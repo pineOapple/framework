@@ -1,3 +1,12 @@
 [submodule "fsfw_common"]
 	path = fsfw_common
 	url = https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common.git
+[submodule "generators/fsfwgen"]
+	path = generators/fsfwgen
+	url = https://egit.irs.uni-stuttgart.de/fsfw/fsfw-generators.git
+[submodule "fsfw"]
+	path = fsfw
+	url = https://egit.irs.uni-stuttgart.de/fsfw/fsfw.git
+[submodule "tmtc/tmtccmd"]
+	path = tmtc/tmtccmd
+	url = https://github.com/spacefisch/tmtccmd.git
