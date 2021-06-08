@@ -5,15 +5,16 @@
 #include <utility/utility.h>
 #include <mission/utility/PusPacketCreator.h>
 
+#include <fsfw/platform.h>
 #include <fsfw/objectmanager/ObjectManager.h>
 #include <fsfw/serviceinterface/ServiceInterface.h>
 #include <fsfw/tasks/TaskFactory.h>
 
 #include <chrono>
 
-#ifdef WIN32
+#ifdef PLATFORM_WIN
 static const char* COMPILE_PRINTOUT = "Windows";
-#elif LINUX
+#elif defined(PLATFORM_UNIX)
 static const char* COMPILE_PRINTOUT = "Linux";
 #else
 static const char* COMPILE_PRINTOUT = "unknown OS";

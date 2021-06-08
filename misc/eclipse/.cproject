@@ -22,13 +22,17 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1985468037" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1424606859" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.642413900" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.298549648" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1948465397" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.1094759945" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.373430455" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -40,6 +44,11 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.785276733" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.1392373767" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1596645626" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
@@ -75,12 +84,18 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1491459311" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1743900662" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.531515655" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1089950376" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.758197585" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1273759242" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -92,6 +107,11 @@
 								</inputType>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.base.2076450799" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.1551487657" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.547659187" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 						</toolChain>
@@ -124,18 +144,27 @@
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF;org.eclipse.cdt.core.PE64;org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.mingw.base.1711871351" name="Debug Platform" osList="win32" superClass="cdt.managedbuild.target.gnu.platform.mingw.base"/>
 							<builder arguments="--build ." autoBuildTarget="all" buildPath="${workspace_loc:/fsfw-example-hosted/build-Debug}" cleanBuildTarget="clean" command="cmake" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="cdt.managedbuild.builder.gnu.cross.1761965921" incrementalBuildTarget="" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="cdt.managedbuild.builder.gnu.cross"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.base.13166088" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.9853113" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1629700138" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.1070367458" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.1427795091" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.410997206" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.766199866" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1181555788" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.1522058793" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.34963804" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -176,18 +205,27 @@
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF;org.eclipse.cdt.core.PE64;org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.mingw.base.169860740" name="Debug Platform" osList="win32" superClass="cdt.managedbuild.target.gnu.platform.mingw.base"/>
 							<builder arguments="--build ." autoBuildTarget="all" buildPath="${workspace_loc:/fsfw-example-hosted/build-Release}" cleanBuildTarget="clean" command="cmake" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="cdt.managedbuild.builder.gnu.cross.1108079754" incrementalBuildTarget="" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="cdt.managedbuild.builder.gnu.cross"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.base.1193239387" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.base">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.1367543610" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1144625128" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.940094727" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.340892366" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.922626812" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1304280824" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1974862343" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.53516548" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw_example}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/example_common/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/fsfw-example-hosted/bsp_hosted/fsfwconfig}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1156512060" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -254,6 +292,8 @@
 		<configuration configurationName="fsfw-rpi-reldeb-cmake">
 			<resource resourceType="PROJECT" workspacePath="/fsfw_example"/>
 		</configuration>
+		<configuration configurationName="fsfw-mingw-release"/>
+		<configuration configurationName="fsfw-mingw-debug"/>
 		<configuration configurationName="fsfw-linux-release-cmake"/>
 		<configuration configurationName="fsfw-stm32-size-cmake">
 			<resource resourceType="PROJECT" workspacePath="/fsfw_example"/>
@@ -276,9 +316,6 @@
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186;ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186.110876624;cdt.managedbuild.tool.gnu.cpp.compiler.base.224413669;cdt.managedbuild.tool.gnu.cpp.compiler.input.1457704857">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432.;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1178093806;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.1267738452">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
@@ -291,9 +328,6 @@
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432.2027226929;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432.2027226929.;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1984720573;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.1437002520">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150.1754124700;cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.;cdt.managedbuild.tool.gnu.cpp.compiler.base.544338526;cdt.managedbuild.tool.gnu.cpp.compiler.input.1954822288">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.1707470219;cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.1707470219.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1835800442;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.894621426">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
@@ -301,6 +335,39 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.;cdt.managedbuild.tool.gnu.c.compiler.base.1948465397;cdt.managedbuild.tool.gnu.c.compiler.input.373430455">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.954051921;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.954051921.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.340892366;cdt.managedbuild.tool.gnu.cpp.compiler.input.1304280824">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.582100180.1109876492.1852538038;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.582100180.1109876492.1852538038.;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1828907952;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.1322517310">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.1347848179;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.1347848179.;cdt.managedbuild.tool.gnu.cpp.compiler.base.1491459311;cdt.managedbuild.tool.gnu.cpp.compiler.input.531515655">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.954051921;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.954051921.;cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1974862343;cdt.managedbuild.tool.gnu.c.compiler.input.1156512060">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.1707470219;cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.1707470219.;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.819405346;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.478544330">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.1427795091;cdt.managedbuild.tool.gnu.cpp.compiler.input.766199866">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186;ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186.110876624;cdt.managedbuild.tool.gnu.c.compiler.base.1211414080;cdt.managedbuild.tool.gnu.c.compiler.input.469485306">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.;cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1181555788;cdt.managedbuild.tool.gnu.c.compiler.input.34963804">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.2119924363;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.934108357">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186;ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186.110876624;cdt.managedbuild.tool.gnu.cpp.compiler.base.224413669;cdt.managedbuild.tool.gnu.cpp.compiler.input.1457704857">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150.1754124700;cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.;cdt.managedbuild.tool.gnu.cpp.compiler.base.544338526;cdt.managedbuild.tool.gnu.cpp.compiler.input.1954822288">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150;cdt.managedbuild.toolchain.gnu.base.126376150.2127681356;cdt.managedbuild.tool.gnu.cpp.compiler.base.99698962;cdt.managedbuild.tool.gnu.cpp.compiler.input.692135819">
@@ -312,16 +379,13 @@
 		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186;ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186.110876624;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1967188539;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.2102319057">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.582100180.1109876492.1852538038;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.582100180.1109876492.1852538038.;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.1828907952;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.1322517310">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.1107241789;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.1107241789.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.1334653834;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1983803224">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150;cdt.managedbuild.toolchain.gnu.base.126376150.2127681356;cdt.managedbuild.tool.gnu.c.compiler.base.1095552627;cdt.managedbuild.tool.gnu.c.compiler.input.635507907">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.1707470219;cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.1707470219.;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.819405346;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.compiler.input.478544330">
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.1347848179;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.1347848179.;cdt.managedbuild.tool.gnu.c.compiler.base.1089950376;cdt.managedbuild.tool.gnu.c.compiler.input.1273759242">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.582100180.1109876492.1852538038;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.582100180.1109876492.1852538038.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.370772356;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.145564013">
@@ -334,12 +398,6 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.126376150.1754124700;cdt.managedbuild.toolchain.gnu.base.126376150.1754124700.;cdt.managedbuild.tool.gnu.c.compiler.base.1346819701;cdt.managedbuild.tool.gnu.c.compiler.input.2122555798">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186;ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.1154438186.110876624;cdt.managedbuild.tool.gnu.c.compiler.base.1211414080;cdt.managedbuild.tool.gnu.c.compiler.input.469485306">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432;cdt.managedbuild.toolchain.gnu.base.450259316.1933681494.615695818.863590432.;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.2119924363;ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.934108357">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
