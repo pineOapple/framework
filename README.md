@@ -1,4 +1,48 @@
-# FSFW demo with Host OSAL on Windows or Linux
+<img align="center" src=doc/images/FSFW_Logo_V3_bw.png width="50%">
+
+# <a id="top"></a> <a name="linux"></a> FSFW Example Application
+
+This repository features a demo application. The example has been run successfully on the following 
+platforms:
+
+ - Linux host machine with the Linux OSAL or the Host OSAL
+ - Windows with the Host OSAL
+ - STM32H743ZI-Nucleo with the FreeRTOS OSAL
+ - Raspberry Pi with the Linux OSAL
+ - STM32H743ZI-Nucleo with the RTEMS OSAL
+ 
+The purpose of this example is to provide a demo of the FSFW capabilities.
+However, it can also be used as a starting point to set up a repository for
+new flight software. It also aims to provide developers with practical examples
+of how the FSFW is inteded to be used and how project using the FSFW should or can be
+set up and it might serve as a basic test platform for the FSFW as well to ensure all OSALs
+are compiling and running as expected.
+
+The repository contains a Python TMTC program which can be used to showcase
+the TMTC capabilities of the FSFW (currently, using the ECSS PUS packet standard).
+
+# Configuring the Example
+
+The build system will copy three configuration files into the build directory:
+
+1. `commonConfig.h` which contains common configuration parameters
+2. `OBSWConfig.h` which can contain machine and architecture specific configuration options
+3. `FSFWConfig.h` which contains the configuration for the flight software framework
+
+These files can be edited manually after `CMake` buld generation.
+
+# Index
+
+[Getting started with Eclipse for C/C++](example_common/doc/README-eclipse.md#top)<br>
+[Getting started with CMake](example_common/doc/README-cmake.md#top)<br>
+
+[Getting started with the Hosted OSAL](#this)<br>
+[Getting started with the FreeRTOS OSAL on a STM32](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-stm32h7-freertos)<br>
+[Getting started with the RTEMS OSAL on a STM32](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-stm32h7-rtems)<br>
+[Getting started with the Raspberry Pi](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-linux-mcu)<br>
+[Getting started with the Beagle Bone Black](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-linux-mcu)<br>
+
+# <a id="this"></a> FSFW demo with Host OSAL on Windows or Linux
 
 This demo has been tested for Windows and Linux. It uses 
 the host abstraction layer of the FSFW.
@@ -168,8 +212,3 @@ Show in Local Terminal
 
 The separate [Eclipse README](README-eclipse#top) specifies how to set up Eclipse. Separate project files and launch
 configurations for the MinGW build were provided.
-
-
-
-
-
