@@ -2,7 +2,7 @@
 #include <bsp_hosted/core/ObjectFactory.h>
 
 #include <test/MutexExample.h>
-#include <common/utility/utility.h>
+#include <utility/utility.h>
 #include <mission/utility/PusPacketCreator.h>
 
 #include <fsfw/objectmanager/ObjectManager.h>

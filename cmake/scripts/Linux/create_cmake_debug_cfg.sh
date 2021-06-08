@@ -16,7 +16,7 @@ fi
 
 build_generator="Unix Makefiles"
 os_fsfw="linux"
-builddir="build-Debug-Linux"
+builddir="build-Debug"
 
 echo "Running command (without the leading +):"
 set -x # Print command 

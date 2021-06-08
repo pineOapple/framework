@@ -105,7 +105,7 @@ add_subdirectory(${COMMON_PATH})
 target_link_libraries(${TARGET_NAME} PRIVATE
     ${LIB_FSFW_NAME} 
     ${LIB_OS_NAME} 
-    ${LIB_FSFW_HAL_NAME}
+    # ${LIB_FSFW_HAL_NAME}
 )
 
 # Add include paths for all sources.

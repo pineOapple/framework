@@ -16,7 +16,7 @@ fi
 
 build_generator=""
 os_fsfw="host"
-builddir="build-Release-Host"
+builddir="build-Release"
 if [ "${OS}" = "Windows_NT" ]; then
 	build_generator="MinGW Makefiles"
 # Could be other OS but this works for now.
