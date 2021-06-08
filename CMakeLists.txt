@@ -19,13 +19,8 @@ if(NOT OS_FSFW)
     set(OS_FSFW host CACHE STRING "OS for the FSFW.")
 endif()
 
-# Perform steps like loading toolchain files where applicable.
-include(${CMAKE_SCRIPT_PATH}/PreProjectConfig.cmake)
-pre_project_config()
-
 # Project Name
 project(fsfw-example-hosted C CXX)
-
 
 ################################################################################
 # Pre-Sources preparation
@@ -42,17 +37,10 @@ set(LIB_FSFW_HAL_NAME fsfw_hal)
 
 # Set path names
 set(FSFW_PATH fsfw)
-set(MISSION_PATH mission)
 set(COMMON_PATH example_common)
-set(TEST_PATH test)
-set(LWIP_PATH lwip)
 set(LIB_FSFW_HAL_PATH fsfw_hal)
 
-# Analyse different OS and architecture/target options, determine BSP_PATH,
-# display information about compiler etc.
-include (${CMAKE_SCRIPT_PATH}/HardwareOsPreConfig.cmake)
-pre_source_hw_os_config()
-
+set(BSP_PATH "bsp_hosted")
 set(COMMON_CONFIG_PATH "${COMMON_PATH}/config")
 set(FSFW_CONFIG_PATH "${BSP_PATH}/fsfwconfig")
 set(FSFW_ADDITIONAL_INC_PATHS 
@@ -82,6 +70,18 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_definitions(NOMINMAX)
 endif()
 
+if(${OS_FSFW} STREQUAL linux)
+    find_package(Threads REQUIRED)
+# Hosted
+else()
+
+    if(WIN32)
+    elseif(UNIX)
+        find_package(Threads REQUIRED)
+    endif()
+endif()
+
+
 ################################################################################
 # Executable and Sources
 ################################################################################
@@ -95,7 +95,6 @@ if(LIB_OS_NAME)
 endif()
 add_subdirectory(${BSP_PATH})
 add_subdirectory(${FSFW_PATH})
-add_subdirectory(${MISSION_PATH})
 add_subdirectory(${COMMON_PATH})
 
 ################################################################################
@@ -146,9 +145,6 @@ endif()
 target_compile_options(${TARGET_NAME} PRIVATE
     ${WARNING_FLAGS}
 )
-
-include(${CMAKE_SCRIPT_PATH}/HardwareOsPostConfig.cmake)
-post_source_hw_os_config()
 
 if(NOT CMAKE_SIZE)
     set(CMAKE_SIZE size)
