@@ -1,0 +1,32 @@
+# Python 
+**/.idea/*
+!**/.idea/runConfigurations
+__pycache__
+*.db
+venv
+
+# Eclipse
+.cproject
+.project
+!misc/eclipse/**/.project
+!misc/eclipse/**/.cproject
+.pydevproject
+.settings
+.metadata
+
+
+# Build folders
+/build*
+
+_dep
+_obj
+_bin
+Makefile*
+!**/make/Makefile*
+
+# GCOV
+*.gcno
+
+# Visual Studio
+.vs
+out

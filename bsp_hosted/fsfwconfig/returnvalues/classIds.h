@@ -1,0 +1,14 @@
+#ifndef FSFWCONFIG_RETURNVALUES_CLASSIDS_H_
+#define FSFWCONFIG_RETURNVALUES_CLASSIDS_H_
+
+#include "commonClassIds.h"
+
+namespace CLASS_ID {
+enum classIds: uint8_t {
+    CLASS_ID_START = COMMON_CLASS_ID_END,
+    CLASS_ID_END // [EXPORT] : [END]
+};
+}
+
+
+#endif /* FSFWCONFIG_RETURNVALUES_CLASSIDS_H_ */

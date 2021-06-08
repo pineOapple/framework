@@ -1,0 +1,25 @@
+/**
+ * @brief	This file can be used to add preprocessor define for conditional
+ * 			code inclusion exclusion or various other project constants and
+ * 			properties in one place.
+ */
+#ifndef FSFWCONFIG_OBSWCONFIG_H_
+#define FSFWCONFIG_OBSWCONFIG_H_
+
+#include <commonConfig.h>
+
+#ifdef __cplusplus
+
+#include "events/subsystemIdRanges.h"
+#include "objects/systemObjectList.h"
+
+namespace config {
+#endif
+
+/* Add mission configuration flags here */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* FSFWCONFIG_OBSWCONFIG_H_ */

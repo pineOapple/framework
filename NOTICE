@@ -1,0 +1,37 @@
+Flight Software Framework Examples
+
+The initial version of the Flight Software Framework was developed during
+the Flying Laptop Project by the Universität Stuttgart in coorporation
+with Airbus Defence and Space GmbH.
+
+The supreme FSFW Logo was designed by Markus Koller and Luise Trilsbach.
+
+Copyrights in the Flight Software Framework Examples are retained by their contributors.
+No copyright assignment is required to contribute to the Flight Software Framework Examples.
+
+Some files include explicit copyright notices and/or license notices.
+For full authorship information, see the version control history.
+
+Except as otherwise noted (below and/or in individual files), the
+Flight Software Framework Example is licensed under the Apache License, Version 2.0.
+
+
+This example uses:
+
+The Flight Software Framework from egit@irs.uni-stuttgart.de.
+
+And optional:
+The fsfw_hal from egit@irs.uni-stuttgart.de, 
+
+Hardware Abstraction Layers for common OS / Hardware.
+
+tmtccmd, from https://github.com/rmspacefish/tmtccmd/,
+
+A python based TM/TC Tool for testing via the PUS Interface.
+
+rtems-cmake, from https://github.com/rmspacefish/tmtccmd/
+
+A project to build RTEMS with cmake.
+
+
+
