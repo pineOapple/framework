@@ -1,17 +1,7 @@
 version: "3.8"
 
 services:
-    build-linux:
-        build:
-            context: .
-            dockerfile: bsp_linux/Dockerfile
-
-    build-host:
-        build:
-            context: .
-            dockerfile: bsp_hosted/Dockerfile
-
-    build-freertos:
-        build:
-            context: .
-            dockerfile: bsp_stm32_freertos/Dockerfile
+   build-host:
+      build:
+         context: .
+         dockerfile: bsp_hosted/Dockerfile
