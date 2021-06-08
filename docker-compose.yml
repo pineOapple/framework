@@ -4,4 +4,4 @@ services:
    build-host:
       build:
          context: .
-         dockerfile: bsp_hosted/Dockerfile
+         
