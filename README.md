@@ -29,7 +29,7 @@ The build system will copy three configuration files into the build directory:
 2. `OBSWConfig.h` which can contain machine and architecture specific configuration options
 3. `FSFWConfig.h` which contains the configuration for the flight software framework
 
-These files can be edited manually after `CMake` buld generation.
+These files can be edited manually after `CMake` build generation.
 
 # Index
 
@@ -149,8 +149,9 @@ as well to have a convenient way to configure the CMake build.
    cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DOS_FSFW=host ..
    ```
    
-   The build configuration can also be performed with the shell scripts located inside `cmake/scripts/Host` or the Python helper script `cmake_build_config.py` inside `cmake/scripts`.
-   The configured build options can now be shown with `cmake -L`.
+   The build configuration can also be performed with the shell scripts located
+   inside `cmake/scripts/Host` or the Python helper script `cmake_build_config.py`
+   inside `cmake/scripts`. The configured build options can now be shown with `cmake -L`.
 
 4. Call the build system (Make)
    ```
