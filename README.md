@@ -193,22 +193,8 @@ but this has only been tested for Windows 10 and Linux (Ubuntu 20.04)
    
 ### Setting up Eclipse for CMake projects
 
-The separate [Eclipse README](README-eclipse#top) specifies how to set up Eclipse to build CMake projects. Separate project files and launch configurations for the MinGW build were provided. The debug output is colored by default. It is recommended to install the
+The separate [Eclipse README](README-eclipse#top) specifies how to set up Eclipse to build CMake
+projects. Separate project files and launch configurations for the MinGW build were provided.
+The debug output is colored by default. It is recommended to install the
 `ANSI Escape in Console` plugin in Eclipse so the coloring works in the Eclipse console.
 
-
-## Running or Debugging the Software - Makefile
-
-### Linux 
-The Makefile binary will be generated in the `_bin` folder and can be run in Linux directly from the console.
-
-### Windows
-On Windows, it is recommended to run the binary in the command line or as a regular executable (double-click)
-to get the full debug outpu because there seem to be issues with the MinGW output.
-The Windows Terminal can be opened in Eclipse by right clicking on the `_bin` folder in the project explorer and clicking
-Show in Local Terminal
-
-## Setting up Eclipse - Makefile
-
-The separate [Eclipse README](README-eclipse#top) specifies how to set up Eclipse. Separate project files and launch
-configurations for the MinGW build were provided.
