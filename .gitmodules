@@ -1,0 +1,3 @@
+[submodule "fsfw_common"]
+	path = fsfw_common
+	url = https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common.git
