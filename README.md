@@ -92,8 +92,9 @@ FSFW on a host computer without the need of setting up external embedded hardwar
    
 ### Linux - Enabling RTOS functionalities
 
-The last chapter in the [Linux README](README-linux.md#top) specifies some steps required
-to cleanly run the FSFW on a (host) Linux system.
+The last chapter in the [Linux README](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-linux-mcu)
+specifies some steps required to cleanly run the FSFW on a (host) Linux system if
+real time functionalities are turned on via `FSFWConfig.h`.
 
 ## Building the Software with CMake
 
