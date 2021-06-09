@@ -33,8 +33,8 @@ These files can be edited manually after `CMake` build generation.
 
 # Index
 
-[Getting started with Eclipse for C/C++](example_common/doc/README-eclipse.md#top)<br>
-[Getting started with CMake](example_common/doc/README-cmake.md#top)<br>
+[Getting started with Eclipse for C/C++](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common/src/branch/master/doc/README-eclipse.md#top)<br>
+[Getting started with CMake](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common/src/branch/master/doc/README-cmake.md#top)<br>
 
 [Getting started with the Hosted OSAL](#this)<br>
 [Getting started with the FreeRTOS OSAL on a STM32](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-stm32h7-freertos)<br>
@@ -100,7 +100,7 @@ real time functionalities are turned on via `FSFWConfig.h`.
 
 CMake should be [installed](https://cmake.org/install/) first.
 More detailed information on the CMake build process and options
-can be found in the [CMake README](README-cmake.md#top).
+can be found in the [CMake README](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common/src/branch/master/doc/README-cmake.md#top).
 Readers unfamiliar with CMake should read this first. The following steps will show to to build
 the Debug executable using either the "Unix Makefiles" generator on Linux or
 the "MinGW Makefiles" generator in Windows in the command line to be as generic as possible.
@@ -190,7 +190,7 @@ but this has only been tested for Windows 10 and Linux (Ubuntu 20.04)
    
 ## Setting up Eclipse for CMake projects
 
-The separate [Eclipse README](example_common/doc/README-eclipse#top) specifies how to set up Eclipse to build CMake
+The separate [Eclipse README](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common/src/branch/master/doc/README-eclipse.md#top) specifies how to set up Eclipse to build CMake
 projects. Separate project files and launch configurations for the MinGW build were provided.
 The debug output is colored by default. It is recommended to install the
 `ANSI Escape in Console` plugin in Eclipse so the coloring works in the Eclipse console. On Windows,
