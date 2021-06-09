@@ -10,7 +10,7 @@ platforms:
  - STM32H743ZI-Nucleo with the FreeRTOS OSAL
  - Raspberry Pi with the Linux OSAL
  - STM32H743ZI-Nucleo with the RTEMS OSAL
- 
+
 The purpose of this example is to provide a demo of the FSFW capabilities.
 However, it can also be used as a starting point to set up a repository for
 new flight software. It also aims to provide developers with practical examples
@@ -66,12 +66,12 @@ FSFW on a host computer without the need of setting up external embedded hardwar
    ```sh
    pacman -Syuuu
    ```
-   
+
    After that, the gcc toolchain, git, make and CMake should be installed with
    ```sh
    pacman -S git mingw-w64-x86_64-gcc mingw-w64-x86_64-gdb mingw-w64-x86_64-make mingw-w64-x86_64-cmake
    ```
-   
+
    You can install a full development environment with
    ```sh
    pacman -S base-devel
@@ -82,7 +82,7 @@ FSFW on a host computer without the need of setting up external embedded hardwar
    ```sh
    pacman -S mingw-w64-x86_64-toolchain
    ```
-   
+
    It is recommended to set up aliases to get to the example directory
    quickly.
    
@@ -112,12 +112,14 @@ the "MinGW Makefiles" generator in Windows in the command line to be as generic 
    mkdir Debug
    cd Debug
    ```
-   
+
 2. Configure the build system 
    ```sh
    cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DOS_FSFW=host ..
    ```
    
+   You can also use `-DOS_FSFW=linux` to use the Linux OSAL of the FSFW.
+
 3. Build the software
    ```sh
    cmake --build . -j
@@ -142,14 +144,14 @@ as well to have a convenient way to configure the CMake build.
    mkdir Debug
    cd Debug
    ```
-	
+
    The build options can be displayed with `cmake -L` . 
-   
+
 3. Configure the project and generate the native MinGW64 buildsystem
    ```sh
    cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DOS_FSFW=host ..
    ```
-   
+
    The build configuration can also be performed with the shell scripts located
    inside `cmake/scripts/Host` or the Python helper script `cmake_build_config.py`
    inside `cmake/scripts`. The configured build options can now be shown with `cmake -L`.
@@ -158,35 +160,9 @@ as well to have a convenient way to configure the CMake build.
    ```
    cmake --build . -j
    ```
-  
+
 5. Like already mentioned, it is recommended to run the binary directly as an executable by 
-   double-clicking it or in the Windows Terminal. 
-  
-## Building the Software with Makefiles
-
-The Makefile is able to determine the OS and supply additonal required libraries, 
-but this has only been tested for Windows 10 and Linux (Ubuntu 20.04)
-
-1. Clone this repository
-   ```sh
-   git clone https://egit.irs.uni-stuttgart.de/fsfw/fsfw_example.git
-   ```
-
-2. Set up submodules
-   ```sh
-   git submodule init
-   git submodule update
-   ```
-
-3. Copy the `Makefile-Hosted` file in the `make` folder into the cloned folder root
-   and rename it to `Makefile`
-   
-4. Once all the prerequisites have been met. the binary can be built with the following command. 
-   Replace `debug` with `release` to build the optimized binary.
-
-   ```sh
-   make debug -j
-   ```
+   double-clicking it or in the Windows Terminal.
    
 ## Setting up Eclipse for CMake projects
 
