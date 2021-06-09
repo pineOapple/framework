@@ -161,11 +161,6 @@ as well to have a convenient way to configure the CMake build.
   
 5. Like already mentioned, it is recommended to run the binary directly as an executable by 
    double-clicking it or in the Windows Terminal. 
-   
-### Setting up Eclipse for CMake projects
-
-The separate [Eclipse README](README-eclipse#top) specifies how to set up Eclipse to build CMake projects. 
-Separate project files and launch configurations for the MinGW build were provided.
   
 ## Building the Software with Makefiles
 
@@ -193,10 +188,13 @@ but this has only been tested for Windows 10 and Linux (Ubuntu 20.04)
    make debug -j
    ```
    
-### Setting up Eclipse for CMake projects
+## Setting up Eclipse for CMake projects
 
-The separate [Eclipse README](README-eclipse#top) specifies how to set up Eclipse to build CMake
+The separate [Eclipse README](example_common/doc/README-eclipse#top) specifies how to set up Eclipse to build CMake
 projects. Separate project files and launch configurations for the MinGW build were provided.
 The debug output is colored by default. It is recommended to install the
-`ANSI Escape in Console` plugin in Eclipse so the coloring works in the Eclipse console.
+`ANSI Escape in Console` plugin in Eclipse so the coloring works in the Eclipse console. On Windows,
+it is recommended to run the applicaton with the Windows command line for the printout to work
+properly. You can do this by simply double-clicking the binary or using `start <Exe>` in the
+Windows command line
 
