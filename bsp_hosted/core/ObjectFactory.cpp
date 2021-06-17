@@ -12,7 +12,7 @@
 #include <fsfw/monitoring/MonitoringMessageContent.h>
 #include <fsfw/storagemanager/PoolManager.h>
 #include <fsfw/datapoollocal/LocalDataPoolManager.h>
-#include <fsfw/tmtcpacket/pus/TmPacketStored.h>
+#include <fsfw/tmtcpacket/pus/tm.h>
 #include <fsfw/tmtcservices/CommandingServiceBase.h>
 #include <fsfw/tmtcservices/PusServiceBase.h>
 
