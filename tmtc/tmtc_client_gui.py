@@ -26,7 +26,7 @@ limitations under the License.
 
 @author     R. Mueller
 """
-from config.hook_base import FsfwHookBase
+from config.hook_implementation import FsfwHookBase
 from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander
 
 
