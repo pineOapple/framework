@@ -51,8 +51,8 @@ class FsfwHookBase(TmTcHookBase):
         pack_service_queue_user(service=service, op_code=op_code, service_queue=service_queue)
 
     def tm_user_factory_hook(self, raw_tm_packet: bytearray) -> Optional[PusTelemetry]:
-        from pus_tm.factory_hook import tm_user_factory_hook
-        return tm_user_factory_hook(raw_tm_packet=raw_tm_packet)
+         from pus_tm.factory_hook import tm_user_factory_hook
+         return tm_user_factory_hook(raw_tm_packet=raw_tm_packet)
 
     def get_object_ids(self) -> Dict[bytes, list]:
         from config.object_ids import get_object_ids

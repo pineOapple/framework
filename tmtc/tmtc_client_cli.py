@@ -26,6 +26,7 @@ limitations under the License.
 
 @author     R. Mueller
 """
+import sys
 from config.hook_implementation import FsfwHookBase
 try:
     from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander
@@ -34,6 +35,7 @@ except ImportError:
     initialize_tmtc_commander = None
     print("Python tmtccmd submodule not installed")
     print("Install with \"cd tmtccmd && python3 -m pip install -e .\" for interactive installation")
+    sys.exit(0)
 
 
 def main():
