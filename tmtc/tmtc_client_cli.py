@@ -30,10 +30,11 @@ import sys
 from config.hook_implementation import FsfwHookBase
 try:
     from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander
-except ImportError:
+except ImportError as error:
     run_tmtc_commander = None
     initialize_tmtc_commander = None
-    print("Python tmtccmd submodule not installed")
+    print(error)
+    print("Python tmtccmd submodule could not be imported")
     print("Install with \"cd tmtccmd && python3 -m pip install -e .\" for interactive installation")
     sys.exit(0)
 
