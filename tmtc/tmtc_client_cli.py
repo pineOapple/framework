@@ -49,7 +49,7 @@ except ImportError as error:
 def main():
     hook_obj = FsfwHookBase()
     initialize_tmtc_commander(hook_object=hook_obj)
-    ccsds_handler = CcsdsTmHandler(tmtc_printer=None)
+    ccsds_handler = CcsdsTmHandler()
     ccsds_handler.add_tm_handler(apid=PUS_APID, pus_tm_handler=ccsds_tm_handler, max_queue_len=50)
     add_ccsds_handler(ccsds_handler)
     run_tmtc_commander(use_gui=False, app_name="TMTC Commander FSFW")
