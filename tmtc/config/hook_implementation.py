@@ -11,6 +11,8 @@ from tmtccmd.pus_tm.service_3_base import Service3Base
 from tmtccmd.ecss.conf import PusVersion
 from tmtccmd.utility.tmtc_printer import TmTcPrinter
 
+from config.definitions import PUS_APID
+
 
 class FsfwHookBase(TmTcHookBase):
 
@@ -28,7 +30,7 @@ class FsfwHookBase(TmTcHookBase):
     def add_globals_pre_args_parsing(self, gui: bool = False):
         from tmtccmd.config.globals import set_default_globals_pre_args_parsing
         set_default_globals_pre_args_parsing(
-            gui=gui, pus_tm_version=PusVersion.PUS_C, pus_tc_version=PusVersion.PUS_C, apid=0xef
+            gui=gui, pus_tm_version=PusVersion.PUS_C, pus_tc_version=PusVersion.PUS_C, apid=PUS_APID
         )
 
     def add_globals_post_args_parsing(self, args: argparse.Namespace):
@@ -49,10 +51,6 @@ class FsfwHookBase(TmTcHookBase):
     def pack_service_queue(self, service: int, op_code: str, service_queue: TcQueueT):
         from pus_tc.tc_packing import pack_service_queue_user
         pack_service_queue_user(service=service, op_code=op_code, service_queue=service_queue)
-
-    def tm_user_factory_hook(self, raw_tm_packet: bytearray) -> Optional[PusTelemetry]:
-         from pus_tm.factory_hook import tm_user_factory_hook
-         return tm_user_factory_hook(raw_tm_packet=raw_tm_packet)
 
     def get_object_ids(self) -> Dict[bytes, list]:
         from config.object_ids import get_object_ids

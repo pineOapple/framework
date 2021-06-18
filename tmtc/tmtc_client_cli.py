@@ -27,9 +27,16 @@ limitations under the License.
 @author     R. Mueller
 """
 import sys
+
+from tmtccmd.config.definitions import CoreGlobalIds
+from tmtccmd.core.globals_manager import get_global
+
 from config.hook_implementation import FsfwHookBase
+from config.definitions import PUS_APID
+from pus_tm.factory_hook import ccsds_tm_handler
 try:
-    from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander
+    from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander, add_ccsds_handler
+    from tmtccmd.ccsds.handler import CcsdsTmHandler
 except ImportError as error:
     run_tmtc_commander = None
     initialize_tmtc_commander = None
@@ -42,6 +49,9 @@ except ImportError as error:
 def main():
     hook_obj = FsfwHookBase()
     initialize_tmtc_commander(hook_object=hook_obj)
+    ccsds_handler = CcsdsTmHandler(tmtc_printer=None)
+    ccsds_handler.add_tm_handler(apid=PUS_APID, pus_tm_handler=ccsds_tm_handler, max_queue_len=50)
+    add_ccsds_handler(ccsds_handler)
     run_tmtc_commander(use_gui=False, app_name="TMTC Commander FSFW")
 
 
