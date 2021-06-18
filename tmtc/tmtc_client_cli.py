@@ -28,9 +28,6 @@ limitations under the License.
 """
 import sys
 
-from tmtccmd.config.definitions import CoreGlobalIds
-from tmtccmd.core.globals_manager import get_global
-
 from config.hook_implementation import FsfwHookBase
 from config.definitions import PUS_APID
 from pus_tm.factory_hook import ccsds_tm_handler
