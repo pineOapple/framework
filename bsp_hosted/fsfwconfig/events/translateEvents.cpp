@@ -1,7 +1,7 @@
 /**
  * @brief    Auto-generated event translation file. Contains 78 translations.
  * @details
- * Generated on: 2021-05-28 18:21:33
+ * Generated on: 2021-06-21 11:10:29
  */
 #include "translateEvents.h"
 

@@ -19,7 +19,7 @@ from fsfwgen.utility.file_management import copy_file, move_file
 from definitions import BspSelect, BspFolderDict
 
 # TODO: Ask from user or store in json file?
-BSP_SELECT = BspSelect.BSP_LINUX.value
+BSP_SELECT = BspSelect.BSP_HOSTED.value
 BSP_FOLDER = BspFolderDict[BSP_SELECT]
 DATE_TODAY = datetime.datetime.now()
 DATE_STRING_FULL = DATE_TODAY.strftime("%Y-%m-%d %H:%M:%S")
@@ -45,10 +45,10 @@ FILE_SEPARATOR = ";"
 SUBSYSTEM_DEFINITION_DESTINATIONS = [
     f"../../{BSP_FOLDER}/fsfwconfig/events/subsystemIdRanges.h",
     "../../fsfw/events/fwSubsystemIdRanges.h",
-    "../../common/config/commonSubsystemIds.h"
+    "../../example_common/config/commonSubsystemIds.h"
 ]
 
-HEADER_DEFINITION_DESTINATIONS = ["../../mission/", "../../fsfw/", f"../../{BSP_FOLDER}", "../../test/"]
+HEADER_DEFINITION_DESTINATIONS = ["../../example_common/", "../../fsfw/", f"../../{BSP_FOLDER}"]
 
 
 def main():
