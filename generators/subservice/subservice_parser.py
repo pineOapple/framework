@@ -1,5 +1,5 @@
 """
-@file       mib_subservice_parser.py
+@file       subservice_parser.py
 @brief      Parses the Subservice definitions for the Mission Information Base.
 @details    Used by the MIB Exporter, inherits generic File Parser
 @author     R. Mueller
@@ -8,14 +8,14 @@
 Example Stringset to scan for:
 
 enum Subservice: uint8_t {
-		//!< [EXPORT] : [COMMAND] Perform connection test
-	    CONNECTION_TEST = 1,
-	    //!< [EXPORT] : [REPLY] Connection test reply
-	    CONNECTION_TEST_REPORT = 2,
-	    EVENT_TRIGGER_TEST = 128, //!<  [EXPORT] : [COMMAND] Trigger test reply and test event
-	    MULTIPLE_EVENT_TRIGGER_TEST = 129, //!< [EXPORT] : [COMMAND] Trigger multiple events (5)
-	    MULTIPLE_CONNECTION_TEST = 130 //!< [EXPORT] : [COMMAND] Trigger multiple connection tests
-	};
+    //!< [EXPORT] : [COMMAND] Perform connection test
+    CONNECTION_TEST = 1,
+    //!< [EXPORT] : [REPLY] Connection test reply
+    CONNECTION_TEST_REPORT = 2,
+    EVENT_TRIGGER_TEST = 128, //!<  [EXPORT] : [COMMAND] Trigger test reply and test event
+    MULTIPLE_EVENT_TRIGGER_TEST = 129, //!< [EXPORT] : [COMMAND] Trigger multiple events (5)
+    MULTIPLE_CONNECTION_TEST = 130 //!< [EXPORT] : [COMMAND] Trigger multiple connection tests
+};
 
 """
 import re
@@ -23,8 +23,8 @@ from enum import Enum
 
 from fsfwgen.parserbase.file_list_parser import FileListParser
 from fsfwgen.parserbase.parser import FileParser
-from utility.mib_csv_writer import CsvWriter
-from utility.mib_printer import Printer
+from fsfwgen.utility.csv_writer import CsvWriter
+from fsfwgen.utility.printer import Printer
 
 SUBSERVICE_DEFINITION_DESTINATION = ["../../mission/", "../../fsfw/pus/"]
 SUBSERVICE_CSV_NAME = "mib_subservices.csv"
@@ -49,6 +49,7 @@ SQL_INSERT_INTO_SUBSVC_CMD = """
 INSERT INTO Subservice(service,subsvcName,subsvcNumber,type,comment)
 VALUES(?,?,?,?,?)
 """
+
 
 class SubserviceColumns(Enum):
     """
@@ -78,7 +79,6 @@ def main():
     subservice_writer = CsvWriter(SUBSERVICE_CSV_NAME, subservice_table, SUBSERVICE_COLUMN_HEADER)
     subservice_writer.write_to_csv()
     subservice_writer.move_csv("..")
-
 
 
 # TODO: Not really happy with the multi-line implementation, but this is not trivial..
@@ -156,7 +156,6 @@ class SubserviceParser(FileParser):
         self.dict_entry_list[Clmns.NUMBER.value] = ""
         self.dict_entry_list[Clmns.COMMENT.value] = ""
         self.possible_match_on_next_lines = False
-
 
     def __scan_for_export_command(self, line: str) -> bool:
         command_string = re.search(r"([^\[]*)\[export\][: ]*\[([\w]*)\][\s]*([^\n]*)",

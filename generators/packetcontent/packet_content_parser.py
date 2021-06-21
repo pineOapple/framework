@@ -1,15 +1,15 @@
 #! /usr/bin/python3.8
 """
-@file       mib_packet_content_parser.py
+@file       packet_content_parser.py
 @brief      Parses the Service Packet Definition files for all variables
 @details    Used by the Mib Exporter, inherits generic File Parser
 """
 import re
 
-from parserbase.mib_file_list_parser import FileListParser
-from parserbase.mib_parser import FileParser
-from utility.mib_csv_writer import CsvWriter
-from utility.mib_printer import Printer
+from fsfwgen.parserbase.file_list_parser import FileListParser
+from fsfwgen.parserbase.parser import FileParser
+from fsfwgen.utility.csv_writer import CsvWriter
+from fsfwgen.utility.printer import Printer
 
 PACKET_CONTENT_DEFINITION_DESTINATION = ["../../mission/pus/servicepackets/",
                                          "../../fsfw/pus/servicepackets/"]

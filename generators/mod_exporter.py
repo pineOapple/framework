@@ -40,7 +40,7 @@ from utility.mib_printer import Printer, PrettyPrinter
 from utility.mib_sql_writer import SqlWriter
 from utility import mib_globals as g
 from parserbase.mib_file_list_parser import FileListParser
-from packetcontent.mib_packet_content_parser import (
+from packetcontent.packet_content_parser import (
     PacketContentParser,
     PACKET_CONTENT_DEFINITION_DESTINATION,
     PACKET_CONTENT_CSV_NAME,
@@ -49,7 +49,7 @@ from packetcontent.mib_packet_content_parser import (
     SQL_INSERT_PACKET_DATA_CMD,
     SQL_DELETE_PACKET_DATA_CONTENT_CMD
 )
-from subservice.mib_subservice_parser import (
+from subservice.subservice_parser import (
     SubserviceParser,
     SUBSERVICE_DEFINITION_DESTINATION,
     SUBSERVICE_CSV_NAME,
