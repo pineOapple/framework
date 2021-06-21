@@ -30,11 +30,11 @@ FILE_SEPARATOR = ';'
 MAX_STRING_LENGTH = 32
 INTERFACE_DEFINITION_FILES = [
     "../../fsfw/returnvalues/FwClassIds.h",
-    "../../common/config/commonClassIds.h",
+    "../../example_common/config/commonClassIds.h",
     f"../../{BSP_FOLDER}/fsfwconfig/returnvalues/classIds.h"
 ]
 RETURNVALUE_DESTINATIONS = [
-    "../../mission/", "../../fsfw/", f"../../{BSP_FOLDER}"
+    "../../example_common/", "../../fsfw/", f"../../{BSP_FOLDER}"
 ]
 
 SQL_DELETE_RETURNVALUES_CMD = """
