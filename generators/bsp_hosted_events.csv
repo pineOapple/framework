@@ -25,7 +25,7 @@
 2806;DEVICE_UNKNOWN_REPLY;LOW;;../../fsfw/devicehandlers/DeviceHandlerIF.h
 2807;DEVICE_UNREQUESTED_REPLY;LOW;;../../fsfw/devicehandlers/DeviceHandlerIF.h
 2808;INVALID_DEVICE_COMMAND;LOW;Indicates a SW bug in child class.;../../fsfw/devicehandlers/DeviceHandlerIF.h
-2809;MONITORING_LIMIT_EXCEEDED;LOW;Indicates a SW bug in child class.static const Event INVALID_DEVICE_COMMAND = MAKE_EVENT(8, severity::LOW);;../../fsfw/devicehandlers/DeviceHandlerIF.h
+2809;MONITORING_LIMIT_EXCEEDED;LOW;;../../fsfw/devicehandlers/DeviceHandlerIF.h
 2810;MONITORING_AMBIGUOUS;HIGH;;../../fsfw/devicehandlers/DeviceHandlerIF.h
 4201;FUSE_CURRENT_HIGH;LOW;;../../fsfw/power/Fuse.h
 4202;FUSE_WENT_OFF;LOW;;../../fsfw/power/Fuse.h
