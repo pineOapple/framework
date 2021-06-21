@@ -55,7 +55,9 @@ def main():
     print("EventParser: Parsing events: ")
     event_list = parse_events()
     if GENERATE_CSV:
-        handle_csv_export(file_name=CSV_FILENAME, event_list=event_list, file_separator=FILE_SEPARATOR)
+        handle_csv_export(
+            file_name=CSV_FILENAME, event_list=event_list, file_separator=FILE_SEPARATOR
+        )
         if MOVE_CSV_FILE:
             move_file(file_name=CSV_FILENAME, destination=CSV_MOVE_DESTINATION)
     if GENERATE_CPP:
