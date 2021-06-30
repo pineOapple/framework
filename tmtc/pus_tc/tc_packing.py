@@ -12,14 +12,14 @@ from pus_tc.service_20_parameters import pack_service20_commands_into
 from pus_tc.service_2_raw_cmd import pack_service_2_commands_into
 from pus_tc.service_3_housekeeping import pack_service_3_commands_into
 from pus_tc.service_8_func_cmd import pack_service_8_commands_into
-from tmtccmd.utility.logger import get_logger
+from tmtccmd.utility.logger import get_console_logger
 from tmtccmd.pus_tc.definitions import TcQueueT
 from tmtccmd.config.definitions import CoreServiceList
 from tmtccmd.pus_tc.service_5_event import pack_generic_service5_test_into
 from tmtccmd.pus_tc.service_17_test import pack_generic_service17_test
 from pus_tc.service_200_mode import pack_service_200_commands_into
 
-LOGGER = get_logger()
+LOGGER = get_console_logger()
 
 
 def pack_service_queue_user(service: Union[str, int], op_code: str, service_queue: TcQueueT):

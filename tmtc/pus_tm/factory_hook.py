@@ -5,7 +5,7 @@
 """
 
 from tmtccmd.ecss.tm import PusTelemetry
-from tmtccmd.utility.logger import get_logger
+from tmtccmd.utility.logger import get_console_logger
 from tmtccmd.pus_tm.service_1_verification import Service1TM
 from tmtccmd.pus_tm.service_2_raw_cmd import Service2TM
 from tmtccmd.pus_tm.service_3_housekeeping import Service3TM
@@ -19,7 +19,7 @@ from tmtccmd.utility.tmtc_printer import TmTcPrinter
 from config.definitions import PUS_APID
 
 
-LOGGER = get_logger()
+LOGGER = get_console_logger()
 
 
 def ccsds_tm_handler(apid: int, raw_tm_packet: bytearray, tmtc_printer: TmTcPrinter) -> None:

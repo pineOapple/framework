@@ -6,11 +6,11 @@ from tmtccmd.pus_tc.definitions import TcQueueT
 from tmtccmd.pus_tc.service_20_parameter import pack_type_and_matrix_data, \
     pack_parameter_id
 from tmtccmd.pus_tc.service_200_mode import pack_mode_data
-from tmtccmd.utility.logger import get_logger
+from tmtccmd.utility.logger import get_console_logger
 
 from config.object_ids import TEST_DEVICE_0_ID
 
-LOGGER = get_logger()
+LOGGER = get_console_logger()
 
 
 def pack_service20_commands_into(tc_queue: TcQueueT, op_code: str):
