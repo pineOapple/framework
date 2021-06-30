@@ -42,7 +42,8 @@ class FsfwHookBase(TmTcHookBase):
     ) -> Optional[CommunicationInterface]:
         from tmtccmd.config.com_if import create_communication_interface_default
         return create_communication_interface_default(
-            com_if_key=com_if_key, tmtc_printer=tmtc_printer, json_cfg_path=self.get_json_config_file_path()
+            com_if_key=com_if_key, tmtc_printer=tmtc_printer,
+            json_cfg_path=self.get_json_config_file_path()
         )
 
     def perform_mode_operation(self, tmtc_backend: TmTcHandler, mode: int):
