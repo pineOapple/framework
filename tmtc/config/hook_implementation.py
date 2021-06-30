@@ -51,7 +51,7 @@ class FsfwHookBase(TmTcHookBase):
 
     def pack_service_queue(self, service: int, op_code: str, service_queue: TcQueueT):
         from pus_tc.tc_packing import pack_service_queue_user
-        pack_service_queue_user(service=service, op_code=op_code, service_queue=service_queue)
+        pack_service_queue_user(service=service, op_code=op_code, tc_queue=service_queue)
 
     def get_object_ids(self) -> Dict[bytes, list]:
         from config.object_ids import get_object_ids
