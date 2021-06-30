@@ -51,7 +51,11 @@ void ObjectFactory::produce(void* args) {
 
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
 
-    new TestTask(objects::TEST_TASK, false);
+    bool periodicEvent = false;
+#if OBSW_TASK_PERIODIC_EVENT == 1
+    periodicEvent = true;
+#endif
+    new TestTask(objects::TEST_TASK, false, periodicEvent);
 
     ObjectFactory::produceGenericObjects();
 }

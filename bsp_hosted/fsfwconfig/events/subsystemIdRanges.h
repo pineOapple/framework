@@ -1,7 +1,7 @@
 #ifndef FSFWCONFIG_TMTC_SUBSYSTEMIDRANGES_H_
 #define FSFWCONFIG_TMTC_SUBSYSTEMIDRANGES_H_
 
-#include <commonConfig.h>
+#include "commonSubsystemIds.h"
 
 namespace SUBSYSTEM_ID {
 enum subsystemId: uint8_t {

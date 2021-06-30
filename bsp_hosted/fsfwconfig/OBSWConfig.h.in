@@ -8,6 +8,8 @@
 
 #include <commonConfig.h>
 
+#define OBSW_TASK_PERIODIC_EVENT 0
+
 #ifdef __cplusplus
 
 #include "events/subsystemIdRanges.h"
