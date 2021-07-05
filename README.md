@@ -1,4 +1,4 @@
-<img align="center" src=./doc/images/FSFW_Logo_V3_bw.png width="50%">
+<img align="center" src="./raw/branch/master/doc/images/FSFW_Logo_V3_bw.png" width="50%">
 
 # <a id="top"></a> <a name="linux"></a> FSFW Example Application
 
