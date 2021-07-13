@@ -15,8 +15,8 @@ cmake_minimum_required(VERSION 3.13)
 
 set(CMAKE_SCRIPT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-if(NOT OS_FSFW)
-    set(OS_FSFW host CACHE STRING "OS for the FSFW.")
+if(NOT FSFW_OSAL)
+    set(FSFW_OSAL host CACHE STRING "OS for the FSFW.")
 endif()
 
 # Project Name
@@ -70,7 +70,7 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     add_compile_definitions(NOMINMAX)
 endif()
 
-if(${OS_FSFW} STREQUAL linux)
+if(FSFW_OSAL MATCHES linux)
     find_package(Threads REQUIRED)
 # Hosted
 else()
@@ -128,11 +128,9 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     )
 
     # Removed unused sections.
-    if(NOT ${OS_FSFW} MATCHES rtems)
-        target_link_options(${TARGET_NAME} PRIVATE
-            "-Wl,--gc-sections"
-        )
-    endif()
+    target_link_options(${TARGET_NAME} PRIVATE
+        "-Wl,--gc-sections"
+    )
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
@@ -161,7 +159,7 @@ endif()
 
 string(CONCAT POST_BUILD_COMMENT
     "Build directory: ${CMAKE_BINARY_DIR}\n"
-    "Target OSAL: ${OS_FSFW}\n"
+    "Target OSAL: ${FSFW_OSAL}\n"
     "Target Build Type: ${CMAKE_BUILD_TYPE}\n"
     "${TARGET_STRING}"
 )
