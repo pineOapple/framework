@@ -16,12 +16,18 @@ fi
 
 build_generator=""
 os_fsfw="host"
-builddir="build-Release"
+builddir="build-Debug"
 if [ "${OS}" = "Windows_NT" ]; then
 	build_generator="MinGW Makefiles"
+	python="py"
 # Could be other OS but this works for now.
 else
 	build_generator="Unix Makefiles"
+	python="python3"
 fi
 
-python3 cmake_build_config.py -o "${os_fsfw}" -g "${build_generator}" -b "release" -l "${builddir}"
+echo "Running command (without the leading +):"
+set -x # Print command 
+"${python}" cmake_build_config.py -o "${os_fsfw}" -g "${build_generator}" -b "release" -l "${builddir}"
+# Use this if commands are added which should not be printed
+# set +x
