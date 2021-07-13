@@ -1,6 +1,0 @@
-{
-    "COM_IF_KEY": "udp",
-    "TCPIP_UDP_RECV_MAX_SIZE": 1500,
-    "TCPIP_UDP_DEST_IP_ADDRESS": "127.0.0.1",
-    "TCPIP_UDP_DEST_PORT": 7301
-}
