@@ -10,10 +10,10 @@ import struct
 from tmtccmd.config.definitions import QueueCommands
 from tmtccmd.ecss.tc import PusTelecommand
 from tmtccmd.pus_tc.definitions import TcQueueT
-from pus_tc.service_200_mode import pack_mode_data
+from common_tmtc.pus_tc.service_200_mode import pack_mode_data
 
-import pus_tc.command_data as cmd_data
-from config.object_ids import TEST_DEVICE_0_ID
+from common_tmtc import pus_tc as cmd_data
+from common_tmtc.config.object_ids import TEST_DEVICE_0_ID
 
 
 def pack_service_2_commands_into(tc_queue: TcQueueT, op_code: str):

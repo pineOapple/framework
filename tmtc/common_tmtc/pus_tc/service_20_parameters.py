@@ -8,7 +8,7 @@ from tmtccmd.pus_tc.service_20_parameter import pack_type_and_matrix_data, \
 from tmtccmd.pus_tc.service_200_mode import pack_mode_data
 from tmtccmd.utility.logger import get_console_logger
 
-from config.object_ids import TEST_DEVICE_0_ID
+from common_tmtc.config.object_ids import TEST_DEVICE_0_ID
 
 LOGGER = get_console_logger()
 

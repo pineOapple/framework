@@ -7,10 +7,10 @@
 import struct
 from typing import Tuple
 from tmtccmd.pus_tm.service_3_housekeeping import Service3Base
-from tmtccmd.utility.logger import get_logger
+from tmtccmd.utility.logger import get_console_logger
 
-from config.object_ids import TEST_DEVICE_0_ID, TEST_DEVICE_1_ID
-LOGGER = get_logger()
+from common_tmtc.config.object_ids import TEST_DEVICE_0_ID, TEST_DEVICE_1_ID
+LOGGER = get_console_logger()
 
 
 def service_3_hk_handling(

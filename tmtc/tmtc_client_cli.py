@@ -28,9 +28,9 @@ limitations under the License.
 """
 import sys
 
-from config.hook_implementation import FsfwHookBase
-from config.definitions import PUS_APID
-from pus_tm.factory_hook import ccsds_tm_handler
+from common_tmtc.config.hook_implementation import FsfwHookBase
+from common_tmtc.config.definitions import PUS_APID
+from common_tmtc.pus_tm.factory_hook import ccsds_tm_handler
 try:
     from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander, add_ccsds_handler
     from tmtccmd.ccsds.handler import CcsdsTmHandler

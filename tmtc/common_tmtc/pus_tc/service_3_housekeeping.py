@@ -7,7 +7,7 @@ from tmtccmd.ecss.tc import PusTelecommand
 from tmtccmd.pus_tc.definitions import TcQueueT
 from tmtccmd.pus_tc.service_8_functional_cmd import generate_action_command
 
-from config.object_ids import TEST_DEVICE_0_ID, TEST_DEVICE_1_ID
+from common_tmtc.config.object_ids import TEST_DEVICE_0_ID, TEST_DEVICE_1_ID
 
 
 # Set IDs

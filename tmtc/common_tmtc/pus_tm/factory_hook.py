@@ -16,7 +16,7 @@ from tmtccmd.pus_tm.service_20_parameters import Service20TM
 from tmtccmd.pus_tm.service_200_mode import Service200TM
 from tmtccmd.utility.tmtc_printer import TmTcPrinter
 
-from config.definitions import PUS_APID
+from common_tmtc.config.definitions import PUS_APID
 
 
 LOGGER = get_console_logger()

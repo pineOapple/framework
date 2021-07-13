@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-@brief      TMTC Commander entry point for GUI mode.
+@brief      TMTC Commander entry point for command line mode.
 @details
 This client was developed by KSat for the SOURCE project to test the on-board software but
 has evolved into a more generic tool for satellite developers to perform TMTC (Telemetry and Telecommand)
@@ -26,13 +26,29 @@ limitations under the License.
 
 @author     R. Mueller
 """
-from config.hook_implementation import FsfwHookBase
-from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander
+import sys
+
+from common_tmtc.config.hook_implementation import FsfwHookBase
+from common_tmtc.config.definitions import PUS_APID
+from common_tmtc.pus_tm.factory_hook import ccsds_tm_handler
+try:
+    from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander, add_ccsds_handler
+    from tmtccmd.ccsds.handler import CcsdsTmHandler
+except ImportError as error:
+    run_tmtc_commander = None
+    initialize_tmtc_commander = None
+    print(error)
+    print("Python tmtccmd submodule could not be imported")
+    print("Install with \"cd tmtccmd && python3 -m pip install -e .\" for interactive installation")
+    sys.exit(0)
 
 
 def main():
     hook_obj = FsfwHookBase()
     initialize_tmtc_commander(hook_object=hook_obj)
+    ccsds_handler = CcsdsTmHandler()
+    ccsds_handler.add_tm_handler(apid=PUS_APID, pus_tm_handler=ccsds_tm_handler, max_queue_len=50)
+    add_ccsds_handler(ccsds_handler)
     run_tmtc_commander(use_gui=True, app_name="TMTC Commander FSFW")
 
 

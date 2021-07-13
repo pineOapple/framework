@@ -10,7 +10,7 @@ from tmtccmd.ecss.tc import PusTelecommand
 from tmtccmd.pus_tc.packer import TcQueueT
 from tmtccmd.pus_tc.service_200_mode import pack_mode_data
 
-from config.object_ids import TEST_DEVICE_0_ID
+from common_tmtc.config.object_ids import TEST_DEVICE_0_ID
 
 
 def pack_service_200_commands_into(tc_queue: TcQueueT, op_code: str):
