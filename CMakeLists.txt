@@ -54,6 +54,8 @@ configure_file(${COMMON_CONFIG_PATH}/commonConfig.h.in commonConfig.h)
 configure_file(${FSFW_CONFIG_PATH}/FSFWConfig.h.in FSFWConfig.h)
 configure_file(${FSFW_CONFIG_PATH}/OBSWConfig.h.in OBSWConfig.h)
 
+set(FSFW_ADD_MONITORING ON)
+
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(WARNING_FLAGS
         -Wall
