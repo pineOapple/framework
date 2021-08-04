@@ -18,6 +18,12 @@ fi
 build_generator="Unix Makefiles"
 os_fsfw="linux"
 builddir="build-Debug"
+if [ "${OS}" = "Windows_NT" ]; then
+    python="py"
+# Could be other OS but this works for now.
+else
+    python="python3"
+fi
 
 echo "Running command (without the leading +):"
 set -x # Print command 
