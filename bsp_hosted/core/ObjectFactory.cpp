@@ -47,6 +47,8 @@ void ObjectFactory::produce(void* args) {
     /* TMTC Reception via UDP socket */
     auto tmtcBridge = new UdpTmTcBridge(objects::UDP_BRIDGE, objects::CCSDS_DISTRIBUTOR);
     tmtcBridge->setMaxNumberOfPacketsStored(20);
+    sif::info << "Opening UDP TMTC server on port " << tmtcBridge->getUdpPort() <<
+            std::endl;
     new UdpTcPollingTask(objects::UDP_POLLING_TASK, objects::UDP_BRIDGE);
 
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
