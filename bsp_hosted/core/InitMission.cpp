@@ -62,23 +62,23 @@ void InitMission::createTasks() {
 #endif
     /* UDP bridge */
     PeriodicTaskIF* udpBridgeTask = taskFactory->createPeriodicTask(
-            "UDP_UNIX_BRIDGE", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.2,
+            "TCPIP_TMTC_BRIDGE", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.2,
             deadlineMissedFunc
     );
-    result = udpBridgeTask->addComponent(objects::UDP_BRIDGE);
+    result = udpBridgeTask->addComponent(objects::TCPIP_TMTC_BRIDGE);
     if(result != HasReturnvaluesIF::RETURN_OK) {
-        task::printInitError("UDP bridge", objects::UDP_BRIDGE);
+        task::printInitError("TMTC bridge", objects::TCPIP_TMTC_BRIDGE);
     }
 
 #ifdef __unix__
     currPrio = 80;
 #endif
     PeriodicTaskIF* udpPollingTask = taskFactory->createPeriodicTask(
-            "UDP_POLLING", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 2.0, deadlineMissedFunc
+            "TMTC_POLLING", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 2.0, deadlineMissedFunc
     );
-    result = udpPollingTask->addComponent(objects::UDP_POLLING_TASK);
+    result = udpPollingTask->addComponent(objects::TCPIP_TMTC_POLLING_TASK);
     if(result != HasReturnvaluesIF::RETURN_OK) {
-        task::printInitError("UDP polling", objects::UDP_POLLING_TASK);
+        task::printInitError("TMTC polling", objects::TCPIP_TMTC_POLLING_TASK);
     }
 
 #ifdef __unix__

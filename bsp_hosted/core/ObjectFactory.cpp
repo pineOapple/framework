@@ -16,8 +16,13 @@
 #include <fsfw/tmtcservices/CommandingServiceBase.h>
 #include <fsfw/tmtcservices/PusServiceBase.h>
 
+#if  OBSW_USE_TCP_SERVER == 0
 #include <fsfw/osal/common/UdpTcPollingTask.h>
 #include <fsfw/osal/common/UdpTmTcBridge.h>
+#else
+#include "fsfw/osal/common/TcpTmTcServer.h"
+#include "fsfw/osal/common/TcpTmTcBridge.h"
+#endif
 
 void ObjectFactory::produce(void* args) {
     Factory::setStaticFrameworkObjectIds();
@@ -44,12 +49,18 @@ void ObjectFactory::produce(void* args) {
         new PoolManager(objects::IPC_STORE, poolCfg);
     }
 
-    /* TMTC Reception via UDP socket */
-    auto tmtcBridge = new UdpTmTcBridge(objects::UDP_BRIDGE, objects::CCSDS_DISTRIBUTOR);
-    tmtcBridge->setMaxNumberOfPacketsStored(20);
-    sif::info << "Opening UDP TMTC server on port " << tmtcBridge->getUdpPort() <<
-            std::endl;
-    new UdpTcPollingTask(objects::UDP_POLLING_TASK, objects::UDP_BRIDGE);
+    // TMTC Reception via TCP/IP socket
+#if  OBSW_USE_TCP_SERVER == 0
+    auto tmtcBridge = new UdpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
+    tmtcBridge->setMaxNumberOfPacketsStored(50);
+    sif::info << "Opening UDP TMTC server on port " << tmtcBridge->getUdpPort() << std::endl;
+    new UdpTcPollingTask(objects::TCPIP_TMTC_POLLING_TASK, objects::TCPIP_TMTC_BRIDGE);
+#else
+    auto tmtcBridge = new TcpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
+    tmtcBridge->setMaxNumberOfPacketsStored(50);
+    auto tmtcServer = new TcpTmTcServer(objects::TCPIP_TMTC_POLLING_TASK, objects::TCPIP_TMTC_BRIDGE);
+    sif::info << "Opening UDP TMTC server on port " << tmtcServer->getTcpPort() << std::endl;
+#endif
 
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
 
