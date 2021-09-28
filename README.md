@@ -101,15 +101,18 @@ CMake should be [installed](https://cmake.org/install/) first.
 More detailed information on the CMake build process and options
 can be found in the [CMake README](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common/src/branch/master/doc/README-cmake.md).
 Readers unfamiliar with CMake should read this first. The following steps will show to to build
-the Debug executable using either the "Unix Makefiles" generator on Linux or
-the "MinGW Makefiles" generator in Windows in the command line to be as generic as possible.
+the Debug executable using either the `"Unix Makefiles"` generator on Linux or
+the `"MinGW Makefiles"` generator in Windows in the command line to be as generic as possible.
+
+You can also install [Ninja](https://ninja-build.org/) and then supply `-G "Ninja"` to the build
+generation as a cross-platform solution.
 
 ### Linux Build
 
 1. Create a new folder for the executable.
    ```sh
-   mkdir Debug
-   cd Debug
+   mkdir build-Debug
+   cd build-Debug
    ```
 
 2. Configure the build system 
@@ -140,8 +143,8 @@ as well to have a convenient way to configure the CMake build.
 1. Open the MinGW64 terminal and navigate to the `fsfw_example` folder
 2. Create a new folder for the executable.
    ```sh
-   mkdir Debug
-   cd Debug
+   mkdir build-Debug
+   cd build-Debug
    ```
 
    The build options can be displayed with `cmake -L` . 
