@@ -2,14 +2,8 @@
 **/.idea/*
 !**/.idea/runConfigurations
 __pycache__
-*.db
 venv
-/tmtc/bin
-/tmtc/config/*.json
-/tmtc/lib
-/tmtc/lib64
-/tmtc/pyvenv.cfg
-/tmtc/share
+
 
 # Eclipse
 .cproject
