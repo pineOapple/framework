@@ -59,7 +59,7 @@ void ObjectFactory::produce(void* args) {
     auto tmtcBridge = new TcpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
     tmtcBridge->setMaxNumberOfPacketsStored(50);
     auto tmtcServer = new TcpTmTcServer(objects::TCPIP_TMTC_POLLING_TASK, objects::TCPIP_TMTC_BRIDGE);
-    sif::info << "Opening UDP TMTC server on port " << tmtcServer->getTcpPort() << std::endl;
+    sif::info << "Opening TCP TMTC server on port " << tmtcServer->getTcpPort() << std::endl;
 #endif
 
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
