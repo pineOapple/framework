@@ -28,12 +28,14 @@ limitations under the License.
 """
 import sys
 
+from spacepackets.log import set_custom_console_logger_name
 from common_tmtc.config.hook_implementation import FsfwHookBase
 from common_tmtc.config.definitions import PUS_APID
 from common_tmtc.pus_tm.factory_hook import ccsds_tm_handler
 try:
     from tmtccmd.runner import run_tmtc_commander, initialize_tmtc_commander, add_ccsds_handler
     from tmtccmd.ccsds.handler import CcsdsTmHandler
+    from tmtccmd.utility.logger import TMTC_LOGGER_NAME
 except ImportError as error:
     run_tmtc_commander = None
     initialize_tmtc_commander = None
@@ -49,6 +51,7 @@ def main():
     ccsds_handler = CcsdsTmHandler()
     ccsds_handler.add_tm_handler(apid=PUS_APID, pus_tm_handler=ccsds_tm_handler, max_queue_len=50)
     add_ccsds_handler(ccsds_handler)
+    set_custom_console_logger_name(TMTC_LOGGER_NAME)
     run_tmtc_commander(use_gui=False, app_name="TMTC Commander FSFW")
 
 
