@@ -53,11 +53,14 @@ This demo provides the opportunity to to test functionality of the
 FSFW on a host computer without the need of setting up external embedded hardware.
 
 ## Prerequisites
+
 1. Makefile build: make installed (bundled with MSYS2 on Windows or via [xPacks Windows Build Tools](https://xpack.github.io/windows-build-tools/install/)). Natively installed on Linux.
 2. Recommended for application code development: [Eclipse for C/C++](https://www.eclipse.org/downloads/packages/) . 
    Project files and launch configuration are provided for Eclipse to ease development.
    Visual Studio support might follow soon following CMake implementation.
-3. CMake Build: Correct CMake installation.
+3. CMake Build: Correct CMake installation
+4. Recommended: Python 3 and [just](https://github.com/casey/just) installed for easy build
+   generation
 
 ### Windows - MinGW64 build
 
@@ -96,6 +99,35 @@ The dedicated [Linux README](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example
 specifies some steps required to cleanly run the FSFW.
 
 ## Building the Software with CMake
+
+### Recommended way using the `Justfile` and Python
+
+You can use the `Justfile` provided to get a list of common build targets and generate
+the correct build configuration. Install [Python 3](https://www.python.org/downloads/)
+first. The easiest way to install [just](https://github.com/casey/just) is to install
+[Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) first and the run
+the following command
+
+```sh
+cargo install just
+```
+
+After that, you can display common build targets with
+
+```sh
+just -l
+```
+
+and create a build configuration with
+
+```sh
+just <build-target>
+```
+
+All commands run will be display
+
+
+### Manual Way using CMake
 
 CMake should be [installed](https://cmake.org/install/) first.
 More detailed information on the CMake build process and options
