@@ -31,7 +31,9 @@ def main():
         default="debug"
     )
     parser.add_argument("-l", "--builddir", type=str, help="Specify build directory.")
-    parser.add_argument("-g", "--generator", type=str, help="CMake Generator")
+    parser.add_argument(
+        "-g", "--generator", type=str, help="CMake Generator", choices=["make", "ninja"]
+    )
     parser.add_argument(
         "-t", "--target-bsp", type=str, help="Target BSP, combination of architecture and machine"
     )
@@ -53,7 +55,15 @@ def main():
         generator = determine_build_generator()
         generator_cmake_arg = f"-G \"{generator}\""
     else:
-        generator_cmake_arg = f"-G \"{args.generator}\""
+        if args.generator == "make":
+            if os.name == 'nt':
+                generator_cmake_arg = '-G "MinGW Makefiles"'
+            else:
+                generator_cmake_arg = '-G "Unix Makefiles"'
+        elif args.generator == 'ninja':
+            generator_cmake_arg = '-G Ninja'
+        else:
+            generator_cmake_arg = args.generator
 
     if args.osal is None:
         print("No FSFW OSAL specified.")
@@ -63,10 +73,7 @@ def main():
 
     cmake_build_type = determine_build_type(args.buildtype)
 
-    if args.target_bsp is not None:
-        cmake_target_cfg_cmd = f"-DTGT_BSP=\"{args.target_bsp}\""
-    else:
-        cmake_target_cfg_cmd = determine_tgt_bsp(cmake_fsfw_osal)
+    cmake_target_cfg_cmd = ''
 
     define_string = ""
     if args.defines is not None:

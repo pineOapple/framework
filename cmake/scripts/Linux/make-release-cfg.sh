@@ -15,7 +15,7 @@ if [ "${counter}" -ge 5 ];then
     exit 1
 fi
 
-build_generator="Unix Makefiles"
+build_generator="make"
 os_fsfw="linux"
 builddir="build-Release"
 if [ "${OS}" = "Windows_NT" ]; then

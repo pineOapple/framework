@@ -18,7 +18,7 @@ fi
 build_generator=""
 os_fsfw="host"
 builddir="build-Debug"
-build_generator="Ninja"
+build_generator="ninja"
 if [ "${OS}" = "Windows_NT" ]; then
     python="py"
 # Could be other OS but this works for now.

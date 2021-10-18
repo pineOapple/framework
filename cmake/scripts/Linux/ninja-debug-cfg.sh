@@ -15,7 +15,7 @@ if [ "${counter}" -ge 5 ];then
     exit 1
 fi
 
-build_generator="Ninja"
+build_generator="ninja"
 os_fsfw="linux"
 builddir="build-Debug"
 if [ "${OS}" = "Windows_NT" ]; then
