@@ -149,7 +149,7 @@ generation as a cross-platform solution.
 
 2. Configure the build system 
    ```sh
-   cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DOS_FSFW=host ..
+   cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DFSFW_OSAL=host ..
    ```
    
    You can also use `-DOS_FSFW=linux` to use the Linux OSAL of the FSFW.
@@ -183,7 +183,7 @@ as well to have a convenient way to configure the CMake build.
 
 3. Configure the project and generate the native MinGW64 buildsystem
    ```sh
-   cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DOS_FSFW=host ..
+   cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DFSFW_OSAL=host ..
    ```
 
    The build configuration can also be performed with the shell scripts located
