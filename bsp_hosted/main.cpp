@@ -1,9 +1,8 @@
 #include <bsp_hosted/core/InitMission.h>
 #include <bsp_hosted/core/ObjectFactory.h>
 
-#include <test/MutexExample.h>
-#include <utility/utility.h>
-#include <mission/utility/PusPacketCreator.h>
+#include "example/test/MutexExample.h"
+#include "example/utility/utility.h"
 
 #include <fsfw/platform.h>
 #include <fsfw/objectmanager/ObjectManager.h>
@@ -58,7 +57,7 @@ int main() {
 	InitMission::createTasks();
 
 	MutexExample::example();
-	PusPacketCreator::createPusPacketAndPrint();
+	//PusPacketCreator::createPusPacketAndPrint();
 
 	/* Permanent loop. */
 	for(;;) {

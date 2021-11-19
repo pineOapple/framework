@@ -4,10 +4,10 @@
 #include <bsp_hosted/fsfwconfig/tmtc/apid.h>
 #include <bsp_hosted/fsfwconfig/tmtc/pusIds.h>
 
-#include <test/TestTask.h>
+#include "fsfw_tests/integration/task/TestTask.h"
 
-#include <mission/utility/TmFunnel.h>
-#include <mission/core/GenericFactory.h>
+#include "example/utility/TmFunnel.h"
+#include "example/core/GenericFactory.h"
 
 #include <fsfw/monitoring/MonitoringMessageContent.h>
 #include <fsfw/storagemanager/PoolManager.h>

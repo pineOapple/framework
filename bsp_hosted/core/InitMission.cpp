@@ -3,16 +3,17 @@
 #include <bsp_hosted/core/InitMission.h>
 #include <bsp_hosted/fsfwconfig/objects/systemObjectList.h>
 #include <bsp_hosted/fsfwconfig/pollingsequence/pollingSequenceFactory.h>
+#include "example/utility/TaskCreation.h"
+
+#include "fsfw_tests/integration/assemblies/TestAssembly.h"
+
 #include <fsfw/modes/HasModesIF.h>
-
-#include <mission/utility/TaskCreation.h>
-
 #include <fsfw/returnvalues/HasReturnvaluesIF.h>
 #include <fsfw/serviceinterface/ServiceInterface.h>
 #include <fsfw/tasks/FixedTimeslotTaskIF.h>
 #include <fsfw/tasks/PeriodicTaskIF.h>
 #include <fsfw/tasks/TaskFactory.h>
-#include <mission/assemblies/TestAssembly.h>
+
 
 #ifdef _WIN32
 #include <fsfw/osal/windows/winTaskHelpers.h>
