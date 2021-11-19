@@ -4,8 +4,7 @@
 #include <bsp_hosted/fsfwconfig/tmtc/apid.h>
 #include <bsp_hosted/fsfwconfig/tmtc/pusIds.h>
 
-#include "fsfw_tests/integration/task/TestTask.h"
-
+#include "example/test/FsfwTestTask.h"
 #include "example/utility/TmFunnel.h"
 #include "example/core/GenericFactory.h"
 
@@ -68,7 +67,7 @@ void ObjectFactory::produce(void* args) {
 #if OBSW_TASK_PERIODIC_EVENT == 1
     periodicEvent = true;
 #endif
-    new TestTask(objects::TEST_TASK, false, periodicEvent);
+    new FsfwTestTask(objects::TEST_TASK, periodicEvent);
 
     ObjectFactory::produceGenericObjects();
 }
