@@ -294,17 +294,6 @@ void InitMission::createTasks() {
     sif::printInfo("Waiting 5 Seconds and then command Test Assembly to Normal, Dual \n");
 #endif
 
-    TaskFactory::delayTask(5000);
-    CommandMessage modeMessage;
-    ModeMessage::setModeMessage(&modeMessage, ModeMessage::CMD_MODE_COMMAND,
-            DeviceHandlerIF::MODE_NORMAL, TestAssembly::submodes::DUAL);
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-    sif::info << "Commanding Test Assembly to Normal, Dual" << std::endl;
-#else
-    sif::printInfo("Commanding Test Assembly to Normal, Dual \n");
-#endif
-    MessageQueueSenderIF::sendMessage(assembly->getCommandQueue(), &modeMessage,
-            MessageQueueIF::NO_QUEUE);
 #endif /* OBSW_ADD_DEVICE_HANDLER_DEMO */
 }
 
