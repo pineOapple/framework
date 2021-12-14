@@ -52,7 +52,11 @@ the host abstraction layer of the FSFW.
 This demo provides the opportunity to to test functionality of the
 FSFW on a host computer without the need of setting up external embedded hardware.
 
+
 ## Prerequisites
+
+If you need to set up these prerequisites, you can find some more information in the dedicated
+[chapter](#prereqsetup).
 
 1. Makefile build: make installed (bundled with MSYS2 on Windows or via [xPacks Windows Build Tools](https://xpack.github.io/windows-build-tools/install/)). Natively installed on Linux.
 2. Recommended for application code development: [Eclipse for C/C++](https://www.eclipse.org/downloads/packages/) . 
@@ -61,6 +65,25 @@ FSFW on a host computer without the need of setting up external embedded hardwar
 3. CMake Build: Correct CMake installation
 4. Recommended: Python 3 and [just](https://github.com/casey/just) installed for easy build
    generation
+
+## Commanding the Software
+
+When the software is running, it opens a TCP oder UDP server, depending on the configuration,
+on port 7301. You can send PUS telecommands to that port to interactively command the
+software.
+
+For a quick test, install the `tmtccmd` Python package first and use `py` instead
+of `python3` on Windows:
+
+```sh
+cd tmtccmd
+python3 -m pip install -r requirements.txt
+```
+
+Now you can command the software using the `tmtccli.py` and `tmtcgui.py` command.
+For example, you can use `tmtccli.py -s 17 -o 0` to send a ping command.
+
+## <a id="prereqsetup"></a> Setting up Prerequisites
 
 ### Windows - MinGW64 build
 
@@ -207,4 +230,3 @@ The debug output is colored by default. It is recommended to install the
 it is recommended to run the applicaton with the Windows command line for the printout to work
 properly. You can do this by simply double-clicking the binary or using `start <Exe>` in the
 Windows command line
-
