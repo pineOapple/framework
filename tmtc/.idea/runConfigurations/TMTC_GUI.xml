@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TMTC PUS 17 Ping" type="PythonConfigurationType" factoryName="Python" folderName="PUS">
+  <configuration default="false" name="TMTC GUI" type="PythonConfigurationType" factoryName="Python">
     <module name="tmtc" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
@@ -12,8 +12,8 @@
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmtc_client_cli.py" />
-    <option name="PARAMETERS" value="-s 17 -o 0 -l" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmtcgui.py" />
+    <option name="PARAMETERS" value="" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />
