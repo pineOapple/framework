@@ -223,10 +223,15 @@ as well to have a convenient way to configure the CMake build.
    
 ## Setting up Eclipse for CMake projects
 
-The separate [Eclipse README](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common/src/branch/master/doc/README-eclipse.md) specifies how to set up Eclipse to build CMake
+The separate [Eclipse README](https://egit.irs.uni-stuttgart.de/fsfw/fsfw-example-common/src/branch/master/doc/README-eclipse.md)
+specifies how to set up Eclipse to build CMake
 projects. Separate project files and launch configurations for the MinGW build were provided.
 The debug output is colored by default. It is recommended to install the
-`ANSI Escape in Console` plugin in Eclipse so the coloring works in the Eclipse console. On Windows,
-it is recommended to run the applicaton with the Windows command line for the printout to work
+`ANSI Escape in Console` plugin in Eclipse so the coloring works in the Eclipse console. 
+
+**Windows**
+
+On Windows, it is recommended to run the applicaton with the Windows command line for the printout
+to work 
 properly. You can do this by simply double-clicking the binary or using `start <Exe>` in the
 Windows command line
