@@ -166,8 +166,8 @@ generation as a cross-platform solution.
 
 1. Create a new folder for the executable.
    ```sh
-   mkdir build-Debug
-   cd build-Debug
+   mkdir cmake-build-debug
+   cd cmake-build-debug
    ```
 
 2. Configure the build system 
@@ -198,8 +198,8 @@ as well to have a convenient way to configure the CMake build.
 1. Open the MinGW64 terminal and navigate to the `fsfw_example` folder
 2. Create a new folder for the executable.
    ```sh
-   mkdir build-Debug
-   cd build-Debug
+   mkdir cmake-build-debug
+   cd cmake-build-debug
    ```
 
    The build options can be displayed with `cmake -L` . 

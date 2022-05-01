@@ -1,8 +1,11 @@
+# PyCharm
+/.idea/*
+!/.idea/runConfigurations
+!/.idea/cmake.xml
+
 # Python 
-**/.idea/*
-!**/.idea/runConfigurations
 __pycache__
-venv
+/venv
 
 
 # Eclipse

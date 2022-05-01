@@ -17,7 +17,7 @@ fi
 
 build_generator=""
 os_fsfw="host"
-builddir="build-Release"
+builddir="cmake-build-release"
 build_generator="make"
 if [ "${OS}" = "Windows_NT" ]; then
 	python="py"
