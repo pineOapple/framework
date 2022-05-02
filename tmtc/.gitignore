@@ -1,2 +1,6 @@
+/.idea/*
+!/.idea/runConfigurations
+/venv
+
 /config/tmtc_config.json
 /log/*.log
