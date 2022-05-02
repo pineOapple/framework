@@ -284,16 +284,10 @@ void InitMission::createTasks() {
 #endif
 
 #if OBSW_ADD_DEVICE_HANDLER_DEMO
-    HasModesIF* assembly = ObjectManager::instance()->get<HasModesIF>(objects::TEST_ASSEMBLY);
+    auto* assembly = ObjectManager::instance()->get<HasModesIF>(objects::TEST_ASSEMBLY);
     if (assembly == nullptr){
         return;
     }
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-    sif::info << "Waiting 5 Seconds and then command Test Assembly to Normal, Dual" << std::endl;
-#else
-    sif::printInfo("Waiting 5 Seconds and then command Test Assembly to Normal, Dual \n");
-#endif
-
 #endif /* OBSW_ADD_DEVICE_HANDLER_DEMO */
 }
 
