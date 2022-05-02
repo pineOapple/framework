@@ -2,6 +2,7 @@
 /.idea/*
 !/.idea/runConfigurations
 !/.idea/cmake.xml
+!/.idea/codeStyles
 
 # Python 
 __pycache__
