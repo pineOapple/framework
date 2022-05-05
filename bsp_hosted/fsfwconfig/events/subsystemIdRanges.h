@@ -4,8 +4,7 @@
 #include "commonSubsystemIds.h"
 
 namespace SUBSYSTEM_ID {
-enum subsystemId: uint8_t {
-};
+enum subsystemId : uint8_t {};
 }
 
 #endif /* FSFWCONFIG_TMTC_SUBSYSTEMIDRANGES_H_ */

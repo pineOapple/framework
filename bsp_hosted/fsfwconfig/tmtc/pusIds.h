@@ -3,5 +3,4 @@
 
 #include <commonConfig.h>
 
-
 #endif /* FSFWCONFIG_TMTC_PUSIDS_H_ */

@@ -13,7 +13,7 @@ cmake_minimum_required(VERSION 3.13)
 
 # set(CMAKE_VERBOSE TRUE)
 
-set(CMAKE_SCRIPT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 if(NOT FSFW_OSAL)
   set(FSFW_OSAL host CACHE STRING "OS for the FSFW.")
@@ -173,5 +173,5 @@ add_custom_command(
   COMMENT ${POST_BUILD_COMMENT}
 )
 
-include (${CMAKE_SCRIPT_PATH}/BuildType.cmake)
+include (BuildType)
 set_build_type()
