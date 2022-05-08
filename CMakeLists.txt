@@ -22,6 +22,9 @@ endif()
 # Project Name
 project(fsfw-example-hosted C CXX)
 
+find_package(fmt 8 CONFIG)
+option(FSFW_ADD_FMT_TESTS "Add {fmt} library tests" ON)
+
 ################################################################################
 # Pre-Sources preparation
 ################################################################################
@@ -107,6 +110,7 @@ add_subdirectory(${COMMON_PATH})
 target_link_libraries(${TARGET_NAME} PRIVATE
   ${LIB_FSFW_NAME}
   ${LIB_OS_NAME}
+  fmt::fmt
   # ${LIB_FSFW_HAL_NAME}
   )
 

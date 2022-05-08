@@ -1,5 +1,6 @@
 #include <bsp_hosted/core/InitMission.h>
 #include <bsp_hosted/core/ObjectFactory.h>
+
 #include <fsfw/objectmanager/ObjectManager.h>
 #include <fsfw/platform.h>
 #include <fsfw/serviceinterface/ServiceInterface.h>
@@ -9,6 +10,7 @@
 
 #include "example/test/MutexExample.h"
 #include "example/utility/utility.h"
+#include "fsfw/ipc/MutexGuard.h"
 
 #ifdef PLATFORM_WIN
 static const char* COMPILE_PRINTOUT = "Windows";
