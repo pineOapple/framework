@@ -95,8 +95,7 @@ void InitMission::createTasks() {
   result = pst::pollingSequenceExamples(timeslotDemoTask);
   if (result != HasReturnvaluesIF::RETURN_OK) {
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-    sif::error << "InitMission::createTasks: Timeslot demo task initialization failed!"
-               << std::endl;
+    std::cerr << "InitMission::createTasks: Timeslot demo task initialization failed!" << std::endl;
 #else
     sif::printError("InitMission::createTasks: Timeslot demo task initialization failed!\n");
 #endif
@@ -188,7 +187,7 @@ void InitMission::createTasks() {
   result = pst::pollingSequenceDevices(testDevicesTimeslotTask);
   if (result != HasReturnvaluesIF::RETURN_OK) {
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-    sif::error << "InitMission::createTasks: Test PST initialization failed!" << std::endl;
+    std::cerr << "InitMission::createTasks: Test PST initialization failed!" << std::endl;
 #else
     sif::printError("InitMission::createTasks: Test PST initialization failed!\n");
 #endif
@@ -231,7 +230,7 @@ void InitMission::createTasks() {
   }
 
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-  sif::info << "Starting tasks.." << std::endl;
+  std::cout << "Starting tasks.." << std::endl;
 #else
   sif::printInfo("Starting tasks..\n");
 #endif
@@ -267,7 +266,7 @@ void InitMission::createTasks() {
   testTask->startTask();
 
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-  sif::info << "Tasks started.." << std::endl;
+  std::cout << "Tasks started.." << std::endl;
 #else
   sif::printInfo("Tasks started..\n");
 #endif

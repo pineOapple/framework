@@ -1,6 +1,5 @@
 #include <bsp_hosted/core/InitMission.h>
 #include <bsp_hosted/core/ObjectFactory.h>
-
 #include <fsfw/objectmanager/ObjectManager.h>
 #include <fsfw/platform.h>
 #include <fsfw/serviceinterface/ServiceInterface.h>
@@ -21,17 +20,17 @@ static const char* COMPILE_PRINTOUT = "unknown OS";
 #endif
 
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-ServiceInterfaceStream sif::debug("DEBUG", false);
-ServiceInterfaceStream sif::info("INFO", false);
-ServiceInterfaceStream sif::warning("WARNING", false);
-ServiceInterfaceStream sif::error("ERROR", false, true, true);
+// ServiceInterfaceStream sif::debug("DEBUG", false);
+// ServiceInterfaceStream sif::info("INFO", false);
+// ServiceInterfaceStream sif::warning("WARNING", false);
+// ServiceInterfaceStream sif::error("ERROR", false, true, true);
 #endif
 
 int main() {
   utility::commonInitPrint("Hosted", COMPILE_PRINTOUT);
 
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-  sif::info << "Producing system objects.." << std::endl;
+  std::cout << "Producing system objects.." << std::endl;
 #else
   sif::printInfo("Producing system objects..\n");
 #endif /* FSFW_CPP_OSTREAM_ENABLED == 1 */
@@ -40,8 +39,8 @@ int main() {
   objManager->setObjectFactoryFunction(ObjectFactory::produce, nullptr);
 
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-  sif::info << "Objects created successfully.." << std::endl;
-  sif::info << "Initializing objects.." << std::endl;
+  std::cout << "Objects created successfully.." << std::endl;
+  std::cout << "Initializing objects.." << std::endl;
 #else
   sif::printInfo("Objects created successfully..\n");
 #endif /* FSFW_CPP_OSTREAM_ENABLED == 1 */
@@ -49,7 +48,7 @@ int main() {
   objManager->initialize();
 
 #if FSFW_CPP_OSTREAM_ENABLED == 1
-  sif::info << "Creating tasks.." << std::endl;
+  std::cout << "Creating tasks.." << std::endl;
 #else
   sif::printInfo("Creating tasks..\n");
 #endif /* FSFW_CPP_OSTREAM_ENABLED == 1 */
