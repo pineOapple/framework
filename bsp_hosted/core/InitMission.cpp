@@ -4,7 +4,7 @@
 #include <bsp_hosted/fsfwconfig/pollingsequence/pollingSequenceFactory.h>
 #include <fsfw/modes/HasModesIF.h>
 #include <fsfw/returnvalues/HasReturnvaluesIF.h>
-#include <fsfw/serviceinterface/ServiceInterface.h>
+#include <fsfw/serviceinterface.h>
 #include <fsfw/tasks/FixedTimeslotTaskIF.h>
 #include <fsfw/tasks/PeriodicTaskIF.h>
 #include <fsfw/tasks/TaskFactory.h>
@@ -94,11 +94,7 @@ void InitMission::createTasks() {
       "PST_TASK", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.5, deadlineMissedFunc);
   result = pst::pollingSequenceExamples(timeslotDemoTask);
   if (result != HasReturnvaluesIF::RETURN_OK) {
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-    std::cerr << "InitMission::createTasks: Timeslot demo task initialization failed!" << std::endl;
-#else
-    sif::printError("InitMission::createTasks: Timeslot demo task initialization failed!\n");
-#endif
+    FSFW_LOGE("InitMission::createTasks: Timeslot demo task initialization failed\n");
   }
 
 #ifdef __unix__
@@ -186,11 +182,7 @@ void InitMission::createTasks() {
       "PST_TEST_TASK", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 2.0, deadlineMissedFunc);
   result = pst::pollingSequenceDevices(testDevicesTimeslotTask);
   if (result != HasReturnvaluesIF::RETURN_OK) {
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-    std::cerr << "InitMission::createTasks: Test PST initialization failed!" << std::endl;
-#else
-    sif::printError("InitMission::createTasks: Test PST initialization failed!\n");
-#endif
+    FSFW_LOGE("InitMission::createTasks: Test PST initialization failed\n");
   }
 
 #if _WIN32
@@ -229,11 +221,7 @@ void InitMission::createTasks() {
     task::printInitError("Test Task", objects::TEST_TASK);
   }
 
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-  std::cout << "Starting tasks.." << std::endl;
-#else
-  sif::printInfo("Starting tasks..\n");
-#endif
+  FSFW_LOGI("Starting tasks..\n");
 
 #if OBSW_ADD_CORE_COMPONENTS == 1
   distributerTask->startTask();
@@ -265,11 +253,7 @@ void InitMission::createTasks() {
 
   testTask->startTask();
 
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-  std::cout << "Tasks started.." << std::endl;
-#else
-  sif::printInfo("Tasks started..\n");
-#endif
+  FSFW_LOGI("Tasks started\n");
 
 #if OBSW_ADD_DEVICE_HANDLER_DEMO
   auto* assembly = ObjectManager::instance()->get<HasModesIF>(objects::TEST_ASSEMBLY);

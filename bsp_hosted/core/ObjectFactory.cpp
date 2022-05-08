@@ -46,7 +46,7 @@ void ObjectFactory::produce(void* args) {
 #if OBSW_USE_TCP_SERVER == 0
   auto tmtcBridge = new UdpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
   tmtcBridge->setMaxNumberOfPacketsStored(50);
-  std::cout << "Opening UDP TMTC server on port " << tmtcBridge->getUdpPort() << std::endl;
+  FSFW_LOGI("Opening UDP TMTC server on port {}\n", tmtcBridge->getUdpPort());
   new UdpTcPollingTask(objects::TCPIP_TMTC_POLLING_TASK, objects::TCPIP_TMTC_BRIDGE);
 #else
   auto tmtcBridge = new TcpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);

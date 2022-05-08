@@ -2,14 +2,11 @@
 #include <bsp_hosted/core/ObjectFactory.h>
 #include <fsfw/objectmanager/ObjectManager.h>
 #include <fsfw/platform.h>
-#include <fsfw/serviceinterface/ServiceInterface.h>
+#include <fsfw/serviceinterface.h>
 #include <fsfw/tasks/TaskFactory.h>
-
-#include <chrono>
 
 #include "example/test/MutexExample.h"
 #include "example/utility/utility.h"
-#include "fsfw/ipc/MutexGuard.h"
 
 #ifdef PLATFORM_WIN
 static const char* COMPILE_PRINTOUT = "Windows";
@@ -29,29 +26,16 @@ static const char* COMPILE_PRINTOUT = "unknown OS";
 int main() {
   utility::commonInitPrint("Hosted", COMPILE_PRINTOUT);
 
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-  std::cout << "Producing system objects.." << std::endl;
-#else
-  sif::printInfo("Producing system objects..\n");
-#endif /* FSFW_CPP_OSTREAM_ENABLED == 1 */
+  FSFW_LOGI("Producing system objects\n");
 
   ObjectManager* objManager = ObjectManager::instance();
   objManager->setObjectFactoryFunction(ObjectFactory::produce, nullptr);
 
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-  std::cout << "Objects created successfully.." << std::endl;
-  std::cout << "Initializing objects.." << std::endl;
-#else
-  sif::printInfo("Objects created successfully..\n");
-#endif /* FSFW_CPP_OSTREAM_ENABLED == 1 */
+  FSFW_LOGI("Objects created successfully, initializing objects\n");
 
   objManager->initialize();
 
-#if FSFW_CPP_OSTREAM_ENABLED == 1
-  std::cout << "Creating tasks.." << std::endl;
-#else
-  sif::printInfo("Creating tasks..\n");
-#endif /* FSFW_CPP_OSTREAM_ENABLED == 1 */
+  FSFW_LOGI("Creating tasks\n");
 
   InitMission::createTasks();
 
