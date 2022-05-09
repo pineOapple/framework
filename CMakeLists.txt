@@ -13,17 +13,23 @@ cmake_minimum_required(VERSION 3.13)
 
 # set(CMAKE_VERBOSE TRUE)
 
+# Project Name
+project(fsfw-example-hosted C CXX)
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 if(NOT FSFW_OSAL)
   set(FSFW_OSAL host CACHE STRING "OS for the FSFW.")
 endif()
 
-# Project Name
-project(fsfw-example-hosted C CXX)
+option(OBSW_ADD_FMT_TESTS "Add {fmt} library tests" OFF)
+option(OBSW_ENABLE_IPO "Enable IPO/LTO optimization" ON)
 
-find_package(fmt 8 CONFIG)
-option(FSFW_ADD_FMT_TESTS "Add {fmt} library tests" ON)
+include(CheckIPOSupported)
+check_ipo_supported(RESULT IPO_SUPPORTED OUTPUT IPO_ERROR)
+if(NOT IPO_SUPPORTED)
+  message(STATUS "IPO/LTO not supported: ${IPO_ERROR}")
+endif()
 
 ################################################################################
 # Pre-Sources preparation
@@ -106,12 +112,14 @@ add_subdirectory(${COMMON_PATH})
 # Post-Sources preparation
 ################################################################################
 
+if(OBSW_ENABLE_IPO AND IPO_SUPPORTED)
+  set_property(TARGET ${TARGET_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
+
 # Add libraries for all sources.
 target_link_libraries(${TARGET_NAME} PRIVATE
   ${LIB_FSFW_NAME}
   ${LIB_OS_NAME}
-  fmt::fmt
-  # ${LIB_FSFW_HAL_NAME}
   )
 
 # Add include paths for all sources.
