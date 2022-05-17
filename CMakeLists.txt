@@ -25,10 +25,8 @@ endif()
 option(OBSW_ADD_FMT_TESTS "Add {fmt} library tests" OFF)
 option(OBSW_ENABLE_IPO "Enable IPO/LTO optimization" ON)
 
-include(CheckIPOSupported)
-check_ipo_supported(RESULT IPO_SUPPORTED OUTPUT IPO_ERROR)
-if(NOT IPO_SUPPORTED)
-  message(STATUS "IPO/LTO not supported: ${IPO_ERROR}")
+if(OBSW_ENABLE_IPO)
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif()
 
 ################################################################################
@@ -111,10 +109,6 @@ add_subdirectory(${COMMON_PATH})
 ################################################################################
 # Post-Sources preparation
 ################################################################################
-
-if(OBSW_ENABLE_IPO AND IPO_SUPPORTED)
-  set_property(TARGET ${TARGET_NAME} PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
-endif()
 
 # Add libraries for all sources.
 target_link_libraries(${TARGET_NAME} PRIVATE
