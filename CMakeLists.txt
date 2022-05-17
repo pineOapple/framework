@@ -22,6 +22,12 @@ endif()
 # Project Name
 project(fsfw-example-hosted C CXX)
 
+option(OBSW_ENABLE_IPO "Enable IPO/LTO optimization" ON)
+
+if(OBSW_ENABLE_IPO)
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
+
 ################################################################################
 # Pre-Sources preparation
 ################################################################################
