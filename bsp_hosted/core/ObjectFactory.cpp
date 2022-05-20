@@ -25,7 +25,7 @@
 
 void ObjectFactory::produce(void* args) {
   Factory::setStaticFrameworkObjectIds();
-
+  ObjectFactory::produceGenericObjects();
 #if OBSW_ADD_CORE_COMPONENTS == 1
   {
     LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50}, {64, 25}, {128, 15}, {1024, 5}};
@@ -62,6 +62,4 @@ void ObjectFactory::produce(void* args) {
   periodicEvent = true;
 #endif
   new FsfwTestTask(objects::TEST_TASK, periodicEvent);
-
-  ObjectFactory::produceGenericObjects();
 }
