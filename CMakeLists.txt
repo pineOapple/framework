@@ -15,6 +15,8 @@ cmake_minimum_required(VERSION 3.13)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+set(OBSW_MAX_SCHEDULED_TCS 200)
+
 if(NOT FSFW_OSAL)
   set(FSFW_OSAL
       host
