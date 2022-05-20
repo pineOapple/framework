@@ -1,7 +1,7 @@
 /**
  * @brief    Auto-generated event translation file. Contains 78 translations.
  * @details
- * Generated on: 2021-06-21 16:09:15
+ * Generated on: 2022-05-20 09:11:07
  */
 #include "translateEvents.h"
 
@@ -59,7 +59,6 @@ const char *MONITOR_CHANGED_STATE_STRING = "MONITOR_CHANGED_STATE";
 const char *VALUE_BELOW_LOW_LIMIT_STRING = "VALUE_BELOW_LOW_LIMIT";
 const char *VALUE_ABOVE_HIGH_LIMIT_STRING = "VALUE_ABOVE_HIGH_LIMIT";
 const char *VALUE_OUT_OF_RANGE_STRING = "VALUE_OUT_OF_RANGE";
-const char *SWITCHING_TM_FAILED_STRING = "SWITCHING_TM_FAILED";
 const char *CHANGING_MODE_STRING = "CHANGING_MODE";
 const char *MODE_INFO_STRING = "MODE_INFO";
 const char *FALLBACK_FAILED_STRING = "FALLBACK_FAILED";
@@ -83,9 +82,10 @@ const char *FRAME_PROCESSING_FAILED_STRING = "FRAME_PROCESSING_FAILED";
 const char *CLOCK_SET_STRING = "CLOCK_SET";
 const char *CLOCK_SET_FAILURE_STRING = "CLOCK_SET_FAILURE";
 const char *TEST_STRING = "TEST";
+const char *CHANGE_OF_SETUP_PARAMETER_STRING = "CHANGE_OF_SETUP_PARAMETER";
 
 const char *translateEvents(Event event) {
-  switch ((event & 0xffff)) {
+  switch ((event & 0xFFFF)) {
     case (2200):
       return STORE_SEND_WRITE_FAILED_STRING;
     case (2201):
@@ -194,8 +194,6 @@ const char *translateEvents(Event event) {
       return VALUE_ABOVE_HIGH_LIMIT_STRING;
     case (7204):
       return VALUE_OUT_OF_RANGE_STRING;
-    case (7301):
-      return SWITCHING_TM_FAILED_STRING;
     case (7400):
       return CHANGING_MODE_STRING;
     case (7401):
@@ -242,6 +240,8 @@ const char *translateEvents(Event event) {
       return CLOCK_SET_FAILURE_STRING;
     case (9700):
       return TEST_STRING;
+    case (10600):
+      return CHANGE_OF_SETUP_PARAMETER_STRING;
     default:
       return "UNKNOWN_EVENT";
   }
