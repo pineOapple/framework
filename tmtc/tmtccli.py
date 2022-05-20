@@ -7,10 +7,12 @@ from common_tmtc.tmtcc import (
     add_default_tmtccmd_args,
     parse_default_input_arguments,
 )
+from config.hook import FsfwHookBase
 
 
 def main():
-    hook_obj = tmtcc_pre_args()
+    tmtcc_pre_args()
+    hook_obj = FsfwHookBase(json_cfg_path="tmtc_conf.json")
     arg_parser = create_default_args_parser()
     add_default_tmtccmd_args(arg_parser)
     args = parse_default_input_arguments(arg_parser, hook_obj)
