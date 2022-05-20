@@ -2,7 +2,6 @@
 
 #include <bsp_hosted/fsfwconfig/objects/systemObjectList.h>
 #include <bsp_hosted/fsfwconfig/tmtc/apid.h>
-#include <bsp_hosted/fsfwconfig/tmtc/pusIds.h>
 #include <fsfw/datapoollocal/LocalDataPoolManager.h>
 #include <fsfw/monitoring/MonitoringMessageContent.h>
 #include <fsfw/storagemanager/PoolManager.h>

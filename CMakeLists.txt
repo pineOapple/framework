@@ -89,7 +89,7 @@ endif()
 # ##############################################################################
 
 # Add executable
-add_executable(${TARGET_NAME})
+add_executable(${TARGET_NAME} example_common/config/common/definitions.h)
 
 # Add subdirectories
 if(LIB_OS_NAME)
