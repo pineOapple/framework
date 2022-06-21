@@ -159,6 +159,10 @@ void InitMission::createTasks() {
   if (result != HasReturnvaluesIF::RETURN_OK) {
     task::printInitError("PUS 200", objects::PUS_SERVICE_200_MODE_MGMT);
   }
+  result = pusMedPrio->addComponent(objects::PUS_SERVICE_11_TC_SCHEDULER);
+  if (result != HasReturnvaluesIF::RETURN_OK) {
+    task::printInitError("PUS 11", objects::PUS_SERVICE_11_TC_SCHEDULER);
+  }
 
 #ifdef __unix__
   currPrio = 30;

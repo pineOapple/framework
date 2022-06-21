@@ -1,19 +1,14 @@
 #include "ObjectFactory.h"
 
-#include <bsp_hosted/fsfwconfig/objects/systemObjectList.h>
-#include <bsp_hosted/fsfwconfig/tmtc/apid.h>
-#include <bsp_hosted/fsfwconfig/tmtc/pusIds.h>
-#include <fsfw/datapoollocal/LocalDataPoolManager.h>
-#include <fsfw/monitoring/MonitoringMessageContent.h>
-#include <fsfw/storagemanager/PoolManager.h>
-#include <fsfw/tmtcpacket/pus/tm.h>
-#include <fsfw/tmtcservices/CommandingServiceBase.h>
-#include <fsfw/tmtcservices/PusServiceBase.h>
-
 #include "OBSWConfig.h"
+#include "bsp_hosted/fsfwconfig/objects/systemObjectList.h"
+#include "bsp_hosted/fsfwconfig/tmtc/apid.h"
+#include "commonConfig.h"
 #include "example/core/GenericFactory.h"
 #include "example/test/FsfwTestTask.h"
 #include "example/utility/TmFunnel.h"
+#include "fsfw/storagemanager/PoolManager.h"
+#include "fsfw/tmtcservices/CommandingServiceBase.h"
 
 #if OBSW_USE_TCP_SERVER == 0
 #include <fsfw/osal/common/UdpTcPollingTask.h>
@@ -28,20 +23,23 @@ void ObjectFactory::produce(void* args) {
 
 #if OBSW_ADD_CORE_COMPONENTS == 1
   {
-    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50}, {64, 25}, {128, 15}, {1024, 5}};
+    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50},   {64, 40},
+                                          {128, 30}, {1024, 20}, {2048, 10}};
     new PoolManager(objects::TC_STORE, poolCfg);
   }
 
   {
-    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50}, {64, 25}, {128, 15}, {1024, 5}};
+    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50},   {64, 40},
+                                          {128, 30}, {1024, 20}, {2048, 10}};
     new PoolManager(objects::TM_STORE, poolCfg);
   }
 
   {
-    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50}, {64, 25}, {128, 15}, {1024, 5}};
+    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50},   {64, 40},
+                                          {128, 30}, {1024, 20}, {2048, 10}};
     new PoolManager(objects::IPC_STORE, poolCfg);
   }
-
+  ObjectFactory::produceGenericObjects();
   // TMTC Reception via TCP/IP socket
 #if OBSW_USE_TCP_SERVER == 0
   auto tmtcBridge = new UdpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
@@ -62,6 +60,4 @@ void ObjectFactory::produce(void* args) {
   periodicEvent = true;
 #endif
   new FsfwTestTask(objects::TEST_TASK, periodicEvent);
-
-  ObjectFactory::produceGenericObjects();
 }

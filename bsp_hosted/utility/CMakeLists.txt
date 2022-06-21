@@ -1,7 +1,1 @@
-target_sources(${TARGET_NAME} 
-	PUBLIC
-		printChar.c
-)
-
-
-
+target_sources(${TARGET_NAME} PUBLIC printChar.c)

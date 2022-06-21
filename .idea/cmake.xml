@@ -4,7 +4,7 @@
     <configurations>
       <configuration PROFILE_NAME="MinSizeRel" ENABLED="true" CONFIG_NAME="MinSizeRel" />
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
-      <configuration PROFILE_NAME="Debug Linux" ENABLED="false" GENERATION_DIR="cmake-build-debug" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DFSFW_OSAL=linux" />
+      <configuration PROFILE_NAME="Debug Linux" ENABLED="true" GENERATION_DIR="cmake-build-debug-linux" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DFSFW_OSAL=linux" />
       <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" />
       <configuration PROFILE_NAME="Debug Clang" ENABLED="false" CONFIG_NAME="Debug" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=cmake/ClangToolchain.cmake" />
     </configurations>

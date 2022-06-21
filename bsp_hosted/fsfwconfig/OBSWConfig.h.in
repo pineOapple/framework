@@ -10,7 +10,7 @@
 
 #define OBSW_TASK_PERIODIC_EVENT    0
 // Use a TCP server instead of a UDP server for TMTC reception
-#define OBSW_USE_TCP_SERVER         0
+#define OBSW_USE_TCP_SERVER         1
 
 #ifdef __cplusplus
 
