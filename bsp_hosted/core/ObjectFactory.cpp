@@ -3,6 +3,7 @@
 #include "OBSWConfig.h"
 #include "bsp_hosted/fsfwconfig/objects/systemObjectList.h"
 #include "bsp_hosted/fsfwconfig/tmtc/apid.h"
+#include "fsfw/serviceinterface.h"
 #include "commonConfig.h"
 #include "example/core/GenericFactory.h"
 #include "example/test/FsfwTestTask.h"
@@ -50,7 +51,7 @@ void ObjectFactory::produce(void* args) {
   auto tmtcBridge = new TcpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
   tmtcBridge->setMaxNumberOfPacketsStored(50);
   auto tmtcServer = new TcpTmTcServer(objects::TCPIP_TMTC_POLLING_TASK, objects::TCPIP_TMTC_BRIDGE);
-  sif::info << "Opening TCP TMTC server on port " << tmtcServer->getTcpPort() << std::endl;
+  FSFW_LOGI("Opening TCP TMTC server on port {}\n", tmtcServer->getTcpPort());
 #endif
 
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
