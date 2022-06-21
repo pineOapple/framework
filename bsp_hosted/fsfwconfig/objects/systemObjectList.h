@@ -1,7 +1,7 @@
 #ifndef FSFWCONFIG_OBJECTS_SYSTEMOBJECTLIST_H_
 #define FSFWCONFIG_OBJECTS_SYSTEMOBJECTLIST_H_
 
-#include <commonSystemObjects.h>
+#include <commonObjects.h>
 
 namespace objects {
 enum mission_objects {
