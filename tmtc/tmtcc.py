@@ -1,27 +1,61 @@
 #!/usr/bin/env python3
 """TMTC commander for FSFW Example"""
+import sys
+import time
+
+from spacepackets.ecss import PusVerificator
+
 import tmtccmd
-from common_tmtc.common import (
-    tmtcc_post_args,
-    tmtcc_pre_args
-)
+from common_tmtc.common import setup_params, setup_tmtc_handlers, setup_backend
 from config.hook import FsfwHookBase
-from examples.tmtcc import EXAMPLE_APID
-from tmtccmd.config import SetupParams, ArgParserWrapper, SetupWrapper
+from tmtccmd import get_console_logger
+from tmtccmd.core import BackendRequest
+from tmtccmd.logging.pus import (
+    RegularTmtcLogWrapper,
+    RawTmtcTimedLogWrapper,
+    TimedLogWhen,
+)
+from tmtccmd.pus import VerificationWrapper
+from tmtccmd.utility.tmtc_printer import FsfwTmTcPrinter
+
+
+LOGGER = get_console_logger()
 
 
 def main():
-    tmtcc_pre_args()
-    hook_obj = FsfwHookBase(json_cfg_path="tmtc_conf.json")
-    params = SetupParams()
-    parser_wrapper = ArgParserWrapper(hook_obj)
-    parser_wrapper.parse()
-    tmtccmd.init_printout(parser_wrapper.use_gui)
-    parser_wrapper.set_params(params)
-    params.apid = EXAMPLE_APID
-    setup_wrapper = SetupWrapper(hook_obj, params)
-
-    tmtcc_post_args(hook_obj=hook_obj, use_gui=False, args=args)
+    setup_wrapper = setup_params(FsfwHookBase())
+    tmtc_logger = RegularTmtcLogWrapper()
+    printer = FsfwTmTcPrinter(tmtc_logger.logger)
+    raw_logger = RawTmtcTimedLogWrapper(when=TimedLogWhen.PER_HOUR, interval=2)
+    pus_verificator = PusVerificator()
+    verif_wrapper = VerificationWrapper(
+        console_logger=get_console_logger(),
+        file_logger=printer.file_logger,
+        pus_verificator=pus_verificator,
+    )
+    ccsds_handler, tc_handler = setup_tmtc_handlers(
+        verif_wrapper=verif_wrapper, raw_logger=raw_logger, printer=printer
+    )
+    tmtccmd.setup(setup_wrapper)
+    backend = setup_backend(
+        setup_wrapper=setup_wrapper, ccsds_handler=ccsds_handler, tc_handler=tc_handler
+    )
+    try:
+        while True:
+            state = backend.periodic_op(None)
+            if state.request == BackendRequest.TERMINATION_NO_ERROR:
+                sys.exit(0)
+            elif state.request == BackendRequest.DELAY_IDLE:
+                LOGGER.info("TMTC Client in IDLE mode")
+                time.sleep(3.0)
+            elif state.request == BackendRequest.DELAY_LISTENER:
+                time.sleep(0.8)
+            elif state.request == BackendRequest.DELAY_CUSTOM:
+                time.sleep(state.next_delay.total_seconds())
+            elif state.request == BackendRequest.CALL_NEXT:
+                pass
+    except KeyboardInterrupt:
+        sys.exit(0)
 
 
 if __name__ == "__main__":

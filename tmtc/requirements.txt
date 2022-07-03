@@ -1,1 +1,1 @@
-tmtccmd >= 2.2.1
+tmtccmd >= 3.0.0rc1
