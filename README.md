@@ -72,16 +72,19 @@ When the software is running, it opens a TCP oder UDP server, depending on the c
 on port 7301. You can send PUS telecommands to that port to interactively command the
 software.
 
-For a quick test, install the `tmtccmd` Python package first and use `py` instead
-of `python3` on Windows:
+The following steps set up a virtual environment, install all the dependencies, and then use
+the `tmtcc.py` utility to send a ping telecommand to the running OBSW
 
 ```sh
-cd tmtccmd
-python3 -m pip install -r requirements.txt
+cd tmtc
+python3 -m venv venv
+cd deps/tmtccmd
+pip install .[gui]
 ```
 
-Now you can command the software using the `tmtccli.py` and `tmtcgui.py` command.
-For example, you can use `tmtccli.py -s 17 -o 0` to send a ping command.
+Now you can command the software using the `tmtcc.py` command for the CLI mode and `tmtcc.py -g`
+for the GUI mode inside the virtual environment. For example, you can use `tmtcc.py -s 17 -o 0`
+to send a ping command.
 
 ## <a id="prereqsetup"></a> Setting up Prerequisites
 
