@@ -114,7 +114,8 @@ target_link_libraries(
 # Add include paths for all sources.
 target_include_directories(
   ${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-                         ${CMAKE_CURRENT_BINARY_DIR} ${FSFW_CONFIG_PATH})
+                         ${CMAKE_CURRENT_BINARY_DIR} ${FSFW_CONFIG_PATH}
+                         etl::etl)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   target_link_options(${TARGET_NAME} PRIVATE "-Wl,-Map=${TARGET_NAME}.map")
