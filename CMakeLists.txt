@@ -107,15 +107,12 @@ add_subdirectory(${COMMON_PATH})
 
 # Add libraries for all sources.
 target_link_libraries(
-  ${TARGET_NAME} PRIVATE ${LIB_FSFW_NAME} ${LIB_OS_NAME}
-                         # ${LIB_FSFW_HAL_NAME}
-)
+  ${TARGET_NAME} PRIVATE ${LIB_FSFW_NAME} ${LIB_OS_NAME})
 
 # Add include paths for all sources.
 target_include_directories(
   ${TARGET_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-                         ${CMAKE_CURRENT_BINARY_DIR} ${FSFW_CONFIG_PATH}
-                         etl::etl)
+                         ${CMAKE_CURRENT_BINARY_DIR} ${FSFW_CONFIG_PATH})
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   target_link_options(${TARGET_NAME} PRIVATE "-Wl,-Map=${TARGET_NAME}.map")
