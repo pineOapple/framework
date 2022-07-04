@@ -1,28 +1,18 @@
 pipeline {
     agent any
     environment {
-        BUILDDIR = 'build-Debug'
+        BUILDDIR = 'cmake-build-debug'
+    }
+    agent {
+        docker { image 'fsfw-ci:d2'}
     }
     stages {
-        stage('Create Docker') {
-            agent {
-                dockerfile {
-                    dir 'automation'
-                    additionalBuildArgs  '--no-cache'
-                    reuseNode true
-                }
-            }
+        stage('Clean') {
             steps {
                 sh 'rm -rf $BUILDDIR'
             }
         }
         stage('Configure') {
-            agent {
-                dockerfile {
-                    dir 'automation'
-                    reuseNode true
-                }
-            }
             steps {
                 dir(BUILDDIR) {
                     sh 'cmake -DFSFW_OSAL=host ..'
@@ -30,15 +20,9 @@ pipeline {
             }
         }
         stage('Build') {
-            agent {
-                dockerfile {
-                    dir 'automation'
-                    reuseNode true
-                }
-            }
             steps {
                 dir(BUILDDIR) {
-                    sh 'cmake --build . -j'
+                    sh 'cmake --build . -j4'
                 }
             }
         }
