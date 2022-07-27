@@ -12,11 +12,14 @@ class FsfwHookBase(CommonFsfwHookBase):
         return common_fsfw_service_op_code_dict()
 
     def assign_communication_interface(self, com_if_key: str) -> Optional[ComInterface]:
-        from tmtccmd.config.com_if import create_com_interface_default, \
-            create_com_interface_cfg_default
+        from tmtccmd.config.com_if import (
+            create_com_interface_default,
+            create_com_interface_cfg_default,
+        )
+
         cfg = create_com_interface_cfg_default(
             com_if_key=com_if_key,
             json_cfg_path=self.json_cfg_path,
-            space_packet_ids=TM_SP_IDS
+            space_packet_ids=TM_SP_IDS,
         )
         return create_com_interface_default(cfg)
