@@ -16,8 +16,7 @@ from tmtccmd.logging.pus import (
     TimedLogWhen,
 )
 from tmtccmd.pus import VerificationWrapper
-from tmtccmd.utility.tmtc_printer import FsfwTmTcPrinter
-
+from tmtccmd.util.tmtc_printer import FsfwTmTcPrinter
 
 LOGGER = get_console_logger()
 
