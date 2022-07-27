@@ -1,8 +1,8 @@
 /**
  * @brief  Auto-generated object translation file.
  * @details
- * Contains 39 translations.
- * Generated on: 2022-05-20 09:16:37
+ * Contains 40 translations.
+ * Generated on: 2022-07-27 19:41:37
  */
 #include "translateObjects.h"
 
@@ -32,6 +32,7 @@ const char *TC_STORE_STRING = "TC_STORE";
 const char *TM_STORE_STRING = "TM_STORE";
 const char *IPC_STORE_STRING = "IPC_STORE";
 const char *TIME_STAMPER_STRING = "TIME_STAMPER";
+const char *TC_VERIFICATOR_STRING = "TC_VERIFICATOR";
 const char *FSFW_OBJECTS_END_STRING = "FSFW_OBJECTS_END";
 const char *TCPIP_TMTC_BRIDGE_STRING = "TCPIP_TMTC_BRIDGE";
 const char *TCPIP_TMTC_POLLING_TASK_STRING = "TCPIP_TMTC_POLLING_TASK";
@@ -100,6 +101,8 @@ const char *translateObject(object_id_t object) {
       return IPC_STORE_STRING;
     case 0x53500010:
       return TIME_STAMPER_STRING;
+    case 0x53500020:
+      return TC_VERIFICATOR_STRING;
     case 0x53ffffff:
       return FSFW_OBJECTS_END_STRING;
     case 0x62000300:

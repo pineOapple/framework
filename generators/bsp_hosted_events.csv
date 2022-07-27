@@ -74,5 +74,6 @@
 7905;0x1ee1;FRAME_PROCESSING_FAILED;LOW;The CCSDS Board could not interpret a TC;fsfw/src/fsfw/datalinklayer/DataLinkLayer.h
 8900;0x22c4;CLOCK_SET;INFO;;fsfw/src/fsfw/pus/Service9TimeManagement.h
 8901;0x22c5;CLOCK_SET_FAILURE;LOW;;fsfw/src/fsfw/pus/Service9TimeManagement.h
+9100;0x238c;TC_DELETION_FAILED;MEDIUM;Deletion of a TC from the map failed. P1: First 32 bit of request ID, P2. Last 32 bit of Request ID;fsfw/src/fsfw/pus/Service11TelecommandScheduling.h
 9700;0x25e4;TEST;INFO;;fsfw/src/fsfw/pus/Service17Test.h
-10600;0x2968;CHANGE_OF_SETUP_PARAMETER;LOW;;fsfw/hal/src/fsfw_hal/devicehandlers/MgmLIS3MDLHandler.h
+10600;0x2968;CHANGE_OF_SETUP_PARAMETER;LOW;;fsfw/src/fsfw_hal/devicehandlers/MgmLIS3MDLHandler.h

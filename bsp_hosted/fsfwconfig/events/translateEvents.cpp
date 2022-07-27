@@ -1,7 +1,7 @@
 /**
- * @brief    Auto-generated event translation file. Contains 78 translations.
+ * @brief    Auto-generated event translation file. Contains 79 translations.
  * @details
- * Generated on: 2022-05-20 09:11:07
+ * Generated on: 2022-07-27 19:41:37
  */
 #include "translateEvents.h"
 
@@ -81,6 +81,7 @@ const char *BIT_LOCK_LOST_STRING = "BIT_LOCK_LOST";
 const char *FRAME_PROCESSING_FAILED_STRING = "FRAME_PROCESSING_FAILED";
 const char *CLOCK_SET_STRING = "CLOCK_SET";
 const char *CLOCK_SET_FAILURE_STRING = "CLOCK_SET_FAILURE";
+const char *TC_DELETION_FAILED_STRING = "TC_DELETION_FAILED";
 const char *TEST_STRING = "TEST";
 const char *CHANGE_OF_SETUP_PARAMETER_STRING = "CHANGE_OF_SETUP_PARAMETER";
 
@@ -238,6 +239,8 @@ const char *translateEvents(Event event) {
       return CLOCK_SET_STRING;
     case (8901):
       return CLOCK_SET_FAILURE_STRING;
+    case (9100):
+      return TC_DELETION_FAILED_STRING;
     case (9700):
       return TEST_STRING;
     case (10600):
