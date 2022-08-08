@@ -106,8 +106,7 @@ add_subdirectory(${COMMON_PATH})
 # ##############################################################################
 
 # Add libraries for all sources.
-target_link_libraries(
-  ${TARGET_NAME} PRIVATE ${LIB_FSFW_NAME} ${LIB_OS_NAME})
+target_link_libraries(${TARGET_NAME} PRIVATE ${LIB_FSFW_NAME} ${LIB_OS_NAME})
 
 # Add include paths for all sources.
 target_include_directories(
