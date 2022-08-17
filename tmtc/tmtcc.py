@@ -50,7 +50,10 @@ def main():
             elif state.request == BackendRequest.DELAY_LISTENER:
                 time.sleep(0.8)
             elif state.request == BackendRequest.DELAY_CUSTOM:
-                time.sleep(state.next_delay.total_seconds())
+                if state.next_delay.total_seconds() < 0.5:
+                    time.sleep(state.next_delay.total_seconds())
+                else:
+                    time.sleep(0.5)
             elif state.request == BackendRequest.CALL_NEXT:
                 pass
     except KeyboardInterrupt:
