@@ -3,7 +3,7 @@
 #include <bsp_hosted/fsfwconfig/objects/systemObjectList.h>
 #include <bsp_hosted/fsfwconfig/pollingsequence/pollingSequenceFactory.h>
 #include <fsfw/modes/HasModesIF.h>
-#include <fsfw/returnvalues/HasReturnvaluesIF.h>
+#include <fsfw/retval.h>
 #include <fsfw/serviceinterface/ServiceInterface.h>
 #include <fsfw/tasks/FixedTimeslotTaskIF.h>
 #include <fsfw/tasks/PeriodicTaskIF.h>
@@ -41,15 +41,15 @@ void InitMission::createTasks() {
   PeriodicTaskIF* distributerTask = taskFactory->createPeriodicTask(
       "DIST", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.1, deadlineMissedFunc);
   ReturnValue_t result = distributerTask->addComponent(objects::CCSDS_DISTRIBUTOR);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("CCSDS distributor", objects::CCSDS_DISTRIBUTOR);
   }
   result = distributerTask->addComponent(objects::PUS_DISTRIBUTOR);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS distributor", objects::PUS_DISTRIBUTOR);
   }
   result = distributerTask->addComponent(objects::TM_FUNNEL);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("TM funnel", objects::TM_FUNNEL);
   }
 
@@ -60,7 +60,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* udpBridgeTask = taskFactory->createPeriodicTask(
       "TCPIP_TMTC_BRIDGE", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.2, deadlineMissedFunc);
   result = udpBridgeTask->addComponent(objects::TCPIP_TMTC_BRIDGE);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("TMTC bridge", objects::TCPIP_TMTC_BRIDGE);
   }
 
@@ -70,7 +70,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* udpPollingTask = taskFactory->createPeriodicTask(
       "TMTC_POLLING", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 2.0, deadlineMissedFunc);
   result = udpPollingTask->addComponent(objects::TCPIP_TMTC_POLLING_TASK);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("TMTC polling", objects::TCPIP_TMTC_POLLING_TASK);
   }
 
@@ -80,7 +80,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* eventTask = taskFactory->createPeriodicTask(
       "EVENT", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.100, deadlineMissedFunc);
   result = eventTask->addComponent(objects::EVENT_MANAGER);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("Event Manager", objects::EVENT_MANAGER);
   }
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
@@ -93,7 +93,7 @@ void InitMission::createTasks() {
   FixedTimeslotTaskIF* timeslotDemoTask = taskFactory->createFixedTimeslotTask(
       "PST_TASK", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.5, deadlineMissedFunc);
   result = pst::pollingSequenceExamples(timeslotDemoTask);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
 #if FSFW_CPP_OSTREAM_ENABLED == 1
     sif::error << "InitMission::createTasks: Timeslot demo task initialization failed!"
                << std::endl;
@@ -108,7 +108,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* readerTask = taskFactory->createPeriodicTask(
       "READER_TASK", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 1.0, deadlineMissedFunc);
   result = readerTask->addComponent(objects::TEST_DUMMY_4);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("Dummy 4", objects::TEST_DUMMY_4);
   }
 #endif /* OBSW_ADD_TASK_EXAMPLE == 1 */
@@ -121,7 +121,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* pusVerification = taskFactory->createPeriodicTask(
       "PUS_VERIF_1", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.200, deadlineMissedFunc);
   result = pusVerification->addComponent(objects::PUS_SERVICE_1_VERIFICATION);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 1", objects::PUS_SERVICE_1_VERIFICATION);
   }
 
@@ -131,15 +131,15 @@ void InitMission::createTasks() {
   PeriodicTaskIF* pusHighPrio = taskFactory->createPeriodicTask(
       "PUS_HIGH_PRIO", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.2, deadlineMissedFunc);
   result = pusHighPrio->addComponent(objects::PUS_SERVICE_2_DEVICE_ACCESS);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 2", objects::PUS_SERVICE_2_DEVICE_ACCESS);
   }
   result = pusHighPrio->addComponent(objects::PUS_SERVICE_5_EVENT_REPORTING);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 5", objects::PUS_SERVICE_5_EVENT_REPORTING);
   }
   result = pusHighPrio->addComponent(objects::PUS_SERVICE_9_TIME_MGMT);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 9", objects::PUS_SERVICE_9_TIME_MGMT);
   }
 
@@ -149,23 +149,23 @@ void InitMission::createTasks() {
   PeriodicTaskIF* pusMedPrio = taskFactory->createPeriodicTask(
       "PUS_MED_PRIO", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.6, deadlineMissedFunc);
   result = pusMedPrio->addComponent(objects::PUS_SERVICE_3_HOUSEKEEPING);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 3", objects::PUS_SERVICE_3_HOUSEKEEPING);
   }
   result = pusMedPrio->addComponent(objects::PUS_SERVICE_8_FUNCTION_MGMT);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 8", objects::PUS_SERVICE_8_FUNCTION_MGMT);
   }
   result = pusMedPrio->addComponent(objects::PUS_SERVICE_20_PARAMETERS);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 20", objects::PUS_SERVICE_20_PARAMETERS);
   }
   result = pusMedPrio->addComponent(objects::PUS_SERVICE_200_MODE_MGMT);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 200", objects::PUS_SERVICE_200_MODE_MGMT);
   }
   result = pusMedPrio->addComponent(objects::PUS_SERVICE_11_TC_SCHEDULER);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 11", objects::PUS_SERVICE_11_TC_SCHEDULER);
   }
 
@@ -175,7 +175,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* pusLowPrio = taskFactory->createPeriodicTask(
       "PUS_LOW_PRIO", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 1.2, deadlineMissedFunc);
   result = pusLowPrio->addComponent(objects::PUS_SERVICE_17_TEST);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("PUS 17", objects::PUS_SERVICE_17_TEST);
   }
 #endif /* OBSW_ADD_PUS_STACK == 1 */
@@ -190,7 +190,7 @@ void InitMission::createTasks() {
   FixedTimeslotTaskIF* testDevicesTimeslotTask = taskFactory->createFixedTimeslotTask(
       "PST_TEST_TASK", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 2.0, deadlineMissedFunc);
   result = pst::pollingSequenceDevices(testDevicesTimeslotTask);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
 #if FSFW_CPP_OSTREAM_ENABLED == 1
     sif::error << "InitMission::createTasks: Test PST initialization failed!" << std::endl;
 #else
@@ -208,7 +208,7 @@ void InitMission::createTasks() {
     task::printInitError("ASS_TASK", objects::TEST_ASSEMBLY);
   }
   result = assemblyTask->addComponent(objects::TEST_ASSEMBLY);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("ASS_TASK", objects::TEST_ASSEMBLY);
   }
 #endif /* OBSW_ADD_DEVICE_HANDLER_DEMO == 1 */
@@ -220,7 +220,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* controllerTask = taskFactory->createPeriodicTask(
       "TEST_CTRL", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.8, deadlineMissedFunc);
   result = controllerTask->addComponent(objects::TEST_CONTROLLER);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("Controller Task", objects::TEST_CONTROLLER);
   }
 #endif /* OBSW_ADD_CONTROLLER_DEMO == 1 */
@@ -230,7 +230,7 @@ void InitMission::createTasks() {
   PeriodicTaskIF* testTask = TaskFactory::instance()->createPeriodicTask(
       "TEST_TASK", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 1.0, deadlineMissedFunc);
   result = testTask->addComponent(objects::TEST_TASK);
-  if (result != HasReturnvaluesIF::RETURN_OK) {
+  if (result != returnvalue::OK) {
     task::printInitError("Test Task", objects::TEST_TASK);
   }
 

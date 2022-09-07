@@ -1,7 +1,7 @@
 #ifndef POLLINGSEQUENCE_POLLINGSEQUENCFACTORY_H_
 #define POLLINGSEQUENCE_POLLINGSEQUENCFACTORY_H_
 
-#include <fsfw/returnvalues/HasReturnvaluesIF.h>
+#include <fsfw/retval.h>
 
 #include "OBSWConfig.h"
 
