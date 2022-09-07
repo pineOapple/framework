@@ -33,13 +33,18 @@ class CfdpHandler : public SystemObject,
                     public AcceptsTelecommandsIF {
  public:
   explicit CfdpHandler(const HandlerCfg& cfg);
-  bool getRemoteCfg(const cfdp::EntityId& remoteId, cfdp::RemoteEntityCfg** cfg) override;
+
   [[nodiscard]] const char* getName() const override;
   [[nodiscard]] uint32_t getIdentifier() const override;
   [[nodiscard]] MessageQueueId_t getRequestQueue() const override;
 
   ReturnValue_t initialize() override;
   ReturnValue_t performOperation(uint8_t operationCode) override;
+
+  // CFDP remote table interface
+  bool getRemoteCfg(const cfdp::EntityId& remoteId, cfdp::RemoteEntityCfg** cfg) override;
+
+  // CFDP user overrides
   void transactionIndication(const cfdp::TransactionId& id) override;
   void eofSentIndication(const cfdp::TransactionId& id) override;
   void transactionFinishedIndication(const cfdp::TransactionFinishedParams& params) override;

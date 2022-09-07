@@ -11,7 +11,7 @@ CfdpHandler::CfdpHandler(const HandlerCfg& cfg)
       destHandler(
           DestHandlerParams(cfg.cfg, *this, *this, cfg.packetInfoList, cfg.lostSegmentsList),
           FsfwParams(cfg.packetDest, nullptr, this)) {
-  // TODO: Make configurable?
+  // TODO: Make queue params configurable, or better yet, expect it to be passed externally
   msgQueue = QueueFactory::instance()->createMessageQueue();
   destHandler.setMsgQueue(*msgQueue);
 }
