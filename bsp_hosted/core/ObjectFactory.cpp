@@ -42,7 +42,7 @@ void ObjectFactory::produce(void* args) {
     new PoolManager(objects::IPC_STORE, poolCfg);
   }
   TmFunnel* funnel;
-  ObjectFactory::produceGenericObjects(&funnel);
+  ObjectFactory::produceGenericObjects(&funnel, *tcStore);
   // TMTC Reception via TCP/IP socket
 #if OBSW_USE_TCP_SERVER == 0
   auto tmtcBridge = new UdpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
@@ -63,13 +63,18 @@ void ObjectFactory::produce(void* args) {
   periodicEvent = true;
 #endif
   new FsfwTestTask(objects::TEST_TASK, periodicEvent);
+
+#if OBSW_ADD_CFDP_COMPONENTS == 1
   auto* hostFs = new HostFilesystem();
   FsfwHandlerParams params(objects::CFDP_HANDLER, *hostFs, *funnel, *tcStore, *tmStore);
   cfdp::IndicationCfg indicationCfg;
   UnsignedByteField<uint16_t> apid(COMMON_APID);
   cfdp::EntityId localId(apid);
-  cfdp::RemoteEntityCfg cfg;
-  cfdp::OneRemoteConfigProvider remoteCfgProvider(cfg);
-  // CfdpHandlerCfg cfg(localId, indicationCfg);
-  // new CfdpHandler();
+  cfdp::RemoteEntityCfg remoteCfg;
+  cfdp::OneRemoteConfigProvider remoteCfgProvider(remoteCfg);
+  cfdp::PacketInfoList<64> packetList;
+  cfdp::LostSegmentsList<128> lostSegments;
+  CfdpHandlerCfg cfg(localId, indicationCfg, packetList, lostSegments, remoteCfgProvider);
+  new CfdpHandler(params, cfg);
+#endif
 }

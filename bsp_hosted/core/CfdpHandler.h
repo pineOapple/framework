@@ -66,6 +66,10 @@ class CfdpHandler : public SystemObject,
   void abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
                            size_t progress) override;
   void eofRecvIndication(const cfdp::TransactionId& id) override;
+  void noticeOfSuspensionCb(cfdp::ConditionCode code) override;
+  void noticeOfCancellationCb(cfdp::ConditionCode code) override;
+  void abandonCb(cfdp::ConditionCode code) override;
+  void ignoreCb(cfdp::ConditionCode code) override;
 
  private:
   MessageQueueIF* msgQueue = nullptr;

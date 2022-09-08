@@ -48,10 +48,26 @@ void InitMission::createTasks() {
   if (result != returnvalue::OK) {
     task::printInitError("PUS distributor", objects::PUS_DISTRIBUTOR);
   }
+  result = distributerTask->addComponent(objects::CFDP_DISTRIBUTOR);
+  if (result != returnvalue::OK) {
+    task::printInitError("CFDP distributor", objects::CFDP_DISTRIBUTOR);
+  }
   result = distributerTask->addComponent(objects::TM_FUNNEL);
   if (result != returnvalue::OK) {
     task::printInitError("TM funnel", objects::TM_FUNNEL);
   }
+
+#if OBSW_ADD_CFDP_COMPONENTS == 1
+#ifdef __unix__
+  currPrio = 50;
+#endif
+  PeriodicTaskIF* cfdpTask = taskFactory->createPeriodicTask(
+      "CFDP Handler", currPrio, PeriodicTaskIF::MINIMUM_STACK_SIZE, 0.4, deadlineMissedFunc);
+  result = cfdpTask->addComponent(objects::CFDP_HANDLER);
+  if (result != returnvalue::OK) {
+    task::printInitError("CFDP Handler", objects::CFDP_HANDLER);
+  }
+#endif
 
 #ifdef __unix__
   currPrio = 50;
@@ -246,6 +262,10 @@ void InitMission::createTasks() {
   udpPollingTask->startTask();
   eventTask->startTask();
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
+
+#if OBSW_ADD_CFDP_COMPONENTS == 1
+  cfdpTask->startTask();
+#endif
 
 #if OBSW_ADD_PUS_STACK == 1
   pusVerification->startTask();

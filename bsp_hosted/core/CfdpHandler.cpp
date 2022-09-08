@@ -142,3 +142,8 @@ ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
   }
   return result;
 }
+
+void CfdpHandler::noticeOfSuspensionCb(cfdp::ConditionCode code) {}
+void CfdpHandler::noticeOfCancellationCb(cfdp::ConditionCode code) {}
+void CfdpHandler::abandonCb(cfdp::ConditionCode code) {}
+void CfdpHandler::ignoreCb(cfdp::ConditionCode code) {}
