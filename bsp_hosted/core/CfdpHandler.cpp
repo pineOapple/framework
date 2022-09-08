@@ -11,8 +11,8 @@ using namespace cfdp;
 CfdpHandler::CfdpHandler(const FsfwHandlerParams& fsfwParams, const CfdpHandlerCfg& cfdpCfg)
     : SystemObject(fsfwParams.objectId),
       UserBase(fsfwParams.vfs),
-      destHandler(DestHandlerParams(cfdpCfg.cfg, *this, *this, cfdpCfg.packetInfoList,
-                                    cfdpCfg.lostSegmentsList),
+      destHandler(DestHandlerParams(cfdpCfg.cfg, *this, cfdpCfg.remoteCfgProvider,
+                                    cfdpCfg.packetInfoList, cfdpCfg.lostSegmentsList),
                   FsfwParams(fsfwParams.packetDest, nullptr, this, fsfwParams.tcStore,
                              fsfwParams.tmStore)) {
   // TODO: Make queue params configurable, or better yet, expect it to be passed externally
@@ -75,10 +75,6 @@ void CfdpHandler::abandonedIndication(const cfdp::TransactionId& id, cfdp::Condi
                                       size_t progress) {}
 void CfdpHandler::eofRecvIndication(const cfdp::TransactionId& id) {}
 
-bool CfdpHandler::getRemoteCfg(const cfdp::EntityId& remoteId, cfdp::RemoteEntityCfg** cfg) {
-  return false;
-}
-
 ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
   auto accessorPair = tcStore->getData(msg.getStorageId());
   PduHeaderReader reader(accessorPair.second.data(), accessorPair.second.size());
@@ -134,7 +130,7 @@ ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
       // the source handler, for a Finished PDU, it is passed to the destination handler.
       FileDirectives ackedDirective;
       if (not AckPduReader::checkAckedDirectiveField(pduDataField[1], ackedDirective)) {
-        // TODO: appropriate error
+        return INVALID_ACK_DIRECTIVE_FIELDS;
       }
       if (ackedDirective == FileDirectives::EOF_DIRECTIVE) {
         passToSourceHandler();

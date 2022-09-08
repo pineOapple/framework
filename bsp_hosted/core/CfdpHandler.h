@@ -22,17 +22,21 @@ struct FsfwHandlerParams {
 
 struct CfdpHandlerCfg {
   CfdpHandlerCfg(cfdp::LocalEntityCfg cfg, cfdp::PacketInfoListBase& packetInfo,
-                 cfdp::LostSegmentsListBase& lostSegmentsList)
-      : cfg(std::move(cfg)), packetInfoList(packetInfo), lostSegmentsList(lostSegmentsList) {}
+                 cfdp::LostSegmentsListBase& lostSegmentsList,
+                 cfdp::RemoteConfigTableIF& remoteCfgProvider)
+      : cfg(std::move(cfg)),
+        packetInfoList(packetInfo),
+        lostSegmentsList(lostSegmentsList),
+        remoteCfgProvider(remoteCfgProvider) {}
 
   cfdp::LocalEntityCfg cfg;
   cfdp::PacketInfoListBase& packetInfoList;
   cfdp::LostSegmentsListBase& lostSegmentsList;
+  cfdp::RemoteConfigTableIF& remoteCfgProvider;
 };
 
 class CfdpHandler : public SystemObject,
                     public cfdp::UserBase,
-                    public cfdp::RemoteConfigTableIF,
                     public ExecutableObjectIF,
                     public AcceptsTelecommandsIF {
  public:
@@ -44,9 +48,6 @@ class CfdpHandler : public SystemObject,
 
   ReturnValue_t initialize() override;
   ReturnValue_t performOperation(uint8_t operationCode) override;
-
-  // CFDP remote table interface
-  bool getRemoteCfg(const cfdp::EntityId& remoteId, cfdp::RemoteEntityCfg** cfg) override;
 
   // CFDP user overrides
   void transactionIndication(const cfdp::TransactionId& id) override;
