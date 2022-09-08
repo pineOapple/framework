@@ -51,6 +51,12 @@ ReturnValue_t CfdpHandler::performOperation(uint8_t operationCode) {
       status = result;
     }
   }
+  auto& fsmRes = destHandler.performStateMachine();
+  // TODO: Error handling?
+  while(fsmRes.callStatus == CallStatus::CALL_AGAIN) {
+    destHandler.performStateMachine();
+    // TODO: Error handling?
+  }
   return status;
 }
 
@@ -77,15 +83,48 @@ ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
   PduHeaderReader reader(accessorPair.second.data(), accessorPair.second.size());
   ReturnValue_t result = reader.parseData();
   if (result != returnvalue::OK) {
-    return result;
+    return INVALID_PDU_FORMAT;
   }
   // The CFDP distributor should have taken care of ensuring the destination ID is correct
   PduTypes type = reader.getPduType();
   // Only the destination handler can process these PDUs
   if (type == PduTypes::FILE_DATA) {
+    // Disable auto-deletion of packet
+    accessorPair.second.release();
+    PacketInfo info(type, msg.getStorageId());
+    result = destHandler.passPacket(info);
   } else {
     // Route depending on directive type. Retrieve directive type from raw stream for better
-    // performance (with size check)
+    // performance (with sanity and directive code check). The routing is based on section 4.5 of
+    // the CFDP standard which specifies the PDU forwarding procedure.
+
+    // PDU header only. Invalid supplied data. A directive packet should have a valid data field
+    // with at least one byte being the directive code
+    const uint8_t* pduDataField = reader.getPduDataField();
+    if(pduDataField == nullptr) {
+      return INVALID_PDU_FORMAT;
+    }
+    if (not FileDirectiveReader::checkFileDirective(pduDataField[0])) {
+      return INVALID_DIRECTIVE_FIELD;
+    }
+    auto directive = static_cast<FileDirectives>(pduDataField[0]);
+
+    if(directive == FileDirectives::METADATA or directive == FileDirectives::EOF_DIRECTIVE or
+        directive == FileDirectives::PROMPT) {
+      // Section b) of 4.5.3: These PDUs should always be targeted towards the file receiver a.k.a.
+      // the destination handler
+      accessorPair.second.release();
+      PacketInfo info(type, msg.getStorageId(), directive);
+      result = destHandler.passPacket(info);
+
+    } else if(directive == FileDirectives::FINISH or directive == FileDirectives::NAK or directive == FileDirectives::KEEP_ALIVE) {
+      // Section c) of 4.5.3: These PDUs should always be targeted towards the file sender a.k.a.
+      // the source handler
+      // TODO: Pass to source handler
+    } else if(directive == FileDirectives::ACK) {
+      // Section a): Uhh, this is kind of tricky. Could be relevant for both handlers. Maybe
+      // pass it to both and delete if afterwards?
+    }
   }
-  return OK;
+  return result;
 }
