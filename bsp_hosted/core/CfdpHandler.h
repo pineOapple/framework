@@ -7,23 +7,27 @@
 #include "fsfw/objectmanager/SystemObject.h"
 #include "fsfw/tasks/ExecutableObjectIF.h"
 #include "fsfw/tmtcservices/AcceptsTelecommandsIF.h"
+#include "fsfw/tmtcservices/TmTcMessage.h"
 
-struct HandlerCfg {
-  HandlerCfg(object_id_t objectId, cfdp::LocalEntityCfg cfg, HasFileSystemIF& vfs,
-             AcceptsTelemetryIF& packetDest, cfdp::PacketInfoListBase& packetInfo,
-             cfdp::LostSegmentsListBase& lostSegmentsList)
-      : objectId(objectId),
-        cfg(std::move(cfg)),
-        vfs(vfs),
-        packetInfoList(packetInfo),
-        lostSegmentsList(lostSegmentsList),
-        packetDest(packetDest) {}
+struct FsfwHandlerParams {
+  FsfwHandlerParams(object_id_t objectId, HasFileSystemIF& vfs, AcceptsTelemetryIF& packetDest,
+                    StorageManagerIF& tcStore, StorageManagerIF& tmStore)
+      : objectId(objectId), vfs(vfs), packetDest(packetDest), tcStore(tcStore), tmStore(tmStore) {}
   object_id_t objectId{};
-  cfdp::LocalEntityCfg cfg;
   HasFileSystemIF& vfs;
+  AcceptsTelemetryIF& packetDest;
+  StorageManagerIF& tcStore;
+  StorageManagerIF& tmStore;
+};
+
+struct CfdpHandlerCfg {
+  CfdpHandlerCfg(cfdp::LocalEntityCfg cfg, cfdp::PacketInfoListBase& packetInfo,
+                 cfdp::LostSegmentsListBase& lostSegmentsList)
+      : cfg(std::move(cfg)), packetInfoList(packetInfo), lostSegmentsList(lostSegmentsList) {}
+
+  cfdp::LocalEntityCfg cfg;
   cfdp::PacketInfoListBase& packetInfoList;
   cfdp::LostSegmentsListBase& lostSegmentsList;
-  AcceptsTelemetryIF& packetDest;
 };
 
 class CfdpHandler : public SystemObject,
@@ -32,7 +36,7 @@ class CfdpHandler : public SystemObject,
                     public ExecutableObjectIF,
                     public AcceptsTelecommandsIF {
  public:
-  explicit CfdpHandler(const HandlerCfg& cfg);
+  explicit CfdpHandler(const FsfwHandlerParams& fsfwParams, const CfdpHandlerCfg& cfdpCfg);
 
   [[nodiscard]] const char* getName() const override;
   [[nodiscard]] uint32_t getIdentifier() const override;
@@ -62,6 +66,10 @@ class CfdpHandler : public SystemObject,
  private:
   MessageQueueIF* msgQueue = nullptr;
   cfdp::DestHandler destHandler;
+  StorageManagerIF* tcStore = nullptr;
+  StorageManagerIF* tmStore = nullptr;
+
+  ReturnValue_t handleCfdpPacket(TmTcMessage& msg);
 };
 
 #endif  // FSFW_EXAMPLE_HOSTED_CFDPHANDLER_H
