@@ -11,8 +11,9 @@ using namespace cfdp;
 CfdpHandler::CfdpHandler(const FsfwHandlerParams& fsfwParams, const CfdpHandlerCfg& cfdpCfg)
     : SystemObject(fsfwParams.objectId),
       UserBase(fsfwParams.vfs),
-      destHandler(DestHandlerParams(cfdpCfg.cfg, *this, cfdpCfg.remoteCfgProvider,
-                                    cfdpCfg.packetInfoList, cfdpCfg.lostSegmentsList),
+      destHandler(DestHandlerParams(LocalEntityCfg(cfdpCfg.id, cfdpCfg.indicCfg, *this), *this,
+                                    cfdpCfg.remoteCfgProvider, cfdpCfg.packetInfoList,
+                                    cfdpCfg.lostSegmentsList),
                   FsfwParams(fsfwParams.packetDest, nullptr, this, fsfwParams.tcStore,
                              fsfwParams.tmStore)) {
   // TODO: Make queue params configurable, or better yet, expect it to be passed externally

@@ -21,15 +21,17 @@ struct FsfwHandlerParams {
 };
 
 struct CfdpHandlerCfg {
-  CfdpHandlerCfg(cfdp::LocalEntityCfg cfg, cfdp::PacketInfoListBase& packetInfo,
-                 cfdp::LostSegmentsListBase& lostSegmentsList,
+  CfdpHandlerCfg(cfdp::EntityId localId, cfdp::IndicationCfg indicationCfg,
+                 cfdp::PacketInfoListBase& packetInfo, cfdp::LostSegmentsListBase& lostSegmentsList,
                  cfdp::RemoteConfigTableIF& remoteCfgProvider)
-      : cfg(std::move(cfg)),
+      : id(std::move(localId)),
+        indicCfg(indicationCfg),
         packetInfoList(packetInfo),
         lostSegmentsList(lostSegmentsList),
         remoteCfgProvider(remoteCfgProvider) {}
 
-  cfdp::LocalEntityCfg cfg;
+  cfdp::EntityId id;
+  cfdp::IndicationCfg indicCfg;
   cfdp::PacketInfoListBase& packetInfoList;
   cfdp::LostSegmentsListBase& lostSegmentsList;
   cfdp::RemoteConfigTableIF& remoteCfgProvider;
@@ -37,6 +39,7 @@ struct CfdpHandlerCfg {
 
 class CfdpHandler : public SystemObject,
                     public cfdp::UserBase,
+                    public cfdp::FaultHandlerBase,
                     public ExecutableObjectIF,
                     public AcceptsTelecommandsIF {
  public:
