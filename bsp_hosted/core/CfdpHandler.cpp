@@ -1,6 +1,7 @@
 #include "CfdpHandler.h"
 
 #include "fsfw/cfdp/pdu/PduHeaderReader.h"
+#include "fsfw/cfdp/pdu/AckPduReader.h"
 #include "fsfw/ipc/QueueFactory.h"
 #include "fsfw/tmtcservices/TmTcMessage.h"
 
@@ -109,21 +110,36 @@ ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
     }
     auto directive = static_cast<FileDirectives>(pduDataField[0]);
 
+    auto passToDestHandler = [&]() {
+      accessorPair.second.release();
+      PacketInfo info(type, msg.getStorageId(), directive);
+      result = destHandler.passPacket(info);
+    };
+    auto passToSourceHandler = [&]() {
+
+    };
     if(directive == FileDirectives::METADATA or directive == FileDirectives::EOF_DIRECTIVE or
         directive == FileDirectives::PROMPT) {
       // Section b) of 4.5.3: These PDUs should always be targeted towards the file receiver a.k.a.
       // the destination handler
-      accessorPair.second.release();
-      PacketInfo info(type, msg.getStorageId(), directive);
-      result = destHandler.passPacket(info);
-
+      passToDestHandler();
     } else if(directive == FileDirectives::FINISH or directive == FileDirectives::NAK or directive == FileDirectives::KEEP_ALIVE) {
       // Section c) of 4.5.3: These PDUs should always be targeted towards the file sender a.k.a.
       // the source handler
-      // TODO: Pass to source handler
+      passToSourceHandler();
     } else if(directive == FileDirectives::ACK) {
-      // Section a): Uhh, this is kind of tricky. Could be relevant for both handlers. Maybe
-      // pass it to both and delete if afterwards?
+      // Section a): Recipient depends of the type of PDU that is being acknowledged. We can simply
+      // extract the PDU type from the raw stream. If it is an EOF PDU, this packet is passed to
+      // the source handler, for a Finished PDU, it is passed to the destination handler.
+      FileDirectives ackedDirective;
+      if (not AckPduReader::checkAckedDirectiveField(pduDataField[1], ackedDirective)) {
+        // TODO: appropriate error
+      }
+      if(ackedDirective == FileDirectives::EOF_DIRECTIVE) {
+        passToSourceHandler();
+      } else if(ackedDirective == FileDirectives::FINISH) {
+        passToDestHandler();
+      }
     }
   }
   return result;
