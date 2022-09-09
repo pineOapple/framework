@@ -47,6 +47,16 @@ from tmtccmd.cfdp.handler import DestHandler, SourceHandler
 LOGGER = get_console_logger()
 
 
+class CfdpCcsdsWrapper:
+    def __init__(
+        self,
+        cfg: LocalEntityCfg,
+        seq_cnt_provider: ProvidesSeqCount,
+        remote_cfg: Sequence[RemoteEntityCfg],
+    ):
+        self.handler = CfdpHandler(cfg, seq_cnt_provider, remote_cfg)
+
+
 class CfdpHandler(CfdpUserBase):
     def __init__(
         self,
