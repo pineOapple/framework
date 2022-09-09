@@ -3,7 +3,7 @@
 import sys
 import time
 from pathlib import Path
-from typing import Sequence
+from typing import Sequence, Optional
 
 from spacepackets.cfdp import ConditionCode, TransmissionModes, PduType, DirectiveType
 from spacepackets.cfdp.pdu import AbstractFileDirectiveBase, PduHolder
@@ -80,6 +80,15 @@ class CfdpHandler(CfdpUserBase):
         self.source_handler.put_request(
             put_request, self.remote_cfg_table.get_remote_entity(self.dest_id)
         )
+
+    def pull_next_dest_packet(self) -> Optional[PduHolder]:
+        res = self.dest_handler.state_machine()
+        if res.states.packet_ready:
+            return self.dest_handler.pdu_holder
+        return None
+
+    def confirm_dest_packet_sent(self):
+        self.dest_handler.confirm_packet_sent_advance_fsm()
 
     def pass_packet(self, packet: AbstractFileDirectiveBase):
         """This function routes the packets based on PDU type and directive type if applicable.
