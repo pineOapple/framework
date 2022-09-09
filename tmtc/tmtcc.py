@@ -23,8 +23,7 @@ LOGGER = get_console_logger()
 
 
 def main():
-    proc_param_wrapper = ProcedureParamsWrapper()
-    setup_wrapper = setup_params(FsfwHookBase(), proc_param_wrapper)
+    setup_wrapper = setup_params(FsfwHookBase())
     tmtc_logger = RegularTmtcLogWrapper()
     printer = FsfwTmTcPrinter(tmtc_logger.logger)
     raw_logger = RawTmtcTimedLogWrapper(when=TimedLogWhen.PER_HOUR, interval=2)
