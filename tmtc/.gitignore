@@ -3,6 +3,6 @@
 /venv
 
 /config/tmtc_config.json
-/seqcnt.txt
+/seqcnt*.txt
 
 /log

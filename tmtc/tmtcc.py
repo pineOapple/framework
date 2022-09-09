@@ -8,6 +8,7 @@ import tmtccmd
 from common_tmtc.common import setup_params, setup_tmtc_handlers, setup_backend
 from config.hook import FsfwHookBase
 from tmtccmd import get_console_logger
+from tmtccmd.config.args import ProcedureParamsWrapper
 from tmtccmd.core import BackendRequest
 from tmtccmd.logging.pus import (
     RegularTmtcLogWrapper,
@@ -22,7 +23,8 @@ LOGGER = get_console_logger()
 
 
 def main():
-    setup_wrapper = setup_params(FsfwHookBase())
+    proc_param_wrapper = ProcedureParamsWrapper()
+    setup_wrapper = setup_params(FsfwHookBase(), proc_param_wrapper)
     tmtc_logger = RegularTmtcLogWrapper()
     printer = FsfwTmTcPrinter(tmtc_logger.logger)
     raw_logger = RawTmtcTimedLogWrapper(when=TimedLogWhen.PER_HOUR, interval=2)
