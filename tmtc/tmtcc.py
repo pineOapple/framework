@@ -2,39 +2,12 @@
 """TMTC commander for FSFW Example"""
 import sys
 import time
-from pathlib import Path
-from typing import Sequence, Optional
-
-from spacepackets import SpacePacket, SpacePacketHeader, PacketTypes
-from spacepackets.cfdp import ConditionCode, TransmissionModes, PduType, DirectiveType
-from spacepackets.cfdp.pdu import AbstractFileDirectiveBase, PduHolder, PduFactory
-from spacepackets.cfdp.pdu.helper import GenericPduPacket
 from spacepackets.ecss import PusVerificator
 
 import tmtccmd
-from common_tmtc.common import (
-    setup_params,
-    setup_tmtc_handlers,
-    setup_backend,
-    EXAMPLE_APID,
-)
+from common_tmtc.common import setup_params, setup_tmtc_handlers, setup_backend
 from config.hook import FsfwHookBase
-from spacepackets.util import UnsignedByteField
 from tmtccmd import get_console_logger
-from tmtccmd.cfdp import (
-    LocalEntityCfg,
-    CfdpUserBase,
-    TransactionId,
-    RemoteEntityCfg,
-    RemoteEntityCfgTable,
-    HostFilestore,
-)
-from tmtccmd.cfdp.request import PutRequestCfg, PutRequest
-from tmtccmd.cfdp.user import (
-    FileSegmentRecvdParams,
-    MetadataRecvParams,
-    TransactionFinishedParams,
-)
 from tmtccmd.core import BackendRequest
 from tmtccmd.logging.pus import (
     RegularTmtcLogWrapper,
@@ -42,9 +15,8 @@ from tmtccmd.logging.pus import (
     TimedLogWhen,
 )
 from tmtccmd.pus import VerificationWrapper
-from tmtccmd.util import ProvidesSeqCount
 from tmtccmd.util.tmtc_printer import FsfwTmTcPrinter
-from tmtccmd.cfdp.handler import DestHandler, SourceHandler
+
 
 LOGGER = get_console_logger()
 
