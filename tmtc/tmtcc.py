@@ -5,7 +5,8 @@ import time
 from pathlib import Path
 from typing import Sequence
 
-from spacepackets.cfdp import ConditionCode, TransmissionModes
+from spacepackets.cfdp import ConditionCode, TransmissionModes, PduType, DirectiveType
+from spacepackets.cfdp.pdu import AbstractFileDirectiveBase, PduHolder
 from spacepackets.ecss import PusVerificator
 
 import tmtccmd
@@ -79,6 +80,43 @@ class CfdpHandler(CfdpUserBase):
         self.source_handler.put_request(
             put_request, self.remote_cfg_table.get_remote_entity(self.dest_id)
         )
+
+    def pass_packet(self, packet: AbstractFileDirectiveBase):
+        """This function routes the packets based on PDU type and directive type if applicable.
+
+        The routing is based on section 4.5 of the CFDP standard whcih specifies the PDU forwarding
+        procedure.
+        """
+        if packet.pdu_type == PduType.FILE_DATA:
+            self.dest_handler.pass_packet(packet)
+        else:
+            if packet.directive_type in [
+                DirectiveType.METADATA_PDU,
+                DirectiveType.EOF_PDU,
+                DirectiveType.PROMPT_PDU,
+            ]:
+                # Section b) of 4.5.3: These PDUs should always be targeted towards the file
+                # receiver a.k.a. the destination handler
+                self.dest_handler.pass_packet(packet)
+            elif packet.directive_type in [
+                DirectiveType.FINISHED_PDU,
+                DirectiveType.NAK_PDU,
+                DirectiveType.KEEP_ALIVE_PDU,
+            ]:
+                # Section c) of 4.5.3: These PDUs should always be targeted towards the file sender
+                # a.k.a. the source handler
+                self.source_handler.pass_packet(packet)
+            elif packet.directive_type == DirectiveType.ACK_PDU:
+                # Section a): Recipient depends on the type of PDU that is being acknowledged.
+                # We can simply extract the PDU type from the raw stream. If it is an EOF PDU,
+                # this packet is passed to the source handler. For a finished PDU, it is
+                # passed to the destination handler
+                pdu_holder = PduHolder(packet)
+                ack_pdu = pdu_holder.to_ack_pdu()
+                if ack_pdu.directive_code_of_acked_pdu == DirectiveType.EOF_PDU:
+                    self.source_handler.pass_packet(packet)
+                elif ack_pdu.directive_code_of_acked_pdu == DirectiveType.FINISHED_PDU:
+                    self.dest_handler.pass_packet(packet)
 
     def transaction_indication(self, transaction_id: TransactionId):
         pass

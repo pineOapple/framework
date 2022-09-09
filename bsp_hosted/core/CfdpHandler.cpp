@@ -92,9 +92,10 @@ ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
     PacketInfo info(type, msg.getStorageId());
     result = destHandler.passPacket(info);
   } else {
-    // Route depending on directive type. Retrieve directive type from raw stream for better
-    // performance (with sanity and directive code check). The routing is based on section 4.5 of
-    // the CFDP standard which specifies the PDU forwarding procedure.
+    // Route depending on PDU type and directive type if applicable. It retrieves directive type
+    // from the raw stream for better performance (with sanity and directive code check).
+    // The routing is based on section 4.5 of the CFDP standard which specifies the PDU forwarding
+    // procedure.
 
     // PDU header only. Invalid supplied data. A directive packet should have a valid data field
     // with at least one byte being the directive code
