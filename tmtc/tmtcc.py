@@ -7,7 +7,8 @@ from typing import Sequence, Optional
 
 from spacepackets import SpacePacket, SpacePacketHeader, PacketTypes
 from spacepackets.cfdp import ConditionCode, TransmissionModes, PduType, DirectiveType
-from spacepackets.cfdp.pdu import AbstractFileDirectiveBase, PduHolder
+from spacepackets.cfdp.pdu import AbstractFileDirectiveBase, PduHolder, PduFactory
+from spacepackets.cfdp.pdu.helper import GenericPduPacket
 from spacepackets.ecss import PusVerificator
 
 import tmtccmd
@@ -79,7 +80,9 @@ class CfdpCcsdsWrapper:
 
     def pass_packet(self, packet: SpacePacket):
         # Unwrap the user data and pass it to the handler
-        pass
+        pdu_raw = packet.user_data
+        pdu_base = PduFactory.from_raw(pdu_raw)
+        self.handler.pass_packet(pdu_base)
 
 
 class CfdpHandler(CfdpUserBase):
@@ -125,7 +128,7 @@ class CfdpHandler(CfdpUserBase):
     def confirm_dest_packet_sent(self):
         self.dest_handler.confirm_packet_sent_advance_fsm()
 
-    def pass_packet(self, packet: AbstractFileDirectiveBase):
+    def pass_packet(self, packet: GenericPduPacket):
         """This function routes the packets based on PDU type and directive type if applicable.
 
         The routing is based on section 4.5 of the CFDP standard whcih specifies the PDU forwarding
