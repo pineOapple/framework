@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 from typing import Sequence, Optional
 
+from spacepackets import SpacePacket, SpacePacketHeader, PacketTypes
 from spacepackets.cfdp import ConditionCode, TransmissionModes, PduType, DirectiveType
 from spacepackets.cfdp.pdu import AbstractFileDirectiveBase, PduHolder
 from spacepackets.ecss import PusVerificator
@@ -51,10 +52,34 @@ class CfdpCcsdsWrapper:
     def __init__(
         self,
         cfg: LocalEntityCfg,
-        seq_cnt_provider: ProvidesSeqCount,
+        cfdp_seq_cnt_provider: ProvidesSeqCount,
         remote_cfg: Sequence[RemoteEntityCfg],
+        ccsds_seq_cnt_provider: ProvidesSeqCount,
+        ccsds_apid: int,
     ):
-        self.handler = CfdpHandler(cfg, seq_cnt_provider, remote_cfg)
+        self.handler = CfdpHandler(cfg, cfdp_seq_cnt_provider, remote_cfg)
+        self.ccsds_seq_cnt_provider = ccsds_seq_cnt_provider
+        self.ccsds_apid = ccsds_apid
+
+    def pull_next_dest_packet(self) -> Optional[SpacePacket]:
+        """Retrieves the next PDU to send and wraps it into a space packet"""
+        next_packet = self.handler.pull_next_dest_packet()
+        if next_packet is None:
+            return next_packet
+        sp_header = SpacePacketHeader(
+            packet_type=PacketTypes.TC,
+            apid=self.ccsds_apid,
+            seq_count=self.ccsds_seq_cnt_provider.get_and_increment(),
+            data_len=next_packet.packet_len - 1,
+        )
+        return SpacePacket(sp_header, None, next_packet.pack())
+
+    def confirm_dest_packet_sent(self):
+        self.handler.confirm_dest_packet_sent()
+
+    def pass_packet(self, packet: SpacePacket):
+        # Unwrap the user data and pass it to the handler
+        pass
 
 
 class CfdpHandler(CfdpUserBase):
