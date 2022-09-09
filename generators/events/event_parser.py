@@ -49,7 +49,7 @@ SUBSYSTEM_DEFINITION_DESTINATIONS = [
 HEADER_DEFINITION_DESTINATIONS = [
     f"{OBSW_ROOT_DIR}/bsp_hosted",
     f"{OBSW_ROOT_DIR}/fsfw/",
-    f"{FSFW_CONFIG_ROOT}"
+    f"{FSFW_CONFIG_ROOT}",
 ]
 
 
@@ -83,7 +83,9 @@ def parse_events(
             header_file_name=CPP_H_FILENAME,
         )
         if COPY_CPP_FILE:
-            LOGGER.info(f"EventParser: Copying CPP translation file to {CPP_COPY_DESTINATION}")
+            LOGGER.info(
+                f"EventParser: Copying CPP translation file to {CPP_COPY_DESTINATION}"
+            )
             copy_file(CPP_FILENAME, CPP_COPY_DESTINATION)
             copy_file(CPP_H_FILENAME, CPP_COPY_DESTINATION)
 

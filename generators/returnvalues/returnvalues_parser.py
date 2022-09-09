@@ -9,7 +9,13 @@ from fsfwgen.returnvalues.returnvalues_parser import InterfaceParser, ReturnValu
 from fsfwgen.utility.sql_writer import SqlWriter
 from fsfwgen.utility.printer import PrettyPrinter
 
-from definitions import BSP_HOSTED, DATABASE_NAME, ROOT_DIR, OBSW_ROOT_DIR, EXAMPLE_COMMON_DIR
+from definitions import (
+    BSP_HOSTED,
+    DATABASE_NAME,
+    ROOT_DIR,
+    OBSW_ROOT_DIR,
+    EXAMPLE_COMMON_DIR,
+)
 
 LOGGER = get_console_logger()
 EXPORT_TO_FILE = True

@@ -20,27 +20,40 @@ def main():
     print("-- Python CMake build configurator utility --")
 
     print("Parsing command line arguments..")
-    parser = argparse.ArgumentParser(description="Processing arguments for CMake build configuration.")
-    parser.add_argument(
-        "-o", "--osal", type=str, choices=["freertos", "linux", "rtems", "host"],
-        help="FSFW OSAL. Valid arguments: host, linux, rtems, freertos"
+    parser = argparse.ArgumentParser(
+        description="Processing arguments for CMake build configuration."
     )
     parser.add_argument(
-        "-b", "--buildtype", type=str, choices=["debug", "release", "size", "reldeb"],
-        help="CMake build type. Valid arguments: debug, release, size, reldeb (Release with Debug Information)", 
-        default="debug"
+        "-o",
+        "--osal",
+        type=str,
+        choices=["freertos", "linux", "rtems", "host"],
+        help="FSFW OSAL. Valid arguments: host, linux, rtems, freertos",
+    )
+    parser.add_argument(
+        "-b",
+        "--buildtype",
+        type=str,
+        choices=["debug", "release", "size", "reldeb"],
+        help="CMake build type. Valid arguments: debug, release, size, reldeb (Release with Debug Information)",
+        default="debug",
     )
     parser.add_argument("-l", "--builddir", type=str, help="Specify build directory.")
     parser.add_argument(
         "-g", "--generator", type=str, help="CMake Generator", choices=["make", "ninja"]
     )
     parser.add_argument(
-        "-t", "--target-bsp", type=str, help="Target BSP, combination of architecture and machine"
+        "-t",
+        "--target-bsp",
+        type=str,
+        help="Target BSP, combination of architecture and machine",
     )
     parser.add_argument(
-        "-d", "--defines", 
+        "-d",
+        "--defines",
         help="Additional custom defines passed to CMake (supply without -D prefix!)",
-        nargs="*", type=str
+        nargs="*",
+        type=str,
     )
 
     args = parser.parse_args()
@@ -53,15 +66,15 @@ def main():
 
     if args.generator is None:
         generator = determine_build_generator()
-        generator_cmake_arg = f"-G \"{generator}\""
+        generator_cmake_arg = f'-G "{generator}"'
     else:
         if args.generator == "make":
-            if os.name == 'nt':
+            if os.name == "nt":
                 generator_cmake_arg = '-G "MinGW Makefiles"'
             else:
                 generator_cmake_arg = '-G "Unix Makefiles"'
-        elif args.generator == 'ninja':
-            generator_cmake_arg = '-G Ninja'
+        elif args.generator == "ninja":
+            generator_cmake_arg = "-G Ninja"
         else:
             generator_cmake_arg = args.generator
 
@@ -73,14 +86,14 @@ def main():
 
     cmake_build_type = determine_build_type(args.buildtype)
 
-    cmake_target_cfg_cmd = ''
+    cmake_target_cfg_cmd = ""
 
     define_string = ""
     if args.defines is not None:
         define_list = args.defines[0].split()
         for define in define_list:
             define_string += f"-D{define} "
-            
+
     if args.builddir is None:
         cmake_build_folder = determine_build_folder(cmake_build_type)
     else:
@@ -88,8 +101,10 @@ def main():
 
     build_path = source_location + os.path.sep + cmake_build_folder
     if os.path.isdir(build_path):
-        remove_old_dir = input(f"{cmake_build_folder} folder already exists. "
-                               f"Remove old directory? [y/n]: ")
+        remove_old_dir = input(
+            f"{cmake_build_folder} folder already exists. "
+            f"Remove old directory? [y/n]: "
+        )
         if str(remove_old_dir).lower() in ["yes", "y", 1]:
             remove_old_dir = True
         else:
@@ -108,11 +123,13 @@ def main():
     print(f"Navigating into build directory: {build_path}")
     os.chdir(cmake_build_folder)
 
-    cmake_command = f"cmake {generator_cmake_arg} -DFSFW_OSAL=\"{cmake_fsfw_osal}\" " \
-                    f"-DCMAKE_BUILD_TYPE=\"{cmake_build_type}\" {cmake_target_cfg_cmd} " \
-                    f"{define_string} {source_location}"
+    cmake_command = (
+        f'cmake {generator_cmake_arg} -DFSFW_OSAL="{cmake_fsfw_osal}" '
+        f'-DCMAKE_BUILD_TYPE="{cmake_build_type}" {cmake_target_cfg_cmd} '
+        f"{define_string} {source_location}"
+    )
     # Remove redundant spaces
-    cmake_command = ' '.join(cmake_command.split())
+    cmake_command = " ".join(cmake_command.split())
     print("Running CMake command (without +): ")
     print(f"+ {cmake_command}")
     os.system(cmake_command)
@@ -121,8 +138,10 @@ def main():
 
 def determine_build_generator() -> str:
     print("No generator specified. ")
-    print("Please select from the following list of build types or type "
-          "in desired system directly [h for help]: ")
+    print(
+        "Please select from the following list of build types or type "
+        "in desired system directly [h for help]: "
+    )
     while True:
         user_input = input("Enter your selection: ")
         if user_input == "h":
@@ -136,11 +155,15 @@ def determine_build_generator() -> str:
 
 
 def determine_build_folder(cmake_build_type: str) -> str:
-    confirm = input(f"No build folder specified. Set to build type name {cmake_build_type}? [y/n]: ")
+    confirm = input(
+        f"No build folder specified. Set to build type name {cmake_build_type}? [y/n]: "
+    )
     if confirm in ["yes", "y", 1]:
         return cmake_build_type
     else:
-        new_folder_name = input("Please enter folder name, will be created in source folder: ")
+        new_folder_name = input(
+            "Please enter folder name, will be created in source folder: "
+        )
         return new_folder_name
 
 
@@ -150,19 +173,18 @@ def determine_source_location() -> str:
         index += 1
         os.chdir("..")
         if index >= 5:
-            print("Error: Could not find source directory (determined by looking for fsfw folder!)")
+            print(
+                "Error: Could not find source directory (determined by looking for fsfw folder!)"
+            )
             sys.exit(1)
     return os.getcwd()
 
 
 def determine_fsfw_osal() -> str:
-    select_dict = dict({
-        1: "host",
-        2: "linux",
-        3: "freertos",
-        4: "rtems"
-    })
-    print("No build type specified. Please select from the following list of build types: ")
+    select_dict = dict({1: "host", 2: "linux", 3: "freertos", 4: "rtems"})
+    print(
+        "No build type specified. Please select from the following list of build types: "
+    )
     for key, item in select_dict.items():
         print(f"{key}: {item}")
     select = input("Enter your selection: ")
@@ -179,13 +201,12 @@ def determine_fsfw_osal() -> str:
 
 def determine_build_type(build_type_arg) -> str:
     if build_type_arg is None:
-        select_dict = dict({
-            1: "Debug",
-            2: "Release",
-            3: "Release with Debug Information",
-            4: "Size"
-        })
-        print("No build type specified. Please select from the following list of build types")
+        select_dict = dict(
+            {1: "Debug", 2: "Release", 3: "Release with Debug Information", 4: "Size"}
+        )
+        print(
+            "No build type specified. Please select from the following list of build types"
+        )
         for key, item in select_dict.items():
             print(f"{key}: {item}")
         select = input("Enter your selection: ")
@@ -229,11 +250,10 @@ def determine_tgt_bsp(osal: str) -> str:
         print("Target BSP set to arm/stm32h743zi-nucleo")
         osal = "arm/stm32h743zi-nucleo"
     elif osal == "linux":
-        print("No target BSP specified. Please select from the following list of build types.")
-        select_dict = dict({
-            1: "arm/raspberrypi",
-            2: "none/hosted"
-        })
+        print(
+            "No target BSP specified. Please select from the following list of build types."
+        )
+        select_dict = dict({1: "arm/raspberrypi", 2: "none/hosted"})
         for key, item in select_dict.items():
             print(f"{key}: {item}")
         select = input("Enter your selection: ")

@@ -15,4 +15,4 @@ printToConsole = True
 exportToCSV = True
 doCopyFile = False
 copyDestination = "."
-fileSeparator = ';'
+fileSeparator = ";"

@@ -28,7 +28,13 @@ from fsfwgen.utility.printer import Printer
 
 SUBSERVICE_DEFINITION_DESTINATION = ["../../mission/", "../../fsfw/pus/"]
 SUBSERVICE_CSV_NAME = "mib_subservices.csv"
-SUBSERVICE_COLUMN_HEADER = ["Service", "Subservice Name", "Subservice Number", "Type", "Comment"]
+SUBSERVICE_COLUMN_HEADER = [
+    "Service",
+    "Subservice Name",
+    "Subservice Number",
+    "Type",
+    "Comment",
+]
 
 SQL_DELETE_SUBSVC_CMD = """
     DROP TABLE IF EXISTS Subservice;
@@ -55,6 +61,7 @@ class SubserviceColumns(Enum):
     """
     Specifies order of MIB columns
     """
+
     SERVICE = 0
     NAME = 1
     NUMBER = 2
@@ -71,12 +78,16 @@ def main():
     :return:
     """
     header_parser = FileListParser(SUBSERVICE_DEFINITION_DESTINATION)
-    header_file_list = header_parser.parse_header_files(False, "Parsing subservice header files: ")
+    header_file_list = header_parser.parse_header_files(
+        False, "Parsing subservice header files: "
+    )
     packet_subservice_parser = SubserviceParser(header_file_list)
     subservice_table = packet_subservice_parser.parse_files()
     Printer.print_content(subservice_table, "Printing subservice table:")
     print("Found " + str(len(subservice_table)) + " subservice entries.")
-    subservice_writer = CsvWriter(SUBSERVICE_CSV_NAME, subservice_table, SUBSERVICE_COLUMN_HEADER)
+    subservice_writer = CsvWriter(
+        SUBSERVICE_CSV_NAME, subservice_table, SUBSERVICE_COLUMN_HEADER
+    )
     subservice_writer.write_to_csv()
     subservice_writer.move_csv("..")
 
@@ -90,6 +101,7 @@ class SubserviceParser(FileParser):
     """
     This parser class can parse the subservice definitions.
     """
+
     def __init__(self, file_list: list):
         super().__init__(file_list)
         # Column System allows reshuffling of table columns in constructor
@@ -111,7 +123,7 @@ class SubserviceParser(FileParser):
             self_print_parsing_info = args[0]
 
         # Read service from file name
-        service_match = re.search('Service[^0-9]*([0-9]{1,3})', file_name)
+        service_match = re.search("Service[^0-9]*([0-9]{1,3})", file_name)
         if service_match:
             self.dict_entry_list[Clmns.SERVICE.value] = service_match.group(1)
         self.dict_entry_list[Clmns.NAME.value] = " "
@@ -129,7 +141,7 @@ class SubserviceParser(FileParser):
         :return:
         """
         # Case insensitive matching
-        enum_match = re.search(r'[\s]*enum[\s]*Subservice([^\n]*)', line, re.IGNORECASE)
+        enum_match = re.search(r"[\s]*enum[\s]*Subservice([^\n]*)", line, re.IGNORECASE)
         if enum_match:
             self.subservice_enum_found = True
         if self.subservice_enum_found:
@@ -146,7 +158,7 @@ class SubserviceParser(FileParser):
         subservice_match = self.__scan_subservices(line)
         if subservice_match:
             self.index = self.index + 1
-            dict_entry_tuple = tuple(self.dict_entry_list[:self.clmns_len])
+            dict_entry_tuple = tuple(self.dict_entry_list[: self.clmns_len])
             self.mib_table.update({self.index: dict_entry_tuple})
             self.__clear_tuple()
 
@@ -158,8 +170,9 @@ class SubserviceParser(FileParser):
         self.possible_match_on_next_lines = False
 
     def __scan_for_export_command(self, line: str) -> bool:
-        command_string = re.search(r"([^\[]*)\[export\][: ]*\[([\w]*)\][\s]*([^\n]*)",
-                                   line, re.IGNORECASE)
+        command_string = re.search(
+            r"([^\[]*)\[export\][: ]*\[([\w]*)\][\s]*([^\n]*)", line, re.IGNORECASE
+        )
         if command_string:
             # Check whether there is a separated export command
             # (export command is not on same line as subservice definition)
@@ -179,9 +192,9 @@ class SubserviceParser(FileParser):
         Strip whitespaces and comment symbols and add to comment buffer.
         """
         possible_multiline_comment = line.lstrip()
-        possible_multiline_comment = possible_multiline_comment.lstrip('/')
-        possible_multiline_comment = possible_multiline_comment.lstrip('<')
-        possible_multiline_comment = possible_multiline_comment.lstrip('!')
+        possible_multiline_comment = possible_multiline_comment.lstrip("/")
+        possible_multiline_comment = possible_multiline_comment.lstrip("<")
+        possible_multiline_comment = possible_multiline_comment.lstrip("!")
         possible_multiline_comment = possible_multiline_comment.rstrip()
         if len(possible_multiline_comment) > 0:
             self.dict_entry_list[Clmns.COMMENT.value] += possible_multiline_comment
@@ -192,8 +205,9 @@ class SubserviceParser(FileParser):
         :param line:
         :return:
         """
-        subservice_match = \
-            re.search(r"[\s]*([\w]*)[\s]*=[\s]*([0-9]{1,3})(?:,)?(?:[ /!<>]*([^\n]*))?", line)
+        subservice_match = re.search(
+            r"[\s]*([\w]*)[\s]*=[\s]*([0-9]{1,3})(?:,)?(?:[ /!<>]*([^\n]*))?", line
+        )
         if subservice_match:
             self.dict_entry_list[Clmns.NAME.value] = subservice_match.group(1)
             self.dict_entry_list[Clmns.NUMBER.value] = subservice_match.group(2)
@@ -204,7 +218,7 @@ class SubserviceParser(FileParser):
                     return True
             # Check whether exporting was commanded on last lines
             return bool(self.possible_match_on_next_lines)
-        if re.search(r'}[\s]*;', line):
+        if re.search(r"}[\s]*;", line):
             self.subservice_enum_found = False
         return subservice_match
 
@@ -217,19 +231,19 @@ class SubserviceParser(FileParser):
         return export_command_found
 
     def __scan_for_type(self, string) -> bool:
-        type_match = re.search(r'\[reply\]|\[tm\]', string, re.IGNORECASE)
+        type_match = re.search(r"\[reply\]|\[tm\]", string, re.IGNORECASE)
         if type_match:
-            self.dict_entry_list[Clmns.TYPE.value] = 'TM'
+            self.dict_entry_list[Clmns.TYPE.value] = "TM"
             return True
-        type_match = re.search(r'\[command\]|\[tc\]', string, re.IGNORECASE)
+        type_match = re.search(r"\[command\]|\[tc\]", string, re.IGNORECASE)
         if type_match:
-            self.dict_entry_list[Clmns.TYPE.value] = 'TC'
+            self.dict_entry_list[Clmns.TYPE.value] = "TC"
             return True
-        self.dict_entry_list[Clmns.TYPE.value] = 'Unspecified'
+        self.dict_entry_list[Clmns.TYPE.value] = "Unspecified"
         return False
 
     def __scan_for_comment(self, comment_string):
-        comment_match = re.search(r':[\s]*\[[\w]*\][\s]*([^\n]*)', comment_string)
+        comment_match = re.search(r":[\s]*\[[\w]*\][\s]*([^\n]*)", comment_string)
         if comment_match:
             self.dict_entry_list[Clmns.COMMENT.value] = comment_match.group(1)
 

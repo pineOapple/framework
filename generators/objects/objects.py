@@ -15,7 +15,13 @@ from fsfwgen.objects.objects import (
 from fsfwgen.utility.printer import PrettyPrinter
 from fsfwgen.utility.file_management import copy_file
 
-from definitions import BSP_HOSTED, DATABASE_NAME, OBSW_ROOT_DIR, ROOT_DIR, EXAMPLE_COMMON_DIR
+from definitions import (
+    BSP_HOSTED,
+    DATABASE_NAME,
+    OBSW_ROOT_DIR,
+    ROOT_DIR,
+    EXAMPLE_COMMON_DIR,
+)
 
 LOGGER = get_console_logger()
 DATE_TODAY = datetime.datetime.now()

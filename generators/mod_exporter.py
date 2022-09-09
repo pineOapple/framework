@@ -47,7 +47,7 @@ from packetcontent.packet_content_parser import (
     PACKET_CONTENT_HEADER_COLUMN,
     SQL_CREATE_PACKET_DATA_CONTENT_CMD,
     SQL_INSERT_PACKET_DATA_CMD,
-    SQL_DELETE_PACKET_DATA_CONTENT_CMD
+    SQL_DELETE_PACKET_DATA_CONTENT_CMD,
 )
 from subservice.subservice_parser import (
     SubserviceParser,
@@ -67,7 +67,7 @@ from devicecommands.device_command_parser import (
     DH_COMMAND_HEADER_COLUMNS,
     SQL_CREATE_CMDTABLE_CMD,
     SQL_INSERT_INTO_CMDTABLE_CMD,
-    SQL_DELETE_CMDTABLE_CMD
+    SQL_DELETE_CMDTABLE_CMD,
 )
 from returnvalues.returnvalues_parser import (
     InterfaceParser,
@@ -75,15 +75,16 @@ from returnvalues.returnvalues_parser import (
     INTERFACE_DEFINITION_FILES,
     RETURNVALUE_DESTINATIONS,
     sql_retval_exporter,
-    CSV_RETVAL_FILENAME
+    CSV_RETVAL_FILENAME,
 )
 from objects.objects import (
     ObjectDefinitionParser,
     OBJECTS_DEFINITIONS,
     export_object_file,
     CSV_OBJECT_FILENAME,
-    sql_object_exporter
+    sql_object_exporter,
 )
+
 DO_EXPORT_MIB = True
 PRINT_TABLES_TO_CONSOLE = False
 EXPORT_TO_CSV = True
@@ -146,7 +147,7 @@ def handle_subservices_generation():
 
 
 def generate_subservice_table():
-    """ Generate the subservice table. """
+    """Generate the subservice table."""
     subservice_header_parser = FileListParser(
         destination_corrected(SUBSERVICE_DEFINITION_DESTINATION)
     )
@@ -161,7 +162,11 @@ def generate_subservice_table():
 def handle_packet_content_generation():
     print("MIB Exporter: Parsing packing content")
     packet_content_table = generate_packet_content_table()
-    print("MIB Exporter: Found " + str(len(packet_content_table)) + " packet content entries.")
+    print(
+        "MIB Exporter: Found "
+        + str(len(packet_content_table))
+        + " packet content entries."
+    )
     if PRINT_TABLES_TO_CONSOLE:
         print("MIB Exporter: Print packet content table: ")
         Printer.print_content(packet_content_table)
@@ -179,12 +184,12 @@ def handle_packet_content_generation():
             SQL_CREATE_PACKET_DATA_CONTENT_CMD,
             SQL_INSERT_PACKET_DATA_CMD,
             packet_content_table,
-            SQL_DELETE_PACKET_DATA_CONTENT_CMD
+            SQL_DELETE_PACKET_DATA_CONTENT_CMD,
         )
 
 
 def generate_packet_content_table():
-    """ Generate packet content table """
+    """Generate packet content table"""
     packet_data_header_parser = FileListParser(
         destination_corrected(PACKET_CONTENT_DEFINITION_DESTINATION)
     )
@@ -199,7 +204,11 @@ def generate_packet_content_table():
 def handle_device_handler_command_generation():
     print("MIB Exporter: Parsing device handler commands.")
     dh_command_table = generate_device_command_table()
-    print("MIB Exporter: Found " + str(len(dh_command_table)) + " device handler command entries")
+    print(
+        "MIB Exporter: Found "
+        + str(len(dh_command_table))
+        + " device handler command entries"
+    )
     if PRINT_TABLES_TO_CONSOLE:
         print("MIB Exporter: Printing device handler command table: ")
         Printer.print_content(dh_command_table)
@@ -207,19 +216,23 @@ def handle_device_handler_command_generation():
         device_command_writer = CsvWriter(
             DH_COMMANDS_CSV_NAME, dh_command_table, DH_COMMAND_HEADER_COLUMNS
         )
-        print("MIB Exporter: Exporting device handler commands to " + DH_COMMANDS_CSV_NAME)
+        print(
+            "MIB Exporter: Exporting device handler commands to " + DH_COMMANDS_CSV_NAME
+        )
         device_command_writer.write_to_csv()
     if EXPORT_TO_SQL:
         print("MIB Exporter: Exporting device handler commands to SQL")
         sql_writer = SqlWriter()
         sql_writer.sql_writing_helper(
-            SQL_CREATE_CMDTABLE_CMD, SQL_INSERT_INTO_CMDTABLE_CMD, dh_command_table,
-            SQL_DELETE_CMDTABLE_CMD
+            SQL_CREATE_CMDTABLE_CMD,
+            SQL_INSERT_INTO_CMDTABLE_CMD,
+            dh_command_table,
+            SQL_DELETE_CMDTABLE_CMD,
         )
 
 
 def generate_device_command_table(print_info_table: bool = False):
-    """ Generate device command table """
+    """Generate device command table"""
     info_header_file_parser = FileListParser(
         destination_corrected(DH_DEFINITION_DESTINATION)
     )
@@ -228,11 +241,15 @@ def generate_device_command_table(print_info_table: bool = False):
     )
     dh_information_parser = DeviceHandlerInformationParser(info_header_file_list)
     dh_information_table = dh_information_parser.parse_files()
-    print("MIB Exporter: Found " + str(len(dh_information_table)) +
-          " device handler information entries.")
+    print(
+        "MIB Exporter: Found "
+        + str(len(dh_information_table))
+        + " device handler information entries."
+    )
     if print_info_table:
         Printer.print_content(
-            dh_information_table, "MIB Exporter: Priting device handler command information table: "
+            dh_information_table,
+            "MIB Exporter: Priting device handler command information table: ",
         )
 
     header_file_parser = FileListParser(
@@ -270,7 +287,9 @@ def generate_returnvalue_table():
     interfaces = interface_parser.parse_files()
     print("MIB Exporter: Found interfaces : " + str(len(interfaces)))
     header_parser = FileListParser(destination_corrected(RETURNVALUE_DESTINATIONS))
-    header_list = header_parser.parse_header_files(True, "MIB Exporter: Parsing header file list: ")
+    header_list = header_parser.parse_header_files(
+        True, "MIB Exporter: Parsing header file list: "
+    )
     returnvalue_parser = ReturnValueParser(interfaces, header_list, False)
     returnvalue_table = returnvalue_parser.parse_files(False)
     if PRINT_TABLES_TO_CONSOLE:
@@ -323,7 +342,7 @@ def handle_external_file_running():
 
 
 def update_globals():
-    """ Updates the global variables """
+    """Updates the global variables"""
     g.PP = pprint.PrettyPrinter(indent=0, width=250)
     g.doExportMIB = DO_EXPORT_MIB
     g.executeSQLcommands = False
