@@ -2,6 +2,7 @@
 
 #include "fsfw/cfdp/pdu/AckPduReader.h"
 #include "fsfw/cfdp/pdu/PduHeaderReader.h"
+#include "fsfw/globalfunctions/arrayprinter.h"
 #include "fsfw/ipc/QueueFactory.h"
 #include "fsfw/tmtcservices/TmTcMessage.h"
 
@@ -78,6 +79,9 @@ void CfdpHandler::eofRecvIndication(const cfdp::TransactionId& id) {}
 
 ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
   auto accessorPair = tcStore->getData(msg.getStorageId());
+  if(accessorPair.first != OK) {
+    return accessorPair.first;
+  }
   PduHeaderReader reader(accessorPair.second.data(), accessorPair.second.size());
   ReturnValue_t result = reader.parseData();
   if (result != returnvalue::OK) {

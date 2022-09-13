@@ -13,7 +13,7 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmtcc.py" />
-    <option name="PARAMETERS" value="cfdp /tmp/hello.txt /tmp/hello-cpy.txt" />
+    <option name="PARAMETERS" value="cfdp cfdp_test.txt /tmp/hello-cpy.txt" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

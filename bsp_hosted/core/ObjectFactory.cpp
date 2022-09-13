@@ -3,13 +3,16 @@
 #include "CfdpHandler.h"
 #include "OBSWConfig.h"
 #include "bsp_hosted/fsfwconfig/objects/systemObjectList.h"
+#include "common/definitions.h"
 #include "commonConfig.h"
 #include "example/core/GenericFactory.h"
 #include "example/test/FsfwTestTask.h"
 #include "example/utility/TmFunnel.h"
 #include "fsfw/storagemanager/PoolManager.h"
+#include "fsfw/tcdistribution/CcsdsDistributorIF.h"
 #include "fsfw/tmtcservices/CommandingServiceBase.h"
 #include "fsfw_hal/host/HostFilesystem.h"
+#include "fsfw/tcdistribution/CcsdsDistributor.h"
 
 #if OBSW_USE_TCP_SERVER == 0
 #include <fsfw/osal/common/UdpTcPollingTask.h>
@@ -42,7 +45,8 @@ void ObjectFactory::produce(void* args) {
     new PoolManager(objects::IPC_STORE, poolCfg);
   }
   TmFunnel* funnel;
-  ObjectFactory::produceGenericObjects(&funnel, *tcStore);
+  CcsdsDistributor* ccsdsDistrib;
+  ObjectFactory::produceGenericObjects(&funnel, &ccsdsDistrib, *tcStore);
   // TMTC Reception via TCP/IP socket
 #if OBSW_USE_TCP_SERVER == 0
   auto tmtcBridge = new UdpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
@@ -68,13 +72,16 @@ void ObjectFactory::produce(void* args) {
   auto* hostFs = new HostFilesystem();
   FsfwHandlerParams params(objects::CFDP_HANDLER, *hostFs, *funnel, *tcStore, *tmStore);
   cfdp::IndicationCfg indicationCfg;
-  UnsignedByteField<uint16_t> apid(COMMON_APID);
+  UnsignedByteField<uint16_t> apid(common::COMMON_CFDP_APID);
   cfdp::EntityId localId(apid);
   cfdp::RemoteEntityCfg remoteCfg;
   cfdp::OneRemoteConfigProvider remoteCfgProvider(remoteCfg);
   cfdp::PacketInfoList<64> packetList;
   cfdp::LostSegmentsList<128> lostSegments;
   CfdpHandlerCfg cfg(localId, indicationCfg, packetList, lostSegments, remoteCfgProvider);
-  new CfdpHandler(params, cfg);
+  auto* cfdpHandler = new CfdpHandler(params, cfg);
+  CcsdsDistributorIF::DestInfo info("CFDP Destination", common::COMMON_CFDP_APID,
+                                    cfdpHandler->getRequestQueue(), true);
+  ccsdsDistrib->registerApplication(info);
 #endif
 }
