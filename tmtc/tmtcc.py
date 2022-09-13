@@ -8,7 +8,6 @@ import tmtccmd
 from common_tmtc.common import setup_params, setup_tmtc_handlers, setup_backend
 from config.hook import FsfwHookBase
 from tmtccmd import get_console_logger
-from tmtccmd.config.args import ProcedureParamsWrapper
 from tmtccmd.core import BackendRequest
 from tmtccmd.logging.pus import (
     RegularTmtcLogWrapper,
