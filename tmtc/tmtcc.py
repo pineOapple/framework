@@ -48,6 +48,8 @@ def main():
                 LOGGER.info("TMTC Client in IDLE mode")
                 time.sleep(3.0)
             elif state.request == BackendRequest.DELAY_LISTENER:
+                if tc_handler.cfdp_done:
+                    sys.exit(0)
                 time.sleep(0.8)
             elif state.request == BackendRequest.DELAY_CUSTOM:
                 if state.next_delay.total_seconds() < 0.5:
