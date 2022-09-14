@@ -22,23 +22,26 @@ struct FsfwHandlerParams {
 
 struct CfdpHandlerCfg {
   CfdpHandlerCfg(cfdp::EntityId localId, cfdp::IndicationCfg indicationCfg,
-                 cfdp::PacketInfoListBase& packetInfo, cfdp::LostSegmentsListBase& lostSegmentsList,
+                 cfdp::UserBase &userHandler,
+                 cfdp::PacketInfoListBase& packetInfo,
+                 cfdp::LostSegmentsListBase& lostSegmentsList,
                  cfdp::RemoteConfigTableIF& remoteCfgProvider)
       : id(std::move(localId)),
         indicCfg(indicationCfg),
         packetInfoList(packetInfo),
         lostSegmentsList(lostSegmentsList),
-        remoteCfgProvider(remoteCfgProvider) {}
+        remoteCfgProvider(remoteCfgProvider),
+        userHandler(userHandler) {}
 
   cfdp::EntityId id;
   cfdp::IndicationCfg indicCfg;
   cfdp::PacketInfoListBase& packetInfoList;
   cfdp::LostSegmentsListBase& lostSegmentsList;
   cfdp::RemoteConfigTableIF& remoteCfgProvider;
+  cfdp::UserBase& userHandler;
 };
 
 class CfdpHandler : public SystemObject,
-                    public cfdp::UserBase,
                     public cfdp::FaultHandlerBase,
                     public ExecutableObjectIF,
                     public AcceptsTelecommandsIF {
@@ -52,20 +55,6 @@ class CfdpHandler : public SystemObject,
   ReturnValue_t initialize() override;
   ReturnValue_t performOperation(uint8_t operationCode) override;
 
-  // CFDP user overrides
-  void transactionIndication(const cfdp::TransactionId& id) override;
-  void eofSentIndication(const cfdp::TransactionId& id) override;
-  void transactionFinishedIndication(const cfdp::TransactionFinishedParams& params) override;
-  void metadataRecvdIndication(const cfdp::MetadataRecvdParams& params) override;
-  void fileSegmentRecvdIndication(const cfdp::FileSegmentRecvdParams& params) override;
-  void reportIndication(const cfdp::TransactionId& id, cfdp::StatusReportIF& report) override;
-  void suspendedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code) override;
-  void resumedIndication(const cfdp::TransactionId& id, size_t progress) override;
-  void faultIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
-                       size_t progress) override;
-  void abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
-                           size_t progress) override;
-  void eofRecvIndication(const cfdp::TransactionId& id) override;
   void noticeOfSuspensionCb(cfdp::ConditionCode code) override;
   void noticeOfCancellationCb(cfdp::ConditionCode code) override;
   void abandonCb(cfdp::ConditionCode code) override;

@@ -11,8 +11,7 @@ using namespace cfdp;
 
 CfdpHandler::CfdpHandler(const FsfwHandlerParams& fsfwParams, const CfdpHandlerCfg& cfdpCfg)
     : SystemObject(fsfwParams.objectId),
-      UserBase(fsfwParams.vfs),
-      destHandler(DestHandlerParams(LocalEntityCfg(cfdpCfg.id, cfdpCfg.indicCfg, *this), *this,
+      destHandler(DestHandlerParams(LocalEntityCfg(cfdpCfg.id, cfdpCfg.indicCfg, *this), cfdpCfg.userHandler,
                                     cfdpCfg.remoteCfgProvider, cfdpCfg.packetInfoList,
                                     cfdpCfg.lostSegmentsList),
                   FsfwParams(fsfwParams.packetDest, nullptr, this, fsfwParams.tcStore,
@@ -62,20 +61,6 @@ ReturnValue_t CfdpHandler::performOperation(uint8_t operationCode) {
   }
   return status;
 }
-
-void CfdpHandler::transactionIndication(const cfdp::TransactionId& id) {}
-void CfdpHandler::eofSentIndication(const cfdp::TransactionId& id) {}
-void CfdpHandler::transactionFinishedIndication(const cfdp::TransactionFinishedParams& params) {}
-void CfdpHandler::metadataRecvdIndication(const cfdp::MetadataRecvdParams& params) {}
-void CfdpHandler::fileSegmentRecvdIndication(const cfdp::FileSegmentRecvdParams& params) {}
-void CfdpHandler::reportIndication(const cfdp::TransactionId& id, cfdp::StatusReportIF& report) {}
-void CfdpHandler::suspendedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code) {}
-void CfdpHandler::resumedIndication(const cfdp::TransactionId& id, size_t progress) {}
-void CfdpHandler::faultIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
-                                  size_t progress) {}
-void CfdpHandler::abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
-                                      size_t progress) {}
-void CfdpHandler::eofRecvIndication(const cfdp::TransactionId& id) {}
 
 ReturnValue_t CfdpHandler::handleCfdpPacket(TmTcMessage& msg) {
   auto accessorPair = tcStore->getData(msg.getStorageId());

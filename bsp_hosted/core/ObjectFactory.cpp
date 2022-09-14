@@ -22,6 +22,31 @@
 #include "fsfw/osal/common/TcpTmTcServer.h"
 #endif
 
+class CfdpExampleUserHandler: public cfdp::UserBase {
+ public:
+  explicit CfdpExampleUserHandler(HasFileSystemIF& vfs): cfdp::UserBase(vfs) {}
+
+  void transactionIndication(const cfdp::TransactionId& id) override {}
+  void eofSentIndication(const cfdp::TransactionId& id) override {}
+  void transactionFinishedIndication(const cfdp::TransactionFinishedParams& params) override {
+    sif::info << "File transaction finished for transaction with " << params.id << std::endl;
+  }
+  void metadataRecvdIndication(const cfdp::MetadataRecvdParams& params) override {
+    sif::info << "Metadata received for transaction with " << params.id << std::endl;
+  }
+  void fileSegmentRecvdIndication(const cfdp::FileSegmentRecvdParams& params) override {}
+  void reportIndication(const cfdp::TransactionId& id, cfdp::StatusReportIF& report) override {}
+  void suspendedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code) override {}
+  void resumedIndication(const cfdp::TransactionId& id, size_t progress) override {}
+  void faultIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
+                       size_t progress) override {}
+  void abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
+                           size_t progress) override {}
+  void eofRecvIndication(const cfdp::TransactionId& id) override {
+    sif::info << "EOF PDU received for transaction with " << id << std::endl;
+  }
+};
+
 void ObjectFactory::produce(void* args) {
   Factory::setStaticFrameworkObjectIds();
   StorageManagerIF* tcStore = nullptr;
@@ -74,11 +99,15 @@ void ObjectFactory::produce(void* args) {
   cfdp::IndicationCfg indicationCfg;
   UnsignedByteField<uint16_t> apid(common::COMMON_CFDP_APID);
   cfdp::EntityId localId(apid);
-  cfdp::RemoteEntityCfg remoteCfg;
-  cfdp::OneRemoteConfigProvider remoteCfgProvider(remoteCfg);
+  UnsignedByteField<uint16_t> remoteEntityId(common::COMMON_CFDP_CLIENT_ENTITY_ID);
+  cfdp::EntityId remoteId(remoteEntityId);
+  cfdp::RemoteEntityCfg remoteCfg(remoteId);
+  remoteCfg.defaultChecksum = cfdp::ChecksumTypes::CRC_32;
+  auto* remoteCfgProvider = new cfdp::OneRemoteConfigProvider(remoteCfg);
+  auto* cfdpUserHandler = new CfdpExampleUserHandler(*hostFs);
   cfdp::PacketInfoList<64> packetList;
   cfdp::LostSegmentsList<128> lostSegments;
-  CfdpHandlerCfg cfg(localId, indicationCfg, packetList, lostSegments, remoteCfgProvider);
+  CfdpHandlerCfg cfg(localId, indicationCfg, *cfdpUserHandler, packetList, lostSegments, *remoteCfgProvider);
   auto* cfdpHandler = new CfdpHandler(params, cfg);
   CcsdsDistributorIF::DestInfo info("CFDP Destination", common::COMMON_CFDP_APID,
                                     cfdpHandler->getRequestQueue(), true);
