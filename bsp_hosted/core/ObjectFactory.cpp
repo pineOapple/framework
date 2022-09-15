@@ -53,20 +53,20 @@ void ObjectFactory::produce(void* args) {
   StorageManagerIF* tmStore = nullptr;
 #if OBSW_ADD_CORE_COMPONENTS == 1
   {
-    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50},   {64, 40},
-                                          {128, 30}, {1024, 20}, {2048, 10}};
+    LocalPool::LocalPoolConfig poolCfg = {{100, 16}, {50, 32},   {40, 64},
+                                          {30, 128}, {20, 1024}, {10, 2048}};
     tcStore = new PoolManager(objects::TC_STORE, poolCfg);
   }
 
   {
-    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50},   {64, 40},
-                                          {128, 30}, {1024, 20}, {2048, 10}};
+    LocalPool::LocalPoolConfig poolCfg = {{100, 16}, {50, 32},   {40, 64},
+                                          {30, 128}, {20, 1024}, {10, 2048}};
     tmStore = new PoolManager(objects::TM_STORE, poolCfg);
   }
 
   {
-    LocalPool::LocalPoolConfig poolCfg = {{16, 100}, {32, 50},   {64, 40},
-                                          {128, 30}, {1024, 20}, {2048, 10}};
+    LocalPool::LocalPoolConfig poolCfg = {{100, 16}, {50, 32},   {40, 64},
+                                          {30, 128}, {20, 1024}, {10, 2048}};
     new PoolManager(objects::IPC_STORE, poolCfg);
   }
   TmFunnel* funnel;
