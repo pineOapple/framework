@@ -1,6 +1,5 @@
 #include "ObjectFactory.h"
 
-#include "CfdpHandler.h"
 #include "OBSWConfig.h"
 #include "bsp_hosted/fsfwconfig/objects/systemObjectList.h"
 #include "common/definitions.h"
@@ -8,11 +7,12 @@
 #include "example/core/GenericFactory.h"
 #include "example/test/FsfwTestTask.h"
 #include "example/utility/TmFunnel.h"
+#include "fsfw/cfdp.h"
 #include "fsfw/storagemanager/PoolManager.h"
+#include "fsfw/tcdistribution/CcsdsDistributor.h"
 #include "fsfw/tcdistribution/CcsdsDistributorIF.h"
 #include "fsfw/tmtcservices/CommandingServiceBase.h"
 #include "fsfw_hal/host/HostFilesystem.h"
-#include "fsfw/tcdistribution/CcsdsDistributor.h"
 
 #if OBSW_USE_TCP_SERVER == 0
 #include <fsfw/osal/common/UdpTcPollingTask.h>
@@ -22,9 +22,9 @@
 #include "fsfw/osal/common/TcpTmTcServer.h"
 #endif
 
-class CfdpExampleUserHandler: public cfdp::UserBase {
+class CfdpExampleUserHandler : public cfdp::UserBase {
  public:
-  explicit CfdpExampleUserHandler(HasFileSystemIF& vfs): cfdp::UserBase(vfs) {}
+  explicit CfdpExampleUserHandler(HasFileSystemIF& vfs) : cfdp::UserBase(vfs) {}
 
   void transactionIndication(const cfdp::TransactionId& id) override {}
   void eofSentIndication(const cfdp::TransactionId& id) override {}
@@ -36,14 +36,35 @@ class CfdpExampleUserHandler: public cfdp::UserBase {
   }
   void fileSegmentRecvdIndication(const cfdp::FileSegmentRecvdParams& params) override {}
   void reportIndication(const cfdp::TransactionId& id, cfdp::StatusReportIF& report) override {}
-  void suspendedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code) override {}
+  void suspendedIndication(const cfdp::TransactionId& id, cfdp::ConditionCodes code) override {}
   void resumedIndication(const cfdp::TransactionId& id, size_t progress) override {}
-  void faultIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
+  void faultIndication(const cfdp::TransactionId& id, cfdp::ConditionCodes code,
                        size_t progress) override {}
-  void abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
+  void abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCodes code,
                            size_t progress) override {}
   void eofRecvIndication(const cfdp::TransactionId& id) override {
     sif::info << "EOF PDU received for transaction with " << id << std::endl;
+  }
+};
+
+class CfdpExampleFaultHandler : public cfdp::FaultHandlerBase {
+ public:
+  void noticeOfSuspensionCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+    sif::warning << "Notice of suspension detected for transaction " << id
+                 << " with condition code: " << cfdp::getConditionCodeString(code) << std::endl;
+  }
+  void noticeOfCancellationCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+    sif::warning << "Notice of suspension detected for transaction " << id
+                 << " with condition code: " << cfdp::getConditionCodeString(code) << std::endl;
+  }
+  void abandonCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+    sif::warning << "Transaction " << id
+                 << " was abandoned, condition code : " << cfdp::getConditionCodeString(code)
+                 << std::endl;
+  }
+  void ignoreCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+    sif::warning << "Fault ignored for transaction " << id
+                 << ", condition code: " << cfdp::getConditionCodeString(code) << std::endl;
   }
 };
 
@@ -105,9 +126,11 @@ void ObjectFactory::produce(void* args) {
   remoteCfg.defaultChecksum = cfdp::ChecksumTypes::CRC_32;
   auto* remoteCfgProvider = new cfdp::OneRemoteConfigProvider(remoteCfg);
   auto* cfdpUserHandler = new CfdpExampleUserHandler(*hostFs);
+  auto* cfdpFaultHandler = new CfdpExampleFaultHandler();
   cfdp::PacketInfoList<64> packetList;
   cfdp::LostSegmentsList<128> lostSegments;
-  CfdpHandlerCfg cfg(localId, indicationCfg, *cfdpUserHandler, packetList, lostSegments, *remoteCfgProvider);
+  CfdpHandlerCfg cfg(localId, indicationCfg, *cfdpUserHandler, *cfdpFaultHandler, packetList,
+                     lostSegments, *remoteCfgProvider);
   auto* cfdpHandler = new CfdpHandler(params, cfg);
   CcsdsDistributorIF::DestInfo info("CFDP Destination", common::COMMON_CFDP_APID,
                                     cfdpHandler->getRequestQueue(), true);
