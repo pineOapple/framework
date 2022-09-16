@@ -36,11 +36,11 @@ class CfdpExampleUserHandler : public cfdp::UserBase {
   }
   void fileSegmentRecvdIndication(const cfdp::FileSegmentRecvdParams& params) override {}
   void reportIndication(const cfdp::TransactionId& id, cfdp::StatusReportIF& report) override {}
-  void suspendedIndication(const cfdp::TransactionId& id, cfdp::ConditionCodes code) override {}
+  void suspendedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code) override {}
   void resumedIndication(const cfdp::TransactionId& id, size_t progress) override {}
-  void faultIndication(const cfdp::TransactionId& id, cfdp::ConditionCodes code,
+  void faultIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
                        size_t progress) override {}
-  void abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCodes code,
+  void abandonedIndication(const cfdp::TransactionId& id, cfdp::ConditionCode code,
                            size_t progress) override {}
   void eofRecvIndication(const cfdp::TransactionId& id) override {
     sif::info << "EOF PDU received for transaction with " << id << std::endl;
@@ -49,20 +49,20 @@ class CfdpExampleUserHandler : public cfdp::UserBase {
 
 class CfdpExampleFaultHandler : public cfdp::FaultHandlerBase {
  public:
-  void noticeOfSuspensionCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+  void noticeOfSuspensionCb(cfdp::TransactionId& id, cfdp::ConditionCode code) override {
     sif::warning << "Notice of suspension detected for transaction " << id
                  << " with condition code: " << cfdp::getConditionCodeString(code) << std::endl;
   }
-  void noticeOfCancellationCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+  void noticeOfCancellationCb(cfdp::TransactionId& id, cfdp::ConditionCode code) override {
     sif::warning << "Notice of suspension detected for transaction " << id
                  << " with condition code: " << cfdp::getConditionCodeString(code) << std::endl;
   }
-  void abandonCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+  void abandonCb(cfdp::TransactionId& id, cfdp::ConditionCode code) override {
     sif::warning << "Transaction " << id
                  << " was abandoned, condition code : " << cfdp::getConditionCodeString(code)
                  << std::endl;
   }
-  void ignoreCb(cfdp::TransactionId& id, cfdp::ConditionCodes code) override {
+  void ignoreCb(cfdp::TransactionId& id, cfdp::ConditionCode code) override {
     sif::warning << "Fault ignored for transaction " << id
                  << ", condition code: " << cfdp::getConditionCodeString(code) << std::endl;
   }
@@ -123,7 +123,7 @@ void ObjectFactory::produce(void* args) {
   UnsignedByteField<uint16_t> remoteEntityId(common::COMMON_CFDP_CLIENT_ENTITY_ID);
   cfdp::EntityId remoteId(remoteEntityId);
   cfdp::RemoteEntityCfg remoteCfg(remoteId);
-  remoteCfg.defaultChecksum = cfdp::ChecksumTypes::CRC_32;
+  remoteCfg.defaultChecksum = cfdp::ChecksumType::CRC_32;
   auto* remoteCfgProvider = new cfdp::OneRemoteConfigProvider(remoteCfg);
   auto* cfdpUserHandler = new CfdpExampleUserHandler(*hostFs);
   auto* cfdpFaultHandler = new CfdpExampleFaultHandler();
