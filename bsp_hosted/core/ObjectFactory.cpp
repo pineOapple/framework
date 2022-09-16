@@ -66,6 +66,7 @@ void ObjectFactory::produce(void* args) {
   tmtcBridge->setMaxNumberOfPacketsStored(50);
   auto tmtcServer = new TcpTmTcServer(objects::TCPIP_TMTC_POLLING_TASK, objects::TCPIP_TMTC_BRIDGE);
   sif::info << "Opening TCP TMTC server on port " << tmtcServer->getTcpPort() << std::endl;
+  // TODO: Set the set of valid space packet IDs. Otherwise, parsing might fail
 #endif
 
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
