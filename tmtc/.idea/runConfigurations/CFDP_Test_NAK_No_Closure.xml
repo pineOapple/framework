@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CFDP Test" type="PythonConfigurationType" factoryName="Python" folderName="CFDP">
+  <configuration default="false" name="CFDP Test NAK No Closure" type="PythonConfigurationType" factoryName="Python" folderName="CFDP">
     <module name="tmtc" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
@@ -13,7 +13,7 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tmtcc.py" />
-    <option name="PARAMETERS" value="cfdp filetest/cfdp_test.txt /tmp/hello-cpy.txt -d 0.2" />
+    <option name="PARAMETERS" value="cfdp filetest/cfdp_test.txt /tmp/hello-cpy.txt --no-closure -d 0.2" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />
