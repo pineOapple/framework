@@ -52,9 +52,8 @@ void ObjectFactory::produce(void* args) {
                                           {30, 128}, {20, 1024}, {10, 2048}};
     new PoolManager(objects::IPC_STORE, poolCfg);
   }
-  TmFunnel* funnel;
+  PusTmFunnel* funnel;
   CcsdsDistributor* ccsdsDistrib;
-  ObjectFactory::produceGenericObjects(&funnel, &ccsdsDistrib, *tcStore, *tmStore);
   // TMTC Reception via TCP/IP socket
 #if OBSW_USE_TCP_SERVER == 0
   auto tmtcBridge = new UdpTmTcBridge(objects::TCPIP_TMTC_BRIDGE, objects::CCSDS_DISTRIBUTOR);
@@ -68,6 +67,7 @@ void ObjectFactory::produce(void* args) {
   sif::info << "Opening TCP TMTC server on port " << tmtcServer->getTcpPort() << std::endl;
   // TODO: Set the set of valid space packet IDs. Otherwise, parsing might fail
 #endif
+  ObjectFactory::produceGenericObjects(&funnel, *tmtcBridge, &ccsdsDistrib, *tcStore, *tmStore);
 
 #endif /* OBSW_ADD_CORE_COMPONENTS == 1 */
 
