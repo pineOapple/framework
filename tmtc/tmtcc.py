@@ -42,6 +42,7 @@ def main():
     try:
         while True:
             state = backend.periodic_op(None)
+            tc_handler.cfdp_in_ccsds_wrapper.handler.fsm()
             if state.request == BackendRequest.TERMINATION_NO_ERROR:
                 sys.exit(0)
             elif state.request == BackendRequest.DELAY_IDLE:
