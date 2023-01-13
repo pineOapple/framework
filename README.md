@@ -52,6 +52,11 @@ the host abstraction layer of the FSFW.
 This demo provides the opportunity to to test functionality of the
 FSFW on a host computer without the need of setting up external embedded hardware.
 
+After cloning, make sure to clone and initialize the submodules
+
+```sh
+git submodule update --init
+```
 
 ## Prerequisites
 
