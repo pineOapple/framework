@@ -1,1 +1,1 @@
-tmtccmd >= 3.0.0rc1
+tmtccmd == 4.0.0a1
